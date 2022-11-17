@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+/* * {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+} */
+.Gallery {
+ 
+  background: #16384c;
+  
+}
+
+.content > h4 {
+  text-align: justify;
+}
+
+.content > p {
+  text-align: justify;
+}
+
+
+.container .Product_Card {
+  max-width: 300px;
+  height: 215px;
+  margin: 30px 10px;
+  padding: 20px 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease-in-out;
+}
+.container .Product_Card:hover {
+  height: 450px;
+}
+.container .Product_Card .imgContainer {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  top: -50px;
+  left: 10px;
+  z-index: 1;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+.container .Product_Card .imgContainer img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+.container .Product_Card .content {
+  position: relative;
+  margin-top: -140px;
+  padding: 10px 15px;
+  text-align: center;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease-in-out;
+}
+.container .Product_Card:hover .content {
+  visibility: visible;
+  opacity: 1;
+  margin-top: -40px;
+  transition-delay: 0.3s;
+}
+
+@media (max-width: 330px) {
+  .container .Product_Card .imgContainer {
+    left: -2px;
+  }
+}
+.content {
+  justify-content: center;
+}
+
+.gallery_heading{
+    
+    font-size: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family:'Courier New', Courier, monospace
+  }
+
+
+  .gallery_heading:after {
+    width: 100px;
+    height: 5px;
+    display: block;
+    content: "";
+    position: relative;
+    left: 50%;
+    margin-left: -50px;
+    background-color: #b80000;
+  }

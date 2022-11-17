@@ -1,0 +1,10 @@
+/* label {
+    font-weight: 600;
+    color:rgba(98, 82, 217, 0.8)
+} */
+.User_heading{
+  font-size: 43px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+}
