@@ -1,97 +1,99 @@
 
 import React from "react";
+import Sidebar from "../components/Sidebar";
 import "./UserRegistration.css";
 
 function UserRegistration() {
   return (
     <>
-    <div className="userRegistration" style={{backgroundColor:"#40c960"}}>
-    <h1 class="text-center User_heading py-3">Join Our Community</h1>
-    <div class="container ">
+    <Sidebar/>
+    <div className="userRegistration" style={{backgroundColor:"#40c960", marginTop:"5rem"}}>
+    <h1 className="text-center User_heading py-3">Join Our Community</h1>
+    <div className="container ">
         <form>
           
-          <div class="row jumbotron">
+          <div className="row jumbotron">
          
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="name-f">First Name</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 name="fname"
                 id="name-f"
                 placeholder="Enter your first name."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="name-l">Last name</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 name="lname"
                 id="name-l"
                 placeholder="Enter your last name."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="email">Email</label>
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 name="email"
                 id="email"
                 placeholder="Enter your email."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="address-1">Address Line-1</label>
               <input
                 type="address"
-                class="form-control"
+                className="form-control"
                 name="Locality"
                 id="address-1"
                 placeholder="Locality/House/Street no."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="address-2">Address Line-2</label>
               <input
                 type="address"
-                class="form-control"
+                className="form-control"
                 name="address"
                 id="address-2"
                 placeholder="Village/City Name."
                 required
               />
             </div>
-            <div class="col-sm-4 form-group">
+            <div className="col-sm-4 form-group">
               <label for="State">State</label>
               <input
                 type="address"
-                class="form-control"
+                className="form-control"
                 name="State"
                 id="State"
                 placeholder="Enter your state name."
                 required
               />
             </div>
-            <div class="col-sm-2 form-group">
+            <div className="col-sm-2 form-group">
               <label for="zip">Postal-Code</label>
               <input
                 type="zip"
-                class="form-control"
+                className="form-control"
                 name="Zip"
                 id="zip"
                 placeholder="Postal-Code."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="Country">Country</label>
-              <select class="form-control custom-select browser-default">
+              <select className="form-control custom-select browser-default">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Åland Islands">Åland Islands</option>
                 <option value="Albania">Albania</option>
@@ -404,31 +406,31 @@ function UserRegistration() {
                 <option value="Zimbabwe">Zimbabwe</option>
               </select>
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="Date">Date Of Birth</label>
               <input
                 type="Date"
                 name="dob"
-                class="form-control"
+                className="form-control"
                 id="Date"
                 placeholder=""
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="sex">Gender</label>
               <select
                 id="sex"
-                class="form-control browser-default custom-select"
+                className="form-control browser-default custom-select"
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="unspesified">Unspecified</option>
               </select>
             </div>
-            {/* <div class="col-sm-2 form-group">
+            {/* <div className="col-sm-2 form-group">
               <label for="cod">Country code</label>
-              <select class="form-control browser-default custom-select">
+              <select className="form-control browser-default custom-select">
                 <option data-countryCode="US" value="1" selected>
                   USA (+1)
                 </option>
@@ -1075,53 +1077,53 @@ function UserRegistration() {
                 </option>
               </select>
             </div> */}
-            <div class="col-sm-4 form-group">
+            <div className="col-sm-4 form-group">
               <label for="tel">Phone</label>
               <input
                 type="tel"
                 name="phone"
-                class="form-control"
+                className="form-control"
                 id="tel"
                 placeholder="Enter Your Contact Number."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="pass">Password</label>
               <input
                 type="Password"
                 name="password"
-                class="form-control"
+                className="form-control"
                 id="pass"
                 placeholder="Enter your password."
                 required
               />
             </div>
-            <div class="col-sm-6 form-group">
+            <div className="col-sm-6 form-group">
               <label for="pass2">Confirm Password</label>
               <input
                 type="Password"
                 name="cnf-password"
-                class="form-control"
+                className="form-control"
                 id="pass2"
                 placeholder="Re-enter your password."
                 required
               />
             </div>
-            <div class="col-sm-12">
+            <div className="col-sm-12">
               <input
                 type="checkbox"
-                class="form-check d-inline"
+                className="form-check d-inline"
                 id="chb"
                 required
               />
-              <label for="chb" class="form-check-label">
+              <label for="chb" className="form-check-label">
                 &nbsp;I accept all terms and conditions.
               </label>
             </div>
 
-            <div class="col-sm-12 form-group mb-0">
-              <button class="btn btn-primary float-right">Submit</button>
+            <div className="col-sm-12 form-group mb-0">
+              <button className="btn btn-primary float-right">Submit</button>
             </div>
           </div>
         </form>

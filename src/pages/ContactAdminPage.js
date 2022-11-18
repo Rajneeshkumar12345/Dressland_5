@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EdiText from "react-editext";
+import Sidebar from "../components/Sidebar";
 
 function ContactAdminPage() {
   const [name, setName] = useState("");
@@ -68,7 +69,9 @@ function ContactAdminPage() {
   //     console.log(state);
   //   };
   return (
-    <div className="Contact_Admin">
+    <>
+    <Sidebar/>
+     <div className="Contact_Admin" style={{marginTop:"7rem"}}>
       <div
         className="container Contact_Admin_Form"
         style={{ width: "50%", marginBottom: "3rem" }}
@@ -174,6 +177,8 @@ function ContactAdminPage() {
         </div>
       </div>
     </div>
+    </>
+   
   );
 }
 

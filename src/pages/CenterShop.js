@@ -1,16 +1,18 @@
 import React from "react";
+import Sidebar from "../components/Sidebar";
 import "./CenterShop.css";
 
 function CenterShop() {
   return (
     <>
-      <div className="CenterShop">
-        <header className="text-center fixed-top CenterSop_header">
-          <p class="tag-line py-2"> Center/Shop </p>
+    <Sidebar/>
+      <div className="CenterShop" style={{marginTop:'5rem'}}>
+        <header className="text-center CenterSop_header">
+          <p className="tag-line py-2"> Center/Shop </p>
         </header>
-        <div class="wrapper">
+        <div className="wrapper">
           <main>
-            <div class="info" style={{ marginTop: "5rem" }}>
+            <div className="info" style={{ marginTop: "5rem" }}>
               <h3 className="Center_heading">Signup for our newsletter</h3>
               <p>
                 Get the lastest update of the product is doing right in your
@@ -18,8 +20,8 @@ function CenterShop() {
               </p>
             </div>
             <form action="#" method="GET" className="head_line">
-              <fieldset class="contact-info">
-                <div class="">
+              <fieldset className="contact-info">
+                <div className="">
                   <legend>Contact Information</legend>
                   <p>
                     <label for="name">Full Name</label>
@@ -99,12 +101,12 @@ function CenterShop() {
                 </div>
               </fieldset>
 
-              <fieldset class="newsletter">
-                <div class="">
+              <fieldset className="newsletter">
+                <div className="">
                   <legend>Newsletter</legend>
                   <p>Select the newsletter you would like to recieve</p>
 
-                  <div class="checkboxes">
+                  <div className="checkboxes">
                     <p>
                       <input type="checkbox" id="html_news" name="news" />
                       <label for="html_news" style={{ marginLeft: "-50px" }}>
@@ -126,7 +128,7 @@ function CenterShop() {
                   </div>
 
                   {/* <p>Newsletter format</p>
-                <div class="radio-btn">
+                <div className="radio-btn">
                   <p>
                     <input
                       type="radio"
@@ -173,37 +175,37 @@ function CenterShop() {
                 </div>
               </fieldset>
             </form>
-            <div class="footer">
+            <div className="footer">
               <div className="btn w-100" style={{ color: "#19e34f" }}>
                 <button type="submit" className="btn CenterShop_Submit">
                   Submit
                 </button>
               </div>
 
-              <p>&copy; Copyright Fabric.com 2022</p>
+              <p>&copy; Copyright SK Dressland.com 2022</p>
             </div>
           </main>
         </div>
       </div>
 
       {/* <main>
-   <div class="title">
+   <div className="title">
    <h1 id="title">Survey Form</h1>
    <p id="description">Thank you for taking the time to help us improve the platform</p>
   </div>
   
    
-     <label for="name" id="name-label" class="uno">Name</label>
+     <label for="name" id="name-label" className="uno">Name</label>
      <input type="text" id="name" placeholder="Enter your name" requiered/>
   
      
-     <label for="email" id="email-label" class="uno">Email</label>
+     <label for="email" id="email-label" className="uno">Email</label>
      <input type="email" id="email" placeholder="Enter your email"  requiered/>
      
-     <label for="age" id="number-label" class="uno">Age (optional)</label>
+     <label for="age" id="number-label" className="uno">Age (optional)</label>
      <input type="number" id="number" placeholder="Enter your age"/>
      
-     <label for="dropdown" id="dropdown-label" class="uno">Which option best describes your current role?</label>
+     <label for="dropdown" id="dropdown-label" className="uno">Which option best describes your current role?</label>
      <select id="dropdown" name="rol">
        <option disable selected value>Select your current rol</option>
        <option value="student">Student</option>
@@ -212,38 +214,38 @@ function CenterShop() {
        <option value="hunting">Looking for a job</option>
      </select>
      
-     <p class="uno">Would you recommend our Agency to a friend?</p>
-     <label for="btn" id="btn-label" class="uno">Definitely</label>
-     <input type="radio" name="user-recommend" value="definitely" class="input" checked/>
-     <label for="btn" id="btn-label" class="uno">Maybe</label>
-     <input type="radio" name="user-recommend" value="maybe" class="input"/>
-     <label for="btn" id="btn-label" class="uno">Not sure</label>
-       <input type="radio" name="user-recommend" value="not-sure" class="input"/>
+     <p className="uno">Would you recommend our Agency to a friend?</p>
+     <label for="btn" id="btn-label" className="uno">Definitely</label>
+     <input type="radio" name="user-recommend" value="definitely" className="input" checked/>
+     <label for="btn" id="btn-label" className="uno">Maybe</label>
+     <input type="radio" name="user-recommend" value="maybe" className="input"/>
+     <label for="btn" id="btn-label" className="uno">Not sure</label>
+       <input type="radio" name="user-recommend" value="not-sure" className="input"/>
     
-       <p class="uno">What would you like to see improved? (Check all that apply)</p>
-     <div class="check">
-     <label class="uno">
-     <input name="prefer" type="checkbox" value="front-end projects" class="checkbox-input"/>Front-end projects</label>
-     <label class="uno">
-     <input name="prefer" type="checkbox" value="back-end projects" class="checkbox-input"/>Back-end projects</label>
+       <p className="uno">What would you like to see improved? (Check all that apply)</p>
+     <div className="check">
+     <label className="uno">
+     <input name="prefer" type="checkbox" value="front-end projects" className="checkbox-input"/>Front-end projects</label>
+     <label className="uno">
+     <input name="prefer" type="checkbox" value="back-end projects" className="checkbox-input"/>Back-end projects</label>
 
-     <label class="uno">
-   <input name="prefer" type="checkbox" value="social-media" class="checkbox-input"/>Social media (Marketing)</label>
-     <label class="uno">
-   <input name="prefer" type="checkbox" value="video-games" class="checkbox-input"/>Video Games Development</label>
+     <label className="uno">
+   <input name="prefer" type="checkbox" value="social-media" className="checkbox-input"/>Social media (Marketing)</label>
+     <label className="uno">
+   <input name="prefer" type="checkbox" value="video-games" className="checkbox-input"/>Video Games Development</label>
 
-     <label class="uno">
-   <input name="prefer" type="checkbox" value="ui-ux-design" class="checkbox-input"/>UI/UX Design Tutorials++</label>
-       <label class="uno">
-   <input name="prefer" type="checkbox" value="other" class="checkbox-input"/>Other (send us a message)</label>
+     <label className="uno">
+   <input name="prefer" type="checkbox" value="ui-ux-design" className="checkbox-input"/>UI/UX Design Tutorials++</label>
+       <label className="uno">
+   <input name="prefer" type="checkbox" value="other" className="checkbox-input"/>Other (send us a message)</label>
      </div>
      
-     <p class="uno">Any comments or suggestions?</p>
-     <textarea id="message" class="textarea uno" name="message" placeholder="Enter your message here..."></textarea>
+     <p className="uno">Any comments or suggestions?</p>
+     <textarea id="message" className="textarea uno" name="message" placeholder="Enter your message here..."></textarea>
      
     
      
-     <button type="submit" id="submit" class="submit uno">Send your application</button>
+     <button type="submit" id="submit" className="submit uno">Send your application</button>
      
   
   

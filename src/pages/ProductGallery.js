@@ -10,9 +10,11 @@ import Cloth6 from "../images/Cloth6.jpg";
 import Cloth7 from "../images/Cloth7.webp";
 import Cloth8 from "../images/Cloth8.jpg";
 import Carosol3 from "../images/Carosol3.jpg";
+import Toggle from "../components/Toggle";
 function ProductGallery() {
   return (
     <>
+    <Toggle/>
       <div className="home" style={{ backgroundColor: "#3e5e78" }}>
         {/* 10 Card Container start from here */}
         <h1 className="text-center gallery_heading text-white py-2">Our Product Gallery </h1>
@@ -28,7 +30,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth1}
-                    alt="Card image cap"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -60,7 +62,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth2}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -91,7 +93,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth3}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -119,7 +121,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth4}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -148,7 +150,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth5}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -177,7 +179,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth6}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -205,7 +207,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Cloth7}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -234,7 +236,7 @@ function ProductGallery() {
                     className="card-img-top "
                     src={Cloth8}
                     height="400"
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">
@@ -262,7 +264,7 @@ function ProductGallery() {
                   <img
                     className="card-img-top"
                     src={Carosol3}
-                    alt="Card cap_photo"
+                    alt="not found"
                   />
                 </div>
                 <div className="card-body">

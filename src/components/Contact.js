@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import "./Contact.css";
+import Toggle from "./Toggle";
 
 function Contact() {
   useEffect(() => {
@@ -7,7 +8,8 @@ function Contact() {
   });
   return (
     <>
-      <div className="row" id="contatti" style={{ marginTop: "0rem" }}>
+    <Toggle/>
+      <div className="row" id="contatti" style={{ marginTop: "3rem" }}>
         <div className=" mt-5">
           <div className="container">
             <div className="row" style={{ height: "550px" }}>
@@ -16,18 +18,18 @@ function Contact() {
                   <h4 className="contact_sk col-sm-12">SK DRESSLAND</h4>
                 </div>
                 <div className="Contact-info" style={{marginTop:"3rem"}}>
-                  <div class="contact_info_sec">
+                  <div className="contact_info_sec">
                     <h4 className="text-white col-sm-12">Contact Info</h4>
-                    <div class="d-flex info_single align-items-center">
-                      <i class="fas fa-headset"></i>
+                    <div className="d-flex info_single align-items-center">
+                      <i className="fas fa-headset"></i>
                       <span className="text-white col-sm-12">+91 6498653450</span>
                     </div>
-                    <div class="d-flex info_single align-items-center">
-                      <i class="fas fa-envelope-open-text"></i>
+                    <div className="d-flex info_single align-items-center">
+                      <i className="fas fa-envelope-open-text"></i>
                       <span className="text-white  col-sm-12">info@dressland.com</span>
                     </div>
-                    <div class="d-flex info_single align-items-center">
-                      <i class="fas fa-map-marked-alt"></i>
+                    <div className="d-flex info_single align-items-center">
+                      <i className="fas fa-map-marked-alt"></i>
                       <span className="text-white  col-sm-12">
                        Address
                       </span>

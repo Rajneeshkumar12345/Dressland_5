@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EdiText from "react-editext";
+import Sidebar from "../components/Sidebar";
 
 function AboutAdminPage() {
   // const [editing, setEditing] = useState(false);
@@ -15,7 +16,10 @@ function AboutAdminPage() {
     setFile(data);
   };
   return (
-    <div className="About_Admin">
+    <>
+
+<Sidebar/>
+    <div className="About_Admin" style={{marginTop:"7rem"}}>
       <div className="container About_Container_Admin">
         <h2 className="text-center text-dark mt-3">About us</h2>
         {/* <button className='' onClick={() => setEditing((v) => !v)} style={{width:"15%"}}>Toggle</button> */}
@@ -41,6 +45,8 @@ function AboutAdminPage() {
         </div>
       </div>
     </div>
+    </>
+
   );
 }
 

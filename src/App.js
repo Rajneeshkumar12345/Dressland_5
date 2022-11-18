@@ -83,8 +83,8 @@
 // export default App;
 
 import "./App.css";
-  import MainDash from "./components/MainDash/MainDash";
- import RightSide from "./components/RigtSide/RightSide";
+import MainDash from "./components/MainDash/MainDash";
+import RightSide from "./components/RigtSide/RightSide";
 import Sidebar from "./components/Sidebar";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -92,11 +92,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import Home from "./components/Home";
 // import Login from "./components/Login";
 import ToggleSidebar from "./components/ToggleSidebar";
- import CenterShop from "./pages/CenterShop";
- import Register from "./components/Register";
- import UserRegistration from "./pages/UserRegistration";
- import Product from "./pages/Product";
- import Contact from "./components/Contact";
+import CenterShop from "./pages/CenterShop";
+import Register from "./components/Register";
+import UserRegistration from "./pages/UserRegistration";
+import Product from "./pages/Product";
+import Contact from "./components/Contact";
 
 import About from "./components/About";
 import Galary from "./pages/Galary";
@@ -109,7 +109,6 @@ import AboutAdminPage from "./pages/AboutAdminPage";
 import ContactAdminPage from "./pages/ContactAdminPage";
 import ProductExplore from "./pages/ProductExplore";
 
-
 // import DistributerPage from "./components/DistributerPage";
 
 function App() {
@@ -119,7 +118,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<ToggleSidebar />} />
           <Route exact path="/About" element={<About />} />
-          <Route exact path="/Stock" element={<Stock/>} />
+          <Route exact path="/Stock" element={<Stock />} />
           <Route exact path="/ProductGallery" element={<ProductGallery />} />
           <Route exact path="/Product" element={<Product />} />
           <Route exact path="/Galary" element={<Galary />} />
@@ -127,12 +126,20 @@ function App() {
           <Route exact path="/LoginPage" element={<Login />} />
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Master" element={<Master />} />
-          <Route exact path="/UserRegistration" element={<UserRegistration/>} />
-          <Route exact path="/CenterShop" element={<CenterShop/>} />
+          <Route
+            exact
+            path="/UserRegistration"
+            element={<UserRegistration />}
+          />
+          <Route exact path="/CenterShop" element={<CenterShop />} />
           <Route exact path="/EnquiryForm" element={<EnquiryForm />} />
-          <Route exact path="/AboutAdminPage" element={<AboutAdminPage/>} />
-          <Route exact path="/ContactAdminPage" element={<ContactAdminPage/>} />
-          <Route exact path="/ProductExplore" element={<ProductExplore/>} />
+          <Route exact path="/AboutAdminPage" element={<AboutAdminPage />} />
+          <Route
+            exact
+            path="/ContactAdminPage"
+            element={<ContactAdminPage />}
+          />
+          <Route exact path="/ProductExplore" element={<ProductExplore />} />
           {/* <Route exact path="/DistributerPage" element={<DistributerPage />} /> */}
           <Route
             exact
@@ -150,10 +157,9 @@ function App() {
             }
           />
         </Routes>
-          {/* <Route exact path="/CenterShop" element={ <CenterShop/> } /> */}
+        {/* <Route exact path="/CenterShop" element={ <CenterShop/> } /> */}
       </BrowserRouter>
     </main>
- 
   );
 }
 
@@ -196,10 +202,12 @@ export default App;
   /* <CenterShop/> */
 }
 
-   {/* //   <div className="App">
+{
+  /* //   <div className="App">
     //   <div className="AppGlass">
     //     <Sidebar/>
     //     <MainDash/>
     //     <RightSide/>
     //   </div>
-    // </div> */}
+    // </div> */
+}

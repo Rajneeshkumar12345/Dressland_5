@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
+import {Link} from 'react-router-dom'
 import Logo from "../images/Logo.png";
 import { UilSignOutAlt } from "@iconscout/react-unicons";
 //import { SidebarData } from "../Data/Data";
@@ -17,6 +18,21 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import InfoIcon from "@mui/icons-material/Info";
 
+
+
+
+
+
+
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+
+import { SidebarAdminData } from "./SidebarAdminData";
+
+import { IconContext } from "react-icons";
+
+
+import img from "../images/Logo.png";
 const Sidebar = () => {
   // const [selected, setSelected] = useState(0);
 
@@ -32,11 +48,9 @@ const Sidebar = () => {
   // };
   // console.log(window.innerWidth);
 
-  const [isOpen, setIsopen] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
 
-  const ToggleSidebar = () => {
-    isOpen === true ? setIsopen(false) : setIsopen(true);
-  };
+  const showSidebar = () => setSidebar(!sidebar);
 
   return (
     <>
@@ -53,12 +67,12 @@ const Sidebar = () => {
       // animate={window.innerWidth <= 768 ? `${expanded}` : ""}
       >
         {/* logo */}
-        {/* <div className="logo fixed">
+        {/* <div className="logo">
           <img src={Logo} alt="logo" />
         
-        </div>
+        </div> */}
 
-        <div className="menu fixed">
+        {/* <div className="menu fixed">
           <ul>
             <li className="Dash1 D1">
               <a href="/MainDash" className="text-dark">
@@ -135,66 +149,48 @@ const Sidebar = () => {
           </div>
         </div> */}
 
-        <div className="container-fluid mt-3">
-          <nav className="navbar navbar-expand-lg navbar-light ">
-            <div className="container-fluid p-2">
-              {/* <a className="navbar-brand text-primary mr-0">Company Logo</a> */}
-              <div className="form-inline ml-auto">
-                <div
-                  className="btn btn-primary"
-                  onClick={ToggleSidebar}
-                  style={{ marginLeft: "-7rem" }}
-                >
-                  <i className="fa fa-bars"></i>
-                </div>
-              </div>
-            </div>
-          </nav>
-          <div className={`sidebar ${isOpen == true ? "active" : ""}`}>
-            <div className="sd-header">
-              <h4 className="mb-0">Sidebar Header</h4>
-              <div className="btn btn-primary" onClick={ToggleSidebar}>
-                <i className="fa fa-times"></i>
-              </div>
-            </div>
-            <div className="sd-body">
-              <ul>
-                <li>
-                  <a href="/MainDash" className="sd-link">
-                    Dashboard
-                  </a>
-                </li>
-                <li>
-                  <a href="/Product" className="sd-link">
-                    Product
-                  </a>
-                </li>
-                <li>
-                  <a className="sd-link">Menu Item 3</a>
-                </li>
-                <li>
-                  <a className="sd-link">Menu Item 4</a>
-                </li>
-                <li>
-                  <a className="sd-link">Menu Item 5</a>
-                </li>
-                <li>
-                  <a className="sd-link">Menu Item 6</a>
-                </li>
-                <li>
-                  <a className="sd-link">Menu Item 7</a>
-                </li>
-                <li>
-                  <a className="sd-link">Menu Item 8</a>
-                </li>
-              </ul>
-            </div>
+    
+
+
+            
+    <div className="navBar fixed-top">
+        <IconContext.Provider value={{ color: "#fff" }}>
+          <div className="navbar">
+            <Link to="#" className="menu-bars">
+              <FaIcons.FaBars onClick={showSidebar} />
+            </Link>
+            {/* <Link to="/" className="img_contain ">
+              <img
+                src={img}
+                className="img-fluid "
+                width="60"
+                height="40"
+                alt="img"
+              />
+            </Link> */}
+            <div><h2 className="ms-5 mt-3">Admin Panel</h2></div>
           </div>
-          <div
-            className={`sidebar-overlay ${isOpen == true ? "active" : ""}`}
-            onClick={ToggleSidebar}
-          ></div>
-        </div>
+          <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+            <ul className="nav-menu-items" onClick={showSidebar} >
+              <li className="navbar-toggle" >
+                <Link to="#" className="menu-bars" style={{marginLeft:"12rem"}} >
+                  <AiIcons.AiOutlineClose />
+                </Link>
+              </li>
+              {SidebarAdminData.map((item, index) => {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </IconContext.Provider>
+      </div>
       </motion.div>
     </>
   );

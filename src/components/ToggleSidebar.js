@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ToggleSidebar.css";
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 //import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -25,24 +26,43 @@ import Cloth6 from "../images/Cloth6.jpg";
 import Cloth7 from "../images/Cloth7.webp";
 import Cloth8 from "../images/Cloth8.jpg";
 
+import Logo from "../images/Logo.png";
+import HomeIcon from "@mui/icons-material/Home";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import PhoneIcon from "@mui/icons-material/Phone";
 
-import Logo from '../images/Logo.png'
-import HomeIcon from '@mui/icons-material/Home';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import PhoneIcon from '@mui/icons-material/Phone';
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+
+import { SidebarData } from "./SidebarData";
+
+import { IconContext } from "react-icons";
+
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const ToggleSidebar = () => {
-  const [isOpen, setIsopen] = useState(false);
+  // const [isOpen, setIsopen] = useState(false);
 
-  const ToggleSidebar = () => {
-    isOpen === true ? setIsopen(false) : setIsopen(true);
-  };
+  // const ToggleSidebar = () => {
+  //   isOpen === true ? setIsopen(false) : setIsopen(true);
+  // };
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
   return (
     <>
-      <div className="container-fluid mt-3">
-        <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-md">
-          <div className="container-fluid">
-            <a href="/" className="img_contain">
+      <div className="navBar fixed-top">
+        <IconContext.Provider value={{ color: "#fff" }}>
+          <div className="navbar">
+            <Link to="#" className="menu-bars">
+              <FaIcons.FaBars onClick={showSidebar} />
+            </Link>
+            <Link to="/" className="img_contain ">
               <img
                 src={img}
                 className="img-fluid "
@@ -50,144 +70,217 @@ const ToggleSidebar = () => {
                 height="40"
                 alt="img"
               />
-            </a>
+            </Link>
+
+
+            <section
+              className="d-flex justify-content-between p-2 text-white Navbar_Social"
+              style={{ backgroundColor: "#172470", marginLeft:"45rem" }}
+            >
+              <div className="me-5 ms-5">
+                <a
+                  href="https://www.facebook.com/CodeLoverTech/"
+                  target="_blank"
+                  className="text-white me-4"
+                >
+                  <WhatsAppIcon fontSize="medium" />{" "}
+                  <a href="tel:+" className="text-dark">
+                  </a>
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href="https://www.facebook.com/CodeLoverTech/"
+                  target="_blank"
+                  className="text-white me-4"
+                >
+                  <FacebookOutlinedIcon fontSize="medium" />
+                </a>
+                <a
+                  href="https://twitter.com/infoRajInfotech"
+                  target="_blank"
+                  className="text-white me-4"
+                >
+                  <TwitterIcon fontSize="medium" />
+                </a>
+
+                <a
+                  href="https://www.instagram.com/codelovertechnology/?hl=en"
+                  target="_blank"
+                  className="text-white me-4"
+                >
+                  <InstagramIcon fontSize="medium" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/codelover-technology-810724151/"
+                  target="_blank"
+                  className="text-white me-4"
+                >
+                  <LinkedInIcon fontSize="medium" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/codelover-technology-810724151/"
+                  target="_blank"
+                  className="text-white me-1"
+                >
+                  <YouTubeIcon fontSize="medium" />
+                </a>
+              </div>
+            </section>
+          </div>
+          <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+            <ul className="nav-menu-items" onClick={showSidebar}>
+              <li className="navbar-toggle">
+                <Link to="#" className="menu-bars">
+                  <AiIcons.AiOutlineClose />
+                </Link>
+              </li>
+              {SidebarData.map((item, index) => {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </IconContext.Provider>
+      </div>
+      <div className="container-fluid mt-3">
+        {/* <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-md">
+          <div className="container-fluid">
+            <Link to="/" className="img_contain">
+              <img
+                src={img}
+                className="img-fluid"
+                width="60"
+                height="40"
+                alt="img"
+              />
+            </Link>
             <div className="form-inline ml-auto">
               <div className="btn btn-primary" onClick={ToggleSidebar}>
-                {/* <i className="fa fa-bars"></i> */}
+             
                 <MenuIcon fontSize="medium" />
               </div>
             </div>
           </div>
-        </nav>
-        <div class="container my-5">
+        </nav> */}
+        <div className="container my-5">
           {/* <a
             href=""
-            class="site-nav__link site-nav__link--underline site-nav__link--has-dropdown"
+            className="site-nav__link site-nav__link--underline site-nav__link--has-dropdown"
           >
             Wholesale
           </a> */}
 
-          <div class="ombre-externe">
-            <div class="ombre-interne">
+          <div className="ombre-externe">
+            <div className="ombre-interne">
               <div
                 id="carouselExampleCaptions"
-                class="carousel slide "
+                className="carousel slide "
                 data-bs-ride="carousel"
               >
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
                     <img
                       src={Caro1}
-                      class="d-block w-100 peinture-ombre-interne-fine"
+                      className="d-block w-100 peinture-ombre-interne-fine"
                       alt="carosol_image"
                     />
                   </div>
-                  <div class="carousel-item">
+                  <div className="carousel-item">
                     <img
                       src={Caro2}
-                      class="d-block w-100"
+                      className="d-block w-100"
                       alt="carosol_image"
                     />
-                    {/* <div class="carousel-caption">
+                    {/* <div className="carousel-caption">
                       <h5>Second slide</h5>
                       <p></p>
                     </div> */}
                   </div>
-                  <div class="carousel-item">
+                  <div className="carousel-item">
                     <img
                       src={Caro3}
-                      class="d-block w-100"
+                      className="d-block w-100"
                       alt="carosol-image"
                     />
-                    {/* <div class="carousel-caption">
+                    {/* <div className="carousel-caption">
                       <h5>Third slide</h5>
                       <p></p>
                     </div> */}
                   </div>
                 </div>
                 <button
-                  class="carousel-control-prev"
+                  className="carousel-control-prev"
                   type="button"
                   data-bs-target="#carouselExampleCaptions"
                   data-bs-slide="prev"
                 >
                   <span
-                    class="carousel-control-prev-icon"
+                    className="carousel-control-prev-icon"
                     aria-hidden="true"
                   ></span>
-                  <span class="visually-hidden">Previous</span>
+                  <span className="visually-hidden">Previous</span>
                 </button>
                 <button
-                  class="carousel-control-next"
+                  className="carousel-control-next"
                   type="button"
                   data-bs-target="#carouselExampleCaptions"
                   data-bs-slide="next"
                 >
                   <span
-                    class="carousel-control-next-icon"
+                    className="carousel-control-next-icon"
                     aria-hidden="true"
                   ></span>
-                  <span class="visually-hidden">Next</span>
+                  <span className="visually-hidden">Next</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className={`sidebar ${isOpen == true ? "active" : ""}`}>
+        {/* ************************Sidebar Toggle Start from here  ***********************************/}
+        {/* <div className={`sidebar ${isOpen == true ? "active" : ""}`}>
           <div className="sd-header">
             <h4 className="mb-0 Toggle_CompanyName text-white"><span style={{fontSize:"50px", fontWeight:"600", marginLeft:"70px", color:"#0bad09"}}>SK</span> Dressland </h4>
             <div className="btn btn-primary" onClick={ToggleSidebar}>
-              {/* <i className="fa fa-times"></i> */}
+             
               <CloseIcon fontSize="medium" />
             </div>
           </div>
           <div className="sd-body">
             <ul>
               <li>
-                <a
-                  href="/"
-                  class="btn btn-dark btn-lg"
+                <Link
+                  to="/"
+                  className="sd-link"
                   style={{ width: "15rem" }}
                 >
-                  <CottageIcon /> Home
-                </a>
+                   Home
+                </Link>
               </li>
               <li>
                 <a
-                  class="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg"
                   style={{ width: "15rem" }}
                   href="/About"
                   role="button"
                 >
                   <InfoIcon /> About Us
                 </a>
-                {/* <div class="collapse" id="collapseExample">
-                  <ul>
-                    <li>
-                      <a
-                        className="btn btn-success mt-1"
-                        style={{ width: "15rem" }}
-                      >
-                        About 1
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="btn btn-success mt-1"
-                        style={{ width: "15rem" }}
-                      >
-                        About 2
-                      </a>
-                    </li>
-                  </ul>
-                </div> */}
+         
               </li>
 
               <li>
                 <a
                   href="/ProductGallery"
-                  class="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg"
                   style={{ width: "15rem" }}
                 >
                   {" "}
@@ -198,7 +291,7 @@ const ToggleSidebar = () => {
               <li>
                 <a
                   href="/ProductExplore"
-                  class="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg"
                   style={{ width: "15rem" }}
                 >
                   {" "}
@@ -208,7 +301,7 @@ const ToggleSidebar = () => {
               <li>
                 <a
                   href="/Contact"
-                  class="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg"
                   style={{ width: "15rem" }}
                 >
                   {" "}
@@ -218,7 +311,7 @@ const ToggleSidebar = () => {
               <li>
                 <a
                   href="/MainDash"
-                  class="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg"
                   style={{ width: "15rem" }}
                 >
                   {" "}
@@ -228,7 +321,7 @@ const ToggleSidebar = () => {
               <li>
                 <a
                   href="/LoginPage"
-                  class="btn btn-dark btn-lg"
+                  className="btn btn-dark btn-lg"
                   style={{ width: "15rem" }}
                 >
                   {" "}
@@ -236,14 +329,7 @@ const ToggleSidebar = () => {
                 </a>
               </li>
               <li>
-                {/* <a
-                  href="/EnquiryForm"
-                  class="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                >
-                  {" "}
-                  <LogoutIcon /> Enquiry
-                </a> */}
+            
               </li>
             </ul>
           </div>
@@ -251,33 +337,37 @@ const ToggleSidebar = () => {
         <div
           className={`sidebar-overlay ${isOpen === true ? "active" : ""}`}
           onClick={ToggleSidebar}
-        ></div>
+        ></div> */}
 
-        {/* POPUP WINDOW START FROM HERE  */}
+        {/****************************** * POPUP WINDOW START FROM HERE  ****************************************/}
         <button
           data-toggle="modal"
           data-target="#myModal"
-          class="trigger_popup border-0"
+          className="trigger_popup border-0"
         >
           <span>Enquire Now</span>
         </button>
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
+        <div className="modal fade" id="myModal" role="dialog">
+          <div className="modal-dialog">
             <div
-              class="modal-content"
+              className="modal-content"
               // style={{ backgroundColor: "rgba(3, 3, 55, 0.5)" }}
             >
-              {/* <div class="modal-header" >
-                <button type="button" class="close" data-dismiss="modal">
+              {/* <div className="modal-header" >
+                <button type="button" className="close" data-dismiss="modal">
                   &times;
                 </button>
               </div> */}
-              <div id="container"  style={{ marginTop: "3rem" }}>
-              <button type="button" class="close text-right me-3" data-dismiss="modal">
+              <div id="container" style={{ marginTop: "3rem" }}>
+                <button
+                  type="button"
+                  className="close text-right me-3"
+                  data-dismiss="modal"
+                >
                   &times;
-                  </button>
+                </button>
                 <header>Enquire Now </header>
-                
+
                 <form method="post">
                   <fieldset>
                     <br />
@@ -288,7 +378,7 @@ const ToggleSidebar = () => {
                       className="Popup_Common"
                       placeholder="EnterName"
                       required
-                      autofocus
+                      autoFocus
                     />
                     <br />
                     <br />
@@ -347,10 +437,10 @@ const ToggleSidebar = () => {
                 </form>
               </div>
 
-              {/* <div class="modal-footer">
+              {/* <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-default"
+                  className="btn btn-default"
                   data-dismiss="modal"
                 >
                   Close
@@ -359,15 +449,19 @@ const ToggleSidebar = () => {
             </div>
           </div>
         </div>
+      </div>
 
       {/* ******************3D ROTATING COMPONENTS START FROM HERE**************** */}
-      </div>
+
       <div className="rotate_div">
         <h1 className="rotate-heading py-3 col-sm-12">OUR DRESSES</h1>
-        <h4 className="quote_head col-sm-12">We has been you Establish a relationship with our Customers from the get go!</h4>
+        <h4 className="quote_head col-sm-12">
+          We has been you Establish a relationship with our Customers from the
+          get go!
+        </h4>
       </div>
       <div className="rotatation">
-        <div class="scope ">
+        <div className="scope ">
           <span className="sp1">
             <img src={Cloth1} alt="not found" />
           </span>
@@ -395,10 +489,7 @@ const ToggleSidebar = () => {
         </div>
       </div>
 
-
-
-
-{/* ************** * FOOTER START FROM HERE.*************************** */}
+      {/* ************** * FOOTER START FROM HERE.*************************** */}
 
       <div className="footer">
         {/* <!-- Remove the container if you want to extend the Footer to full width. --> */}
@@ -418,9 +509,7 @@ const ToggleSidebar = () => {
                   {/* Grid column*/}
                   <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     {/* Content*/}
-                    <h6 className="text-uppercase  fw-bold">
-                      SK DRESSLAND
-                    </h6>
+                    <h6 className="text-uppercase  fw-bold">SK DRESSLAND</h6>
                     <hr
                       className="mt-0 d-inline-block mx-auto"
                       style={{
@@ -430,20 +519,18 @@ const ToggleSidebar = () => {
                       }}
                     />
                     {/* <br></br> */}
-                  <p>
-                  <img
-                      src={Logo}
-                      height="50"
-                      width="50"
-                      alt="photo"
-                      className=""
-                      
-                    />
-                  </p>
-                    <p className="footer_content">                    
-                    Our mission is also to make quality Cloths
-                accessible to all by providing quality product and
-                Affordable price.
+                    <p>
+                      <img
+                        src={Logo}
+                        height="50"
+                        width="50"
+                        alt="photo"
+                        className=""
+                      />
+                    </p>
+                    <p className="footer_content">
+                      Our mission is also to make quality Cloths accessible to
+                      all by providing quality product and Affordable price.
                     </p>
                   </div>
                   {/*  Grid column
@@ -526,14 +613,16 @@ const ToggleSidebar = () => {
                       }}
                     />
                     <p>
-                      <i className=" mr-3"></i><HomeIcon/>{" "}Enter Addresses
+                      <i className=" mr-3"></i>
+                      <HomeIcon /> Enter Addresses
                     </p>
                     <p>
                       <i className=" mr-3"></i>
-                      <DraftsIcon/>{" "}Enter Email
+                      <DraftsIcon /> Enter Email
                     </p>
                     <p>
-                      <i className=" mr-3"></i><PhoneIcon/>{" "}Enter Phone
+                      <i className=" mr-3"></i>
+                      <PhoneIcon /> Enter Phone
                     </p>
                     {/* <p>
                       <i className="fas fa-print mr-3"></i>Please Write Company
@@ -548,18 +637,17 @@ const ToggleSidebar = () => {
               className="text-center p-3"
               style={{ backgroundColor: "rgba(9, 9, 9, 0.8)" }}
             >
-              © 2022 All Right Reserved by:- 
+              © 2022 All Right Reserved by:-
               <a className="text-white" href="/">
-                {""} SK DRESSLAND {""} 
+                {""} SK DRESSLAND {""}
               </a>
-              
               || Developed by:-
               <a
                 className="text-white"
                 href="https://codelovertechnology.com/"
                 target="_blank"
               >
-              {""}  CodeLover Technology Pvt. Ltd.
+                {""} CodeLover Technology Pvt. Ltd.
               </a>
             </div>
           </footer>

@@ -7,18 +7,20 @@ import Cloth3 from "../images/Cloth3.jpg";
 import Cloth4 from "../images/Cloth4.jpg";
 import Cloth5 from "../images/Cloth5.jpg";
 import Cloth6 from "../images/Cloth6.jpg";
+import Toggle from '../components/Toggle';
 
 function ProductExplore() {
   return (
    <>
+   <Toggle/>
    <div className="Gallery">
-   <div class="container d-flex align-items-center justify-content-center position-relative flex-wrap">
+   <div className="container d-flex align-items-center justify-content-center position-relative flex-wrap">
         <h1 className="text-center gallery_heading text-white py-2">Our Product Gallery </h1>
-        <div class="card Product_Card d-flex position-relative flex-column">
-          <div class="imgContainer img-fluid">
+        <div className="card Product_Card d-flex position-relative flex-column">
+          <div className="imgContainer img-fluid">
             <img src={Cloth1} width="940" height="250" alt='cloth_image'  ></img>
           </div>
-          <div class="content">
+          <div className="content">
             <h4>
               This is fabulous fabric which is created by addidas brand.So, we will provide in good price
             </h4>
@@ -28,11 +30,11 @@ function ProductExplore() {
             </p> */}
           </div>
         </div>
-        <div class="card  Product_Card d-flex position-relative flex-column">
-          <div class="imgContainer">
+        <div className="card  Product_Card d-flex position-relative flex-column">
+          <div className="imgContainer">
             <img src={Cloth2} width="940" height="250" alt="Cloth_image" ></img>
           </div>
-          <div class="content">
+          <div className="content">
             <h4> This is fabulous fabric which is created by addidas brand.So, we will provide in good price</h4>
             {/* <p className='text-dark'>
               Built in gravity senser, when sensing the emergency braking, the
@@ -41,11 +43,11 @@ function ProductExplore() {
             </p> */}
           </div>
         </div>
-        <div class="card  Product_Card d-flex position-relative flex-column">
-          <div class="imgContainer">
+        <div className="card  Product_Card d-flex position-relative flex-column">
+          <div className="imgContainer">
             <img src={Cloth3} width="940" height="250"  alt="Cloth_image" ></img>
           </div>
-          <div class="content">
+          <div className="content">
             <h4>
             This is fabulous fabric which is created by addidas brand.So, we will provide in good price
             </h4>
@@ -57,12 +59,12 @@ function ProductExplore() {
         </div>
       </div>
 
-      <div class="container d-flex align-items-center justify-content-center position-relative flex-wrap ">
-        <div class="card  Product_Card d-flex position-relative flex-column">
-          <div class="imgContainer img-fluid">
+      <div className="container d-flex align-items-center justify-content-center position-relative flex-wrap ">
+        <div className="card  Product_Card d-flex position-relative flex-column">
+          <div className="imgContainer img-fluid">
             <img src={Cloth4} width="940" height="250" alt="Cloth_image"  ></img>
           </div>
-          <div class="content">
+          <div className="content">
             <h4> This is fabulous fabric which is created by addidas brand.So, we will provide in good price</h4>
             {/* <p  className='text-dark'>
               2.2 aperture 150 wide angle lens, covering 6 lanes, more
@@ -71,11 +73,11 @@ function ProductExplore() {
             </p> */}
           </div>
         </div>
-        <div class="card  Product_Card d-flex position-relative flex-column">
-          <div class="imgContainer">
+        <div className="card  Product_Card d-flex position-relative flex-column">
+          <div className="imgContainer">
             <img src={Cloth5} width="940" height="250"  alt="Cloth_image"  ></img>
           </div>
-          <div class="content">
+          <div className="content">
             <h4>
             This is fabulous fabric which is created by addidas brand.So, we will provide in good price
             </h4>
@@ -85,11 +87,11 @@ function ProductExplore() {
             </p> */}
           </div>
         </div>
-        <div class="card  Product_Card  d-flex position-relative flex-column">
-          <div class="imgContainer">
+        <div className="card  Product_Card  d-flex position-relative flex-column">
+          <div className="imgContainer">
             <img src={Cloth6} width="940" height="250" alt="Cloth_image" ></img>
           </div>
-          <div class="content">
+          <div className="content">
             <h4> This is fabulous fabric which is created by addidas brand.So, we will provide in good price</h4>
             {/* <p  className='text-dark'>
               Buil in multi language pronunciation, no need to worry about
