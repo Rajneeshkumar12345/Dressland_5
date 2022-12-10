@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Log_image from "../images/Log_Image.webp";
@@ -16,25 +16,35 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/LoginPage")
+  //   }
+  // })
+
   const handleApi = () => {
     console.log({ email, password });
-    const credentials = {
-      email,
-      password,
-    };
+    // const credentials = {
+    //   email,
+    //   password,
+    // };
     axios
-      .post("http://nias.codelovertechnology.com/UserMaster/api/UserMaster/Login",
-      credentials)
-       .then((result) => {
-         console.log(result.data);
-         // alert("success");
-         localStorage.setItem("token", result.data.token);
-         navigate("/");
-       })
-       .catch((error) => {
-         alert("Plz Enter Valid Email and Password");
-         console.log(error);
+      .post("http://nias.codelovertechnology.com/UserMaster/api/UserMaster/Login",{
+        email: email,
+        password: password
       })
+      .then(result => {
+        console.log(result.data)
+       localStorage.setItem("token", result.data.token);
+         navigate("/MainDash");
+      })
+      .catch(error => {
+        console.log(error)
+      })
+     
+
+
+
       // credentials)
       // .then((response) => {
       //   if (response.data.accountType === "admin") {

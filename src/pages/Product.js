@@ -18,6 +18,7 @@ function Product() {
   const [checkbox, setCheckbox] = useState(false);
 
   const PostData = () => {
+    console.log(PostData)
     axios
       .post("http://nias.codelovertechnology.com/ProductMaster", {
         productID: 0,
@@ -191,44 +192,6 @@ function Product() {
                   })}
                 </tbody>
               </table>
-              {/* <div className="clearfix">
-               
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a href="#">Previous</a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a href="#" className="page-link">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      4
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      5
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
             </div>
           </div>
         </div>
@@ -238,15 +201,18 @@ function Product() {
             <div className="modal-content">
               <form>
                 <div className="modal-header">
-                  <h4 className="modal-title">Add Product</h4>
+                  <h4 className="modal-title col-md-6">Add Product</h4>
+                  <div className="float-right">
                   <button
                     type="button"
-                    className="close"
+                    className="close col-md-6"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     &times;
                   </button>
+                  </div>
+                
                 </div>
                 <div className="container">
                   <div className="row">

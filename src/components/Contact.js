@@ -31,7 +31,7 @@ function Contact() {
                     <div className="d-flex info_single align-items-center">
                       <i className="fas fa-map-marked-alt"></i>
                       <span className="text-white  col-sm-12">
-                       Address
+                      Ajamgarh, UP, India.
                       </span>
                     </div>
                   </div>
@@ -106,15 +106,15 @@ function Contact() {
                     SK DRESSLAND
                   </h2>
                   <i className="fas fa-phone  mt-3"></i>{" "}
-                  <a href="tel:+">Enter Phone here</a>
+                  <a href="tel:+">+91 6498653450</a>
                   <br></br>
                   {/* <i className="fas fa-phone mt-3"></i>{" "}
                 <a href="tel:+">(+916794123456</a>
                 <br></br> */}
                   <i className="fa fa-envelope mt-3"></i>{" "}
-                  <a href="">Enter Email here</a>
+                  <a href="">info@dressland.com</a>
                   <br></br>
-                  <i className="fas fa-globe mt-3"></i> Enter Addresss here
+                  <i className="fas fa-globe mt-3"></i>Ajamgarh, UP, India.
                   <br></br>
                   {/* <i className="fas fa-globe mt-3"></i> Address second<br></br> */}
                   {/* <div className="my-4">

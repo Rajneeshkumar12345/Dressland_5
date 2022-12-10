@@ -406,16 +406,19 @@ function CenterShop() {
           <div className="modal-dialog">
             <div className="modal-content">
               <form>
-                <div className="modal-header">
-                  <h4 className="modal-title">Add CenterShop</h4>
+              <div className="modal-header">
+                  <h4 className="modal-title col-md-8">Add Center Shop</h4>
+                  <div className="float-right">
                   <button
                     type="button"
-                    className="close"
+                    className="close col-md-4"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     &times;
                   </button>
+                  </div>
+                
                 </div>
   
                 <div className="container">

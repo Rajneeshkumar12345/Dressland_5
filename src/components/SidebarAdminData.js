@@ -68,5 +68,11 @@ export const SidebarAdminData = [
     path: '/EnquiryForm',
     icon: <AiIcons.AiOutlineMessage />,
     cName: 'nav-text-admin'
+  },
+  {
+    title: 'TRANSACTION',
+    path: '/Transaction',
+    icon: <AiIcons.AiOutlineShop />,
+    cName: 'nav-text-admin'
   }
 ];

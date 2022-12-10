@@ -199,17 +199,20 @@ function EnquiryForm() {
             <div className="modal-dialog">
               <div className="modal-content">
                 <form>
-                  <div className="modal-header">
-                    <h4 className="modal-title">Add Enquiry</h4>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-hidden="true"
-                    >
-                      &times;
-                    </button>
+                <div className="modal-header">
+                  <h4 className="modal-title col-md-6">Add Enquiry</h4>
+                  <div className="float-right">
+                  <button
+                    type="button"
+                    className="close col-md-6"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
                   </div>
+                
+                </div>
                  
                   <div className="modal-body">
                     <div className="form-group">

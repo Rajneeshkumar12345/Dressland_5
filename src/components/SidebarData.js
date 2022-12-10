@@ -34,12 +34,12 @@ export const SidebarData = [
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },
-  {
-    title: 'AdminDashboard',
-    path: '/MainDash',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: 'nav-text'
-  },
+  // {
+  //   title: 'AdminDashboard',
+  //   path: '/MainDash',
+  //   icon: <FaIcons.FaEnvelopeOpenText />,
+  //   cName: 'nav-text'
+  // },
   {
     title: 'Login',
     path: '/LoginPage',

@@ -114,6 +114,7 @@ import UserAdmin from "./pages/UserAdmin";
 import AdminGallery from "./pages/AdminGallery";
 import VendorSupport from "./pages/VendorSupport";
 import VendorCenterShop from "./pages/VendorCenterShop";
+import Transaction from "./pages/Transaction";
 
 // import DistributerPage from "./components/DistributerPage";
 
@@ -150,6 +151,7 @@ function App() {
           <Route exact path="/ProductExplore" element={<ProductExplore />} />
           <Route exact path="/EnquiryUpdate" element={<EnquiryUpdate/>} />
           <Route exact path="/AdminGallery" element={<AdminGallery/>} />
+          <Route exact path="/Transaction" element={<Transaction/>} />
 
           <Route exact path="/VendorSupport" element={<VendorSupport/>} />
           <Route exact path="/VendorCentorShop" element={<VendorCenterShop/>} />

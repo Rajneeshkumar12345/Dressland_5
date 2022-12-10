@@ -215,16 +215,19 @@ const updateAPIData = () => {
           <div className="modal-dialog">
             <div className="modal-content">
               <form>
-                <div className="modal-header">
-                  <h4 className="modal-title">Add Product</h4>
+              <div className="modal-header">
+                  <h4 className="modal-title col-md-6">Add Product</h4>
+                  <div className="float-right">
                   <button
                     type="button"
-                    className="close"
+                    className="close col-md-6"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     &times;
                   </button>
+                  </div>
+                
                 </div>
                 <div className="container">
                   <div className="form-group">

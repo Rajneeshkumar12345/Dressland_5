@@ -9,7 +9,7 @@ function AdminGallery() {
   const[subTitle, setSubTitle] = useState("")
   const[description, setDescription] = useState("")
   const[imagePath, , setImagePath] = useState("")
-  const[checkbox, setCheckbox] = useState("")
+  const[checkbox, setCheckbox] = useState(false)
   const PostData = () => {
     axios.post("http://nias.codelovertechnology.com/Gallery",{
     galaryID: 0,
@@ -114,7 +114,7 @@ const getData = () => {
                         <td>{data.title}</td>
                         <th>{data.subTitle}</th>
                         <th>{data.description}</th>
-                        <th><img src={"http://nias.codelovertechnology.com/Gallery"  + data.galaryID} width="40" height="30" /></th>
+                        <th><img src={"http://nias.codelovertechnology.com/Gallery/upload/"  + data.imagePath} width="40" height="30" /></th>
                         <td>
                           <a
                             href="#editEmployeeModal"
@@ -158,16 +158,19 @@ const getData = () => {
           <div className="modal-dialog">
             <div className="modal-content">
               <form>
-                <div className="modal-header">
-                  <h4 className="modal-title">Add Product</h4>
+              <div className="modal-header">
+                  <h4 className="modal-title col-md-6">Add Gallery</h4>
+                  <div className="float-right">
                   <button
                     type="button"
-                    className="close"
+                    className="close col-md-6"
                     data-dismiss="modal"
                     aria-hidden="true"
                   >
                     &times;
                   </button>
+                  </div>
+                
                 </div>
                 <div className="container">
                   <div className="form-group">
