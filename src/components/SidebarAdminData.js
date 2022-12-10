@@ -2,6 +2,8 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import * as FcIcons from 'react-icons/fc';
+import * as MdIcons from 'react-icons/md';
 
 export const SidebarAdminData = [
   {
@@ -23,14 +25,14 @@ export const SidebarAdminData = [
     cName: 'nav-text-admin'
   },
   {
-    title: 'USER REGISTRATION',
-    path: '/UserRegistration',
+    title: 'USER REG',
+    path: '/UserAdmin',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text-admin user-registration'
   },
   {
     title: 'GALLERY',
-    path: '/ProductGallery',
+    path: '/AdminGallery',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text-admin'
   },
@@ -43,7 +45,7 @@ export const SidebarAdminData = [
   {
     title: 'CENTERSHOP',
     path: '/CenterShop',
-    icon: <IoIcons.IoMdHelpCircle />,
+    icon: <AiIcons.AiOutlineShop />,
     cName: 'nav-text-admin'
   }
   ,
@@ -57,14 +59,14 @@ export const SidebarAdminData = [
   {
     title: 'CONTACT US',
     path: '/ContactAdminPage',
-    icon: <IoIcons.IoMdHelpCircle />,
+    icon: <MdIcons.MdContacts />,
     cName: 'nav-text-admin'
   }
   ,
   {
     title: 'ENQUIRY',
     path: '/EnquiryForm',
-    icon: <IoIcons.IoMdHelpCircle />,
+    icon: <AiIcons.AiOutlineMessage />,
     cName: 'nav-text-admin'
   }
 ];

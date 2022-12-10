@@ -1,69 +1,227 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import "./CenterShop.css";
+import axios from "axios";
 
 function CenterShop() {
+  const [APIData, setAPIData] = useState([]);
+  const [shopName, setShopName] = useState("");
+  const [personName, setPersonName] = useState("");
+  const [shopEmail_ID, setEmail_ID] = useState("");
+  const [shopContactNo, setShopContactNo] = useState("");
+  const [personContactNo, setPersonContactNo] = useState("");
+  const [personEmailID, setPersonEmailID] = useState("");
+  const [shopAddress, setShopAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [shopBanner, setShopBanner] = useState("");
+  const [remarks, setRemarks] = useState("");
+  const [checkbox, setCheckbox] = useState(true);
+
+  const PostData = () => {
+    axios.post("http://nias.codelovertechnology.com/ShopMaster", {
+      shopID: 0,
+      shopName,
+      personName,
+      shopEmail_ID,
+      shopContactNo,
+      personContactNo,
+      personEmailID,
+      shopAddress,
+      city,
+      state,
+      shopBanner,
+      remarks,
+      createdBy: "NA",
+      createdDate: "2022-11-23T12:56:22.535Z",
+      modifiedBy: "NA",
+      modifiedDate: "2022-11-23T12:56:22.536Z",
+      checkbox,
+    });
+  };
+
+  axios
+    .get("http://nias.codelovertechnology.com/ShopMaster", {
+      shopID: 0,
+      shopName,
+      personName,
+      shopEmail_ID,
+      shopContactNo,
+      personContactNo,
+      personEmailID,
+      shopAddress,
+      city,
+      state,
+      shopBanner,
+      remarks,
+      createdBy: "NA",
+      createdDate: "2022-11-23T12:56:22.535Z",
+      modifiedBy: "NA",
+      modifiedDate: "2022-11-23T12:56:22.536Z",
+      checkbox,
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  useEffect(() => {
+    axios
+      .get(`http://nias.codelovertechnology.com/ShopMaster`)
+      .then((response) => {
+        setAPIData(response.data);
+      });
+  }, []);
+
+
+  const onDelete = (id) => {
+    axios
+      .delete(`http://nias.codelovertechnology.com/ShopMaster/${id}`)
+      .then(() => {
+        getData();
+        alert("Your data has been deleted");
+      });
+  };
+  const getData = () => {
+    axios
+      .get(`http://nias.codelovertechnology.com/ShopMaster`)
+      .then((getData) => {
+        setAPIData(getData.data);
+      });
+  };
+
   return (
     <>
-    <Sidebar/>
-      <div className="CenterShop" style={{marginTop:'5rem'}}>
+      <Sidebar />
+      <div className="CenterShop" style={{ marginTop: "5rem" }}>
         <header className="text-center CenterSop_header">
           <p className="tag-line py-2"> Center/Shop </p>
         </header>
         <div className="wrapper">
           <main>
             <div className="info" style={{ marginTop: "5rem" }}>
-              <h3 className="Center_heading">Signup for our newsletter</h3>
+              <h3 className="Center_heading">Signup For Center</h3>
               <p>
                 Get the lastest update of the product is doing right in your
                 business.
               </p>
             </div>
-            <form action="#" method="GET" className="head_line">
-              <fieldset className="contact-info">
-                <div className="">
-                  <legend>Contact Information</legend>
-                  <p>
-                    <label for="name">Full Name</label>
+
+            <form>
+              <div className="container text-white">
+                <div className="row">
+                  <div className="form-group col-md-4 mb-3">
+                    <label for="validationDefault01">Person Full Name :-</label>
                     <input
+                      onChange={(e) => setPersonName(e.target.value)}
                       type="text"
-                      id="name"
-                      name="user_name"
-                      placeholder="Required"
-                      title="Please fill out this field"
+                      className="form-control"
+                      id="validationDefault01"
+                      placeholder="Enter Name"
+                      required
                     />
-                  </p>
-                  <p>
-                    <label for="email">Email</label>
+                  </div>
+                  <div className="form-group  col-md-4 mb-3">
+                    <label for="validationDefault02">
+                      Person Contact No :-
+                    </label>
                     <input
-                      type="email"
-                      id="email"
-                      name="user_email"
-                      placeholder="Required"
-                      title="Please fill out this field"
+                      onChange={(e) => setPersonContactNo(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault02"
+                      placeholder="Enter Phone"
+                      required
                     />
-                  </p>
-                  <p>
-                    <label for="address"> Address</label>
-                    <input type="text" id="address" name="user_address" />
-                  </p>
-                  <p>
-                    <label for="address">Phone</label>
+                  </div>
+                  <div className=" form-group col-md-4 mb-3">
+                    <label for="validationDefaultUsername">
+                      Person Email ID :-
+                    </label>
+                      <input
+                        onChange={(e) => setPersonEmailID(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        id="validationDefaultUsername"
+                        placeholder="Enter Email"
+                        aria-describedby="inputGroupPrepend2"
+                        required
+                      />
+                  
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="form-group col-md-4 mb-3">
+                    <label for="validationDefault03">Shop Name :-</label>
                     <input
-                      type="number"
-                      id="address"
-                      name="user_address"
-                      placeholder="Required"
-                      title="Please fill out this field"
+                      onChange={(e) => setShopName(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault03"
+                      placeholder="Enter Shop Name"
+                      required
                     />
-                  </p>
-                  <p>
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="user_city" />
-                  </p>
-                  <p>
-                    <label for="state">State</label>
-                    <select id="state" name="user_state">
+                  </div>
+                  <div className="form-group col-md-4 mb-3">
+                    <label for="validationDefault04">Shop Contact No :-</label>
+                    <input
+                      onChange={(e) => setShopContactNo(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter Shop Contact"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-4 mb-3">
+                    <label for="validationDefault05">Shop Email ID :-</label>
+                    <input
+                      onChange={(e) => setEmail_ID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault05"
+                      placeholder="Enter Shop Email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="form-group col-md-6 mb-3">
+                    <label for="validationDefault03">Shop Address :-</label>
+                    <input
+                      onChange={(e) => setShopAddress(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault03"
+                      placeholder="Enter Shop Address"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-3 mb-3">
+                    <label for="validationDefault04">City :-</label>
+                    <input
+                      onChange={(e) => setCity(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter City"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-3 mb-3">
+                    <label for="validationDefault05">State :-</label>
+                    <input
+                      onChange={(e) => setState(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter State"
+                      required
+                    />
+
+                    {/* <select
+                      onChange={(e) => setState(e.target.value)}
+                      className="form-select  form-select-sm"
+                      style={{ height: "40px" }}
+                    >
                       <option value="state">Choose State</option>
                       <option value="abc">Andhra Pradesh</option>
                       <option value="def">Arunachal Pradesh</option>
@@ -92,164 +250,447 @@ function CenterShop() {
                       <option value="upe">Uttar Pradesh</option>
                       <option value="upe">Uttarakhand</option>
                       <option value="upe">West Bengal</option>
-                    </select>
-                  </p>
-                  <p>
-                    <label for="zipcode">Center Code</label>
-                    <input type="number" id="zipcode" name="user_zipcode" />
-                  </p>
-                </div>
-              </fieldset>
-
-              <fieldset className="newsletter">
-                <div className="">
-                  <legend>Newsletter</legend>
-                  <p>Select the newsletter you would like to recieve</p>
-
-                  <div className="checkboxes">
-                    <p>
-                      <input type="checkbox" id="html_news" name="news" />
-                      <label for="html_news" style={{ marginLeft: "-50px" }}>
-                        Cotton
-                      </label>
-                    </p>
-                    <p>
-                      <input type="checkbox" id="css_news" name="news" />
-                      <label for="css_news" style={{ marginLeft: "-50px" }}>
-                        Wool
-                      </label>
-                    </p>
-                    <p>
-                      <input type="checkbox" id="js_news" name="news" />
-                      <label for="js_news" style={{ marginLeft: "-50px" }}>
-                        Fabric
-                      </label>
-                    </p>
+                    </select> */}
                   </div>
-
-                  {/* <p>Newsletter format</p>
-                <div className="radio-btn">
-                  <p>
-                    <input
-                      type="radio"
-                      id="html"
-                      value="html"
-                      name="html_format"
-                    />
-                    <label for="html">HTML</label>
-                  </p>
-                  <p>
-                    <input
-                      type="radio"
-                      id="plain_text"
-                      value="plain_text"
-                      name="plain_text_format"
-                    />
-                    <label for="plain_text">Plain text</label>
-                  </p>
-                </div> */}
-
-                  <p>How did you find us?</p>
-                  <p>
-                    <select>
-                      <option value="PickOne">Pick One</option>
-                      <option value="Google">Google</option>--
-                      <option value="Bing">Bing</option>
-                      <option value="Social Site">Social Site</option>
-                      <option value="Friends/Workplace">
-                        Friends/Workplace
-                      </option>
-                    </select>
-                  </p>
-
-                  <p>Other topics you would like to hear about</p>
-                  <p>
-                    <textarea
-                      id="interest"
-                      name="user_interest"
-                      placeholder="Enter Message"
-                      className="CenterShot_textarea"
-                    ></textarea>{" "}
-                    <br />
-                  </p>
                 </div>
-              </fieldset>
-            </form>
-            <div className="footer">
-              <div className="btn w-100" style={{ color: "#19e34f" }}>
-                <button type="submit" className="btn CenterShop_Submit">
-                  Submit
-                </button>
-              </div>
 
-              <p>&copy; Copyright SK Dressland.com 2022</p>
-            </div>
+                <div className="row">
+                  <div className="form-group col-md-6 mb-3">
+                    <label for="formFileLg" className="form-label">
+                      Shop Banner :-
+                    </label>
+                    <input
+                      onChange={(e) => setShopBanner(e.target.files[0])}
+                      className="form-control form-control"
+                      id="formFileLg"
+                      type="file"
+                    />
+                  </div>
+                  <div className="form-group col-md-6 mb-3">
+                    <label for="validationDefault04">Remarks :-</label>
+                    <input
+                      onChange={(e) => setRemarks(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter Remarks"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                    <input
+                      onChange={(e) => setCheckbox(!checkbox)}
+                      className="form-check-input mt-3 ms-1"
+                      type="checkbox"
+                      value=""
+                      id="invalidCheck2"
+                      required
+                    />
+                    <label className="form-check-label ms-4" for="invalidCheck2">
+                      Check me out
+                    </label>
+                </div>
+                <div className="form-group">
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  onClick={PostData}
+                >
+                  Submit form
+                </button>
+                </div>
+              </div>
+            </form>
           </main>
         </div>
+
+        <div className="getAPIData mt-5">
+          <div className="UserAdmin">
+            <div className="container-xxl" style={{ marginTop: "7rem" }}>
+              <div className="table-responsive">
+                <div className="table-wrapper">
+                  <div className="table-title">
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <h2>
+                          Manage <b>Center Shop</b>
+                        </h2>
+                      </div>
+                      <div className="col-sm-6">
+                        <a
+                          href="#addEmployeeModal"
+                          className="btn btn-success"
+                          data-toggle="modal"
+                        >
+                          <i className="material-icons">&#xE147;</i>{" "}
+                          <span>Add New User</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <table className="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Sr. No.</th>
+                        <th>Person Name</th>
+                        <th>Person Contact</th>
+                        <th>Person Email </th>
+                        <th>Shop Name</th>
+                        <th>Shop Contact</th>
+                        <th>Shop Email </th>
+                        <th>Shop Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        {/* <th>Shop Banner</th> */}
+                        <th>Remarks</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {APIData.map((data) => {
+                        return (
+                          <tr key={data.shopID}>
+                            <td>{data.shopID}</td>
+                            <td>{data.personName}</td>
+                            <td>{data.personContactNo}</td>
+                            <td>{data.personEmailID}</td>
+                            <td>{data.shopName}</td>
+                            <td>{data.shopContactNo}</td>
+                            <td>{data.shopEmail_ID}</td>
+                            <td>{data.shopAddress}</td>
+                            <td>{data.city}</td>
+                            <td>{data.state}</td>
+                            {/* <td><img src={"http://nias.codelovertechnology.com/ShopMaster" + data.shopBanner} width="40" height="30" /></td> */}
+                            <td>{data.remarks}</td>
+                            <td>
+                              <a
+                                href="#editEmployeeModal"
+                                className="edit"
+                                data-toggle="modal"
+                              >
+                                <i
+                                  className="material-icons"
+                                  data-toggle="tooltip"
+                                  title="Edit"
+                                >
+                                  &#xE254;
+                                </i>
+                              </a>
+                              <a
+                                href="#deleteEmployeeModal"
+                                className="delete"
+                                data-toggle="modal"
+                              >
+                                <i
+                                   onClick={() => onDelete(data.shopID)}
+                                  className="material-icons"
+                                  data-toggle="tooltip"
+                                  title="Delete"
+                                >
+                                  &#xE872;
+                                </i>
+                              </a>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div id="addEmployeeModal" className="modal fade">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <form>
+                <div className="modal-header">
+                  <h4 className="modal-title">Add CenterShop</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+  
+                <div className="container">
+                <div className="row">
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault01">Person Full Name :-</label>
+                    <input
+                      onChange={(e) => setPersonName(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault01"
+                      placeholder="Enter Name"
+                      required
+                    />
+                  </div>
+                  <div className="form-group  col-md-12 mb-3">
+                    <label for="validationDefault02">
+                      Person Contact No :-
+                    </label>
+                    <input
+                      onChange={(e) => setPersonContactNo(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault02"
+                      placeholder="Enter Phone"
+                      required
+                    />
+                  </div>
+                  <div className=" form-group col-md-12 mb-3">
+                    <label for="validationDefaultUsername">
+                      Person Email ID :-
+                    </label>
+                      <input
+                        onChange={(e) => setPersonEmailID(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        id="validationDefaultUsername"
+                        placeholder="Enter Email"
+                        aria-describedby="inputGroupPrepend2"
+                        required
+                      />
+                  
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault03">Shop Name :-</label>
+                    <input
+                      onChange={(e) => setShopName(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault03"
+                      placeholder="Enter Shop Name"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault04">Shop Contact No :-</label>
+                    <input
+                      onChange={(e) => setShopContactNo(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter Shop Contact"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault05">Shop Email ID :-</label>
+                    <input
+                      onChange={(e) => setEmail_ID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault05"
+                      placeholder="Enter Shop Email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault03">Shop Address :-</label>
+                    <input
+                      onChange={(e) => setShopAddress(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault03"
+                      placeholder="Enter Shop Address"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault04">City :-</label>
+                    <input
+                      onChange={(e) => setCity(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter City"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault05">State :-</label>
+                    <input
+                      onChange={(e) => setState(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter State"
+                      required
+                    />
+                    {/* <select
+                      onChange={(e) => setState(e.target.value)}
+                      className="form-select  form-select-sm"
+                      style={{ height: "40px" }}
+                    >
+                      <option >Choose State</option>
+                      <option >Andhra Pradesh</option>
+                      <option >Arunachal Pradesh</option>
+                      <option >Assam</option>
+                      <option >Bihar</option>
+                      <option >Chhattisgarh</option>
+                      <option >Gujarat</option>
+                      <option >Haryana</option>
+                      <option >Himachal Pradesh</option>
+                      <option >Jharkhand</option>
+                      <option >Karnataka</option>
+                      <option >Kerala</option>
+                      <option >Madhya Pradesh</option>
+                      <option >Maharashtra</option>
+                      <option >Manipur</option>
+                      <option >Meghalaya</option>
+                      <option >Mizoram</option>
+                      <option >Nagaland</option>
+                      <option >Odisha</option>
+                      <option value="Punjab">Punjab</option>
+                      <option >Rajasthan</option>
+                      <option >Sikkim</option>
+                      <option >Tamil Nadu</option>
+                      <option >Telangana</option>
+                      <option >Tripura</option>
+                      <option >Uttar Pradesh</option>
+                      <option >Uttarakhand</option>
+                      <option >West Bengal</option>
+                    </select> */}
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="formFileLg" className="form-label">
+                      Shop Banner :-
+                    </label>
+                    <input
+                      onChange={(e) => setShopBanner(e.target.value)}
+                      className="form-control form-control"
+                      id="formFileLg"
+                      type="file"
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault04">Remarks :-</label>
+                    <input
+                      onChange={(e) => setRemarks(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter Remarks"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                    <input
+                      onChange={(e) => setCheckbox(!checkbox)}
+                      className="form-check-input mt-3 ms-1"
+                      type="checkbox"
+                      value=""
+                      id="invalidCheck2"
+                      required
+                    />
+                    <label className="form-check-label text-dark ms-4" for="invalidCheck2">
+                      Check me out
+                    </label>
+                </div>
+                <div className="form-group">
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  onClick={PostData}
+                >
+                  Submit form
+                </button>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {/* <div id="editEmployeeModal" className="modal fade">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <form>
+                <div className="modal-header">
+                  <h4 className="modal-title">Edit Product</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <div className="form-group">
+                    <label>User Name</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>User Email</label>
+                    <input type="email" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>User Contact</label>
+                    <input type="email" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>Address</label>
+                    <textarea className="form-control" required></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>City</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>State</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>User Center</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>Password</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>Confirm Password</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                  <div className="form-group">
+                    <label>Remarks</label>
+                    <input type="text" className="form-control" required />
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <input
+                    type="button"
+                    className="btn btn-default"
+                    data-dismiss="modal"
+                    value="Cancel"
+                  />
+                  <input type="submit" className="btn btn-info" value="Save" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> */}
+          </div>
+        </div>
       </div>
-
-      {/* <main>
-   <div className="title">
-   <h1 id="title">Survey Form</h1>
-   <p id="description">Thank you for taking the time to help us improve the platform</p>
-  </div>
-  
-   
-     <label for="name" id="name-label" className="uno">Name</label>
-     <input type="text" id="name" placeholder="Enter your name" requiered/>
-  
-     
-     <label for="email" id="email-label" className="uno">Email</label>
-     <input type="email" id="email" placeholder="Enter your email"  requiered/>
-     
-     <label for="age" id="number-label" className="uno">Age (optional)</label>
-     <input type="number" id="number" placeholder="Enter your age"/>
-     
-     <label for="dropdown" id="dropdown-label" className="uno">Which option best describes your current role?</label>
-     <select id="dropdown" name="rol">
-       <option disable selected value>Select your current rol</option>
-       <option value="student">Student</option>
-       <option value="job">Full time job</option>
-       <option value="freelancer">Freelancer</option>
-       <option value="hunting">Looking for a job</option>
-     </select>
-     
-     <p className="uno">Would you recommend our Agency to a friend?</p>
-     <label for="btn" id="btn-label" className="uno">Definitely</label>
-     <input type="radio" name="user-recommend" value="definitely" className="input" checked/>
-     <label for="btn" id="btn-label" className="uno">Maybe</label>
-     <input type="radio" name="user-recommend" value="maybe" className="input"/>
-     <label for="btn" id="btn-label" className="uno">Not sure</label>
-       <input type="radio" name="user-recommend" value="not-sure" className="input"/>
-    
-       <p className="uno">What would you like to see improved? (Check all that apply)</p>
-     <div className="check">
-     <label className="uno">
-     <input name="prefer" type="checkbox" value="front-end projects" className="checkbox-input"/>Front-end projects</label>
-     <label className="uno">
-     <input name="prefer" type="checkbox" value="back-end projects" className="checkbox-input"/>Back-end projects</label>
-
-     <label className="uno">
-   <input name="prefer" type="checkbox" value="social-media" className="checkbox-input"/>Social media (Marketing)</label>
-     <label className="uno">
-   <input name="prefer" type="checkbox" value="video-games" className="checkbox-input"/>Video Games Development</label>
-
-     <label className="uno">
-   <input name="prefer" type="checkbox" value="ui-ux-design" className="checkbox-input"/>UI/UX Design Tutorials++</label>
-       <label className="uno">
-   <input name="prefer" type="checkbox" value="other" className="checkbox-input"/>Other (send us a message)</label>
-     </div>
-     
-     <p className="uno">Any comments or suggestions?</p>
-     <textarea id="message" className="textarea uno" name="message" placeholder="Enter your message here..."></textarea>
-     
-    
-     
-     <button type="submit" id="submit" className="submit uno">Send your application</button>
-     
-  
-  
-</main> */}
     </>
   );
 }

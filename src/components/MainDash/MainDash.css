@@ -18,8 +18,19 @@
         align-items: center;
         font-size: 10px;
         margin-top: 5rem;
+        margin-left: -20px;
     }
+    .SK_Heading{
+        
+        margin-left: -14px
+    } 
+    
 }
+.SK_Heading{
+    font-size: 30px;
+    font-weight:600
+}
+
 
 
 
@@ -75,11 +86,8 @@
 } */
 
 
- .img_contain {
-	/* -webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .9s ease-in;
-	transition: .9s ease-in; */
+ /* .img_contain {
+	
     transform-origin: 50% 65%;
   transition: all .3s ease;
    filter: 3s ease-in;
@@ -88,10 +96,9 @@
   
   
 
-}
- .img_contain:hover img {
-	/* -webkit-transform: scale(2);
-	transform: scale(2); */
+} */
+ /* .img_contain:hover img {
+	
     filter: brightness(100%);
   transform: scale(1.7);
 
@@ -105,9 +112,7 @@
   -moz-transition-duration: 0.2s;
   -webkit-transition-duration: 0.2s;
   -o-transition-duration: 0.2s;
-
- 
-}
+} */
 /* @media (min-width:767px) {
     .sidebar{
         max-width: -30px;

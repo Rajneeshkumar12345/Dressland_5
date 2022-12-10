@@ -9,7 +9,7 @@ function Galary() {
         <div className="section">
           <div className="info-wrap mob-margin">
             <p className="title-up">Modern Fabric</p>
-            <h2>Cotton Fabric</h2>
+            <h2 className="Cotton_heading">Cotton Fabric</h2>
             <h4 className="Galery_price">
               Rs. 174 <span>Rs. 237</span>
             </h4>

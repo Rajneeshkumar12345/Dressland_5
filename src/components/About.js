@@ -44,7 +44,7 @@ function About() {
                   related to different quality. 
                 </div>
                 <div className="btn-box">
-                  <a href="#" className="theme-btn btn-style-one">
+                  <a href="/Contact" className="theme-btn btn-style-one">
                     Contact Us
                   </a>
                 </div>

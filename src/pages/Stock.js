@@ -1,325 +1,354 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Sidebar from "../components/Sidebar";
 import "./Stock.css";
+import axios from 'axios'
 
 function Master() {
+  const [APIData, setAPIData] = useState([]);
+  const [id, setID] = useState(null);
+  const [userID, setUserID] = useState("");
+  const [productID, setProductID] = useState("");
+  const [stock, setStock] = useState("");
+  const [unit, setUnit] = useState("");
+  const [minimumStock, setMinimumStock] = useState("");
+  const [checkbox, setCheckbox] = useState(false);
+
+
+
+
+  const PostData = () => {
+    axios.post("http://nias.codelovertechnology.com/MasterStock", {
+      stock_ID: 0,
+      userID,
+      productID,
+      stock,
+      unit,
+      minimumStock,
+      remarks: "NA",
+      createdBy: "Admin",
+      createdDate: "2022-12-08T13:20:50.924Z",
+      modifiedBy: "NA",
+      modifiedDate: "2022-12-08T13:20:50.924Z",  
+      checkbox,
+    });
+    // .then((error) =>{
+    //  alert(error)
+    // })
+  };
+
+  axios
+    .get("http://nias.codelovertechnology.com/MasterStock", {
+      stock_ID: 0,
+      userID,
+      productID,
+      stock,
+      unit,
+      minimumStock,
+      remarks: "NA",
+      createdBy: "Admin",
+      createdDate: "2022-12-08T13:20:50.924Z",
+      modifiedBy: "NA",
+      modifiedDate: "2022-12-08T13:20:50.924Z",  
+      checkbox,
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  useEffect(() => {
+    axios
+      .get(`http://nias.codelovertechnology.com/MasterStock`)
+      .then((response) => {
+        setAPIData(response.data);
+      });
+  }, []);
+
+  const onDelete = (id) => {
+    axios
+      .delete(`http://nias.codelovertechnology.com/MasterStock/${id}`)
+      .then(() => {
+        getData();
+        alert("Your data has beeen deleted");
+      });
+  };
+  const getData = () => {
+    axios
+      .get(`http://nias.codelovertechnology.com/MasterStock`)
+      .then((getData) => {
+        setAPIData(getData.data);
+      });
+  };
+
   return (
     <>
     <Sidebar/>
-      <div className="app_master"  style={{marginTop:"5rem"}}>
-        <div className="listing-section" style={{ backgroundColor: "#53c9c4" }}>
-          <h1 className="text-center stock_heading">Stocks</h1>
-          <div className="row mt-5">
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-1"></div>
+    <div className="AdminStock" style={{marginTop:"7rem"}}>
+    <div className="container-xl">
+          <div className="table-responsive">
+            <div className="table-wrapper">
+              <div className="table-title">
+                <div className="row">
+                  <div className="col-sm-6">
+                    <h2>
+                      Manage <b>Stock</b>
+                    </h2>
+                  </div>
+                  <div className="col-sm-6">
+                    <a
+                      href="#addEmployeeModal"
+                      className="btn btn-success"
+                      data-toggle="modal"
+                    >
+                      <i className="material-icons">&#xE147;</i>{" "}
+                      <span>Add New Product</span>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 120</h3>
-                <p className="description">A bag of good fabric!</p>
-                <label for="item-1-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-1-quantity"
-                  id="item-1-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-1-button" id="item-1-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-2"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 150</h3>
-                <p className="description">A bag of good fabric!</p>
-                <label for="item-2-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-2-quantity"
-                  id="item-2-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-2-button" id="item-2-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-3"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 200</h3>
-                <p className="description">A bag of good fabric!</p>
-                <label for="item-3-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-3-quantity"
-                  id="item-3-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-3-button" id="item-3-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-4"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 300</h3>
-                <p className="description">Good Fabric!</p>
-                <label for="item-4-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-4-quantity"
-                  id="item-4-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-4-button" id="item-4-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
+              <table className="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>User ID</th>
+                    <th>Product ID</th>
+                    <th>Stock</th>
+                    <th>Unit</th>
+                    <th>Minimum Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
 
-          <div className="row mt-5">
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-5"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 400</h3>
-                <p className="description">Cotton!</p>
-                <label for="item-1-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-1-quantity"
-                  id="item-1-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-1-button" id="item-1-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-6"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 450</h3>
-                <p className="description">Nice Cotton!</p>
-                <label for="item-2-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-2-quantity"
-                  id="item-2-quantity"
-                  value="1"
-                  className="inp"
-                />
-                <button type="button" name="item-2-button" id="item-2-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-7"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 350</h3>
-                <p className="description">Good Fabric!</p>
-                <label for="item-3-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-3-quantity"
-                  id="item-3-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-3-button" id="item-3-button">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-            <div className="product col-md-3 col-sm-12">
-              <div className="image-box">
-                <div className="images" id="image-8"></div>
-              </div>
-              <div className="text-box">
-                <h2 className="item">Fabric</h2>
-                <h3 className="price">Rs. 300</h3>
-                <p className="description">Good Fabric!</p>
-                <label for="item-4-quantity" className="labal-Stock">Quantity:</label>
-                <input
-                  type="text"
-                  name="item-4-quantity"
-                  id="item-4-quantity"
-                  value="1"
-                />
-                <button type="button" name="item-4-button" id="item-4-button">
-                  Add to Cart
-                </button>
-              </div>
+                <tbody>
+                  {APIData.map((data) => {
+                    return (
+                      <tr key={data.stock_ID}>
+                        <td>{data.stock_ID}</td>
+                        <td>{data.userID}</td>
+                        <td>{data.productID}</td>
+                        <td>{data.stock}</td>
+                        <td>{data.unit}</td>
+                        <td>{data.minimumStock}</td>
+                        <td>
+                          <a
+                            href="#editEmployeeModal"
+                            className="edit"
+                            data-toggle="modal"
+                          >
+                            <i
+                              className="material-icons"
+                              data-toggle="tooltip"
+                              title="Edit"
+                            >
+                              &#xE254;
+                            </i>
+                          </a>
+                          <a
+                            href="#deleteEmployeeModal"
+                            className="delete"
+                            data-toggle="modal"
+                          >
+                            <i
+                               onClick={() => onDelete(data.stock_ID)}
+                              className="material-icons"
+                              data-toggle="tooltip"
+                              title="Delete"
+                            >
+                              &#xE872;
+                            </i>
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+         
             </div>
           </div>
         </div>
 
-        <div className="cart-section" style={{ backgroundColor: "#53c9c4" }}>
-          <div className="table-heading">
-            <div className="row">
-              <h2 className="cart-product card-heading col-md-6 col-sm-12">
-                Product
-              </h2>
-              <h2 className="cart-price card-heading col-md-2 col-sm-12">Price</h2>
-              <h2 className="cart-quantity  card-heading  col-md-2 col-sm-12">
-                Quantity
-              </h2>
-              <h2 className="cart-total  card-heading  col-md-2 col-sm-12">
-                Total
-              </h2>
-            </div>
-          </div>
+        {/* Add emloyeees data here */}
+        <div id="addEmployeeModal" className="modal fade">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <form>
+                <div className="modal-header">
+                  <h4 className="modal-title">Add Stock</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <div className="container">
+                  <div className="form-group">
+                    <label>User ID</label>
+                    <input
+                      onChange={(e) => setUserID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Product ID</label>
+                    <input
+                      onChange={(e) => setProductID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Stock</label>
+                    <input
+                      onChange={(e) => setStock(e.target.value)}
+                      type="value"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Unit</label>
+                    <input
+                      onChange={(e) => setUnit(e.target.value)}
+                      type="value"
+                      className="form-control"
+                      required
+                    />
+                  </div>
 
-          <div className="table-content row">
-            <div className="cart-product ">
-              <div className="cart-image-box">
-                <div className="cart-images" id="image-1"></div>
-              </div>
-              <h2 className="cart-item">Fabric</h2>
-              <p className="cart-description "  class="labal-Stock">A bag of Fabric</p>
-            </div>
-            <div className="cart-price ">
-              <h3 className="price">Rs. 350</h3>
-            </div>
-            <div className="cart-quantity ">
-              <input
-                type="text"
-                name="cart-1-quantity"
-                id="cart-1-quantity"
-                value="1"
-              />
-            </div>
-            <div className="cart-total ">
-              <h3 className="price">Rs. 350</h3>
-              <button
-                type="button"
-                className="remove"
-                name="remove-1"
-                id="remove-1"
-              >
-                x
-              </button>
-            </div>
-          </div>
+                  <div className="form-group">
+                    <label>Minimum Stock</label>
+                    <input
+                      onChange={(e) => setMinimumStock(e.target.value)}
+                      type="value"
+                      className="form-control"
+                      required
+                    />
+                  </div>
 
-          <div className="table-content">
-            <div className="cart-product">
-              <div className="cart-image-box">
-                <div className="cart-images" id="image-7"></div>
-              </div>
-              <h2 className="cart-item">Cotton</h2>
-              <p className="cart-description"  class="labal-Stock">A bag of Cotton!</p>
-            </div>
-            <div className="cart-price">
-              <h3 className="price">Rs. 250</h3>
-            </div>
-            <div className="cart-quantity">
-              <input
-                type="text"
-                name="cart-1-quantity"
-                id="cart-1-quantity"
-                value="1"
-              />
-            </div>
-            <div className="cart-total">
-              <h3 className="price">Rs. 250</h3>
-              <button
-                type="button"
-                className="remove"
-                name="remove-2"
-                id="remove-2"
-              >
-                x
-              </button>
-            </div>
-          </div>
+                  <div className="form-group">
+                    <input
+                      onChange={(e) => setCheckbox(!checkbox)}
+                      type="checkbox"
+                      className="form-check d-inline"
+                      id="chb"
+                      required
+                    />
+                    <label htmlFor="chb" className="form-check-label">
+                      &nbsp; Check me out.
+                    </label>
+                  </div>
 
-          <div className="table-content">
-            <div className="cart-product">
-              <div className="cart-image-box">
-                <div className="cart-images" id="image-3"></div>
-              </div>
-              <h2 className="cart-item">Levis</h2>
-              <p className="cart-description" class="labal-Stock">A bag of Lavis</p>
+                  <div className=" form-group mb-5">
+                    <button
+                      className="btn btn-primary float-right "
+                      onClick={PostData}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div className="cart-price">
-              <h3 className="price">Rs. 450</h3>
-            </div>
-            <div className="cart-quantity">
-              <input
-                type="text"
-                name="cart-1-quantity"
-                id="cart-1-quantity"
-                value="1"
-              />
-            </div>
-            <div className="cart-total">
-              <h3 className="price">Rs. 450</h3>
-              <button
-                type="button"
-                className="remove"
-                name="remove-3"
-                id="remove-3"
-              >
-                x
-              </button>
-            </div>
-          </div>
-
-          <div className="coupon">
-            <input
-              type="text"
-              name="coupon"
-              id="coupon"
-              placeholder="COUPON CODE"
-            />
-            <button type="button" name="coupon" id="coupon">
-              Submit
-            </button>
-          </div>
-
-          <div className="checkout">
-            <button type="button" name="update" id="update">
-              Update
-            </button>
-            <button type="button" name="checkout" id="checkout">
-              Checkout
-            </button>
-            <div className="final-cart-total">
-              <h3 className="price">Rs. 1050</h3>
-            </div>
-          </div>
-
-          <div className="keep-shopping">
-            <button type="button" name="keep-shopping" id="keep-shopping">
-              Keep Shopping
-            </button>
           </div>
         </div>
-      </div>
+
+        <div id="editEmployeeModal" className="modal fade">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <form>
+                <div className="modal-header">
+                  <h4 className="modal-title">Edit Product</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+             
+                <div className="container">
+                  <div className="form-group">
+                    <label>User ID</label>
+                    <input
+                      onChange={(e) => setUserID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Product ID</label>
+                    <input
+                      onChange={(e) => setProductID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Stock</label>
+                    <input
+                      onChange={(e) => setStock(e.target.value)}
+                      type="value"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Unit</label>
+                    <input
+                      onChange={(e) => setUnit(e.target.value)}
+                      type="value"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Minimum Stock</label>
+                    <input
+                      onChange={(e) => setMinimumStock(e.target.value)}
+                      type="value"
+                      className="form-control"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <input
+                      onChange={(e) => setCheckbox(!checkbox)}
+                      type="checkbox"
+                      className="form-check d-inline"
+                      id="chb"
+                      required
+                    />
+                    <label htmlFor="chb" className="form-check-label">
+                      &nbsp; Check me out.
+                    </label>
+                  </div>
+
+                  <div className=" form-group mb-5">
+                    <button
+                      className="btn btn-primary float-right "
+                      onClick={PostData}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+  
     </>
   );
 }

@@ -9,7 +9,7 @@ const MainDash = () => {
 
   return (
     <div className="MainDash" style={{marginTop:"4rem"}}>
-      <h1><span style={{color:"#08b305"}}>SK</span> DRESSLAND</h1>
+      <h1 className="SK_Heading"><span style={{color:"#08b305"}}>SK</span> DRESSLAND</h1>
       <Cards />
       <Table />
 

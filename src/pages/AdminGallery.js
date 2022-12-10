@@ -1,93 +1,71 @@
-import React, { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
-import "./Master.css";
-import Read from "./Read";
 import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { TextArea } from "semantic-ui-react";
+import Sidebar from "../components/Sidebar";
 
-function Master() {
+function AdminGallery() {
   const [APIData, setAPIData] = useState([]);
-  const [id, setID] = useState(null);
-  const [tableValue, setTableValue] = useState("");
-  const [sequence, setSequence] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
-  const [masterTable, setMasterTable] = useState("");
-
+  const [title, setTitle] = useState("")
+  const[subTitle, setSubTitle] = useState("")
+  const[description, setDescription] = useState("")
+  const[imagePath, , setImagePath] = useState("")
+  const[checkbox, setCheckbox] = useState("")
   const PostData = () => {
-    axios.post("http://nias.codelovertechnology.com/MastersAPI", {
-      masterID: 0,
-      masterTable,
-      tableValue,
-      sequence,
-      createdBy: "Admin",
-      createdDate: "2022-11-22T00:00:00",
-      modifiedBy: "Admin",
-      modifiedDate: "2022-11-22T00:00:00",
-      checkbox,
-    });
-    // .then((error) =>{
-    //  alert(error)
-    // })
-  };
-
+    axios.post("http://nias.codelovertechnology.com/Gallery",{
+    galaryID: 0,
+    title,
+    subTitle,
+    description,
+    imagePath,
+    remarks: "NA",
+    createdBy: "NA",
+    createdDate: "2022-12-08T13:19:59.846Z",
+    modifiedBy: "NA",
+    modifiedDate: "2022-12-08T13:19:59.846Z",
+    checkbox,
+    } )
+  }
   axios
-    .get("http://nias.codelovertechnology.com/MastersAPI", {
-      masterID: 0,
-      masterTable,
-      tableValue,
-      sequence,
-      createdBy: "Admin",
-      createdDate: "2022-11-22T00:00:00",
-      modifiedBy: "Admin",
-      modifiedDate: "2022-11-22T00:00:00",
-      checkbox,
-    })
-    .catch((err) => {
-      console.log(err);
+  .get("http://nias.codelovertechnology.com/Gallery", {
+    galaryID: 0,
+    title,
+    subTitle,
+    description,
+    imagePath,
+    remarks: "NA",
+    createdBy: "NA",
+    createdDate: "2022-12-08T13:19:59.846Z",
+    modifiedBy: "NA",
+    modifiedDate: "2022-12-08T13:19:59.846Z",
+    checkbox,
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+useEffect(() => {
+  axios
+    .get(`http://nias.codelovertechnology.com/Gallery`)
+    .then((response) => {
+      setAPIData(response.data);
     });
-  useEffect(() => {
-    axios
-      .get(`http://nias.codelovertechnology.com/MastersAPI`)
-      .then((response) => {
-        setAPIData(response.data);
-      });
-  }, []);
-
-
-  useEffect(() => {
-    setID(localStorage.getItem('ID'))
-    setMasterTable(localStorage.getItem('MasterTable'));
-    setTableValue(localStorage.getItem('TablValue'));
-    setSequence(localStorage.getItem('Sequence'));
-    setCheckbox(localStorage.getItem('Checkbox Value'));
 }, []);
 
-const updateAPIData = () => {
-  axios.put(`http://nias.codelovertechnology.com/MastersAPI/${id}`, {
-      masterTable,
-      tableValue,
-      sequence,
-      checkbox
-  })
-  // .then(() => {
-  //     history.push('/read')
-  // })
-}
 
-  const onDelete = (id) => {
-    axios
-      .delete(`http://nias.codelovertechnology.com/MastersAPI/${id}`)
-      .then(() => {
-        getData();
-        alert("Your data has beeen deleted");
-      });
-  };
-  const getData = () => {
-    axios
-      .get(`http://nias.codelovertechnology.com/MastersAPI`)
-      .then((getData) => {
-        setAPIData(getData.data);
-      });
-  };
+const onDelete = (id) => {
+  axios
+    .delete(`http://nias.codelovertechnology.com/Gallery/${id}`)
+    .then(() => {
+      getData();
+      alert("Your data has beeen deleted");
+    });
+};
+const getData = () => {
+  axios
+    .get(`http://nias.codelovertechnology.com/Gallery`)
+    .then((getData) => {
+      setAPIData(getData.data);
+    });
+};
 
   return (
     <>
@@ -101,7 +79,7 @@ const updateAPIData = () => {
                 <div className="row">
                   <div className="col-sm-6">
                     <h2>
-                      Manage <b>Master</b>
+                      Manage <b>Gallery</b>
                     </h2>
                   </div>
                   <div className="col-sm-6">
@@ -120,9 +98,10 @@ const updateAPIData = () => {
                 <thead>
                   <tr>
                     <th>Sr. No.</th>
-                    <th>Master Table</th>
-                    <th>Table Value</th>
-                    <th>Sequence</th>
+                    <th>Title</th>
+                    <th>SubTitle</th>
+                    <th>Description</th>
+                    <th>Photo</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -130,11 +109,12 @@ const updateAPIData = () => {
                 <tbody>
                   {APIData.map((data) => {
                     return (
-                      <tr key={data.masterID}>
-                        <td>{data.masterID}</td>
-                        <td>{data.masterTable}</td>
-                        <td>{data.tableValue}</td>
-                        <td>{data.sequence}</td>
+                      <tr key={data.galaryID}>
+                        <td>{data.galaryID}</td>
+                        <td>{data.title}</td>
+                        <th>{data.subTitle}</th>
+                        <th>{data.description}</th>
+                        <th><img src={"http://nias.codelovertechnology.com/Gallery"  + data.galaryID} width="40" height="30" /></th>
                         <td>
                           <a
                             href="#editEmployeeModal"
@@ -155,7 +135,7 @@ const updateAPIData = () => {
                             data-toggle="modal"
                           >
                             <i
-                              onClick={() => onDelete(data.masterID)}
+                                 onClick={() => onDelete(data.galaryID)}
                               className="material-icons"
                               data-toggle="tooltip"
                               title="Delete"
@@ -169,43 +149,6 @@ const updateAPIData = () => {
                   })}
                 </tbody>
               </table>
-              {/* <div className="clearfix">
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a href="#">Previous</a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item active_number">
-                    <a href="#" className="page-link">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      4
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      5
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
             </div>
           </div>
         </div>
@@ -228,31 +171,44 @@ const updateAPIData = () => {
                 </div>
                 <div className="container">
                   <div className="form-group">
-                    <label>Master Table</label>
+                    <label>Title</label>
                     <input
-                      onChange={(e) => setMasterTable(e.target.value)}
+                         onChange={(e) => setTitle(e.target.value)}
                       type="text"
                       className="form-control"
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label>Table Value</label>
+                    <label>SubTitle</label>
                     <input
-                      onChange={(e) => setTableValue(e.target.value)}
+                       onChange={(e) => setSubTitle(e.target.value)}
                       type="text"
                       className="form-control"
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label>Sequence</label>
-                    <input
-                      onChange={(e) => setSequence(e.target.value)}
-                      type="value"
+                    <label>Description</label>
+                    <TextArea
+                       onChange={(e) => setDescription(e.target.value)}
+                      type="text"
                       className="form-control"
                       required
                     />
+                  </div>
+                  <div className="form-group">
+                    <div>
+                      <label for="formFileLg" className="form-label">
+                        Upload image :-
+                      </label>
+                      <input
+                        onChange={(e) => setImagePath(e.target.files[0])}
+                        className="form-control form-control"
+                        id="formFileLg"
+                        type="file"
+                      />
+                    </div>
                   </div>
                   <div className="form-group">
                     <input
@@ -267,10 +223,10 @@ const updateAPIData = () => {
                     </label>
                   </div>
 
-                  <div className=" form-group mb-5">
+                  <div className=" form-group mb-0">
                     <button
                       className="btn btn-primary float-right "
-                      onClick={PostData}
+                         onClick={PostData}
                     >
                       Submit
                     </button>
@@ -296,60 +252,41 @@ const updateAPIData = () => {
                     &times;
                   </button>
                 </div>
-                {/* <div className="modal-body">
-                  <div className="form-group">
-                    <label>Master Table</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Table Value</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Sequence</label>
-                    <input type="value" className="form-control" required />
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <input
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    value="Cancel"
-                  />
-                  <input type="submit" className="btn btn-info" value="Save" />
-                </div> */}
+
                 <div className="container">
                   <div className="form-group">
-                    <label>Master Table</label>
+                    <label>Title</label>
                     <input
-                      onChange={(e) => setMasterTable(e.target.value)}
+                      //   onChange={(e) => setMasterTable(e.target.value)}
                       type="text"
                       className="form-control"
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label>Table Value</label>
+                    <label>SubTitle</label>
                     <input
-                      onChange={(e) => setTableValue(e.target.value)}
+                      //   onChange={(e) => setTableValue(e.target.value)}
                       type="text"
                       className="form-control"
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label>Sequence</label>
-                    <input
-                      onChange={(e) => setSequence(e.target.value)}
-                      type="value"
-                      className="form-control"
-                      required
-                    />
+                    <div>
+                      <label for="formFileLg" className="form-label">
+                        Upload image :-
+                      </label>
+                      <input
+                        className="form-control form-control"
+                        id="formFileLg"
+                        type="file"
+                      />
+                    </div>
                   </div>
                   <div className="form-group">
                     <input
-                      onChange={(e) => setCheckbox(!checkbox)}
+                      //   onChange={(e) => setCheckbox(!checkbox)}
                       type="checkbox"
                       className="form-check d-inline"
                       id="chb"
@@ -363,7 +300,7 @@ const updateAPIData = () => {
                   <div className=" form-group mb-0">
                     <button
                       className="btn btn-primary float-right "
-                      onClick={updateAPIData}
+                      //   onClick={updateAPIData}
                     >
                       Submit
                     </button>
@@ -373,11 +310,9 @@ const updateAPIData = () => {
             </div>
           </div>
         </div>
-
-
       </div>
     </>
   );
 }
 
-export default Master;
+export default AdminGallery;

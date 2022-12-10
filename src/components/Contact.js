@@ -9,7 +9,7 @@ function Contact() {
   return (
     <>
     <Toggle/>
-      <div className="row" id="contatti" style={{ marginTop: "3rem" }}>
+      <div className="row" id="contatti" style={{ marginTop: "5rem" }}>
         <div className=" mt-5">
           <div className="container">
             <div className="row" style={{ height: "550px" }}>

@@ -1,46 +1,65 @@
 .img_contain {
-    transform-origin: 50% 65%;
-    transition: all 0.3s ease;
-    filter: 3s ease-in;
-    filter: brightness(120%);
-    margin-left: 5rem;
+  transform-origin: 50% 65%;
+  transition: all 0.3s ease;
+  filter: 3s ease-in;
+  filter: brightness(120%);
+  margin-left: 1.5rem;
+}
+.img_contain:hover img {
+  filter: brightness(100%);
+  transform: scale(1.2);
+
+  transition-timing-function: ease-in-out;
+  -ms-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+}
+
+@media only screen and (max-width: 600px) {
+  .SK_Home {
+    font-size: 20px;
+    margin-left: 9rem;
+    margin-top: -3rem;
   }
-  .img_contain:hover img {
-    filter: brightness(100%);
-    transform: scale(1.4);
-  
-    transition-timing-function: ease-in-out;
-    -ms-transition-timing-function: ease-in-out;
-    -moz-transition-timing-function: ease-in-out;
-    -webkit-transition-timing-function: ease-in-out;
-    -o-transition-timing-function: ease-in-out;
-    transition-duration: 0.2s;
-    -ms-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    -webkit-transition-duration: 0.2s;
-    -o-transition-duration: 0.2s;
+  .Quotation_Treasure{
+    width: 400px;
+    margin-top: 25px;
+    margin-left: -9.5rem;
+    font-size: 15px;
   }
-  
-  .navbar {
-    background-color: #172470;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  .Social_Menu_Icon{
+    margin-top: -20px;
+    
   }
-  
-  .menu-bars {
-    margin-left: 2rem;
-    font-size: 2rem;
-    background: none;
+  .Social_Menu_Icon a{
+    color: #0cb460;
   }
-  
-  
-  @media only screen and  (max-width:600px){
-    .Navbar_Social{
-     margin-left: -10px;
-    }
-  }
+}
+
+
+.navbar {
+  background-color: #172470;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.menu-bars {
+  /* margin-left: 2rem; */
+  font-size: 2rem;
+  background: none;
+}
+
+.Close_Tag{
+  margin-left: 12rem;
+}
   .nav-menu {
     background-color: #0cb460;
     width: 250px;

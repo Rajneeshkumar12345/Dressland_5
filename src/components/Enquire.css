@@ -1,0 +1,144 @@
+.trigger_popup {
+    transform: rotate(270deg);
+    position: fixed;
+    top: 205px;
+    right: -3rem;
+    width: 10%;
+    height: 9%;
+    z-index: 999;
+    cursor: pointer;
+    background-color: #660029;
+    border-radius: 5px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.33;
+  }
+  .border-0 {
+    border: 0 !important;
+  }
+  
+  .trigger_popup:hover {
+    background-color: #06d85f;
+    color: #ff0000;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .trigger_popup {
+      right: -3rem;
+      width: 40%;
+      height: 8%;
+    }
+  }
+
+
+  /* ********************WINDOW POPUP CSS START FROM HERE ******************************************/
+
+#container {
+    background: rgba(3, 3, 55, 0.5);
+    width: 19rem;
+    height: 34rem;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .Close_button{
+    color: #fff;
+  }
+  .Enq{
+    text-align: center;
+  }
+  .Enq_Input{
+    text-align: center;
+  }
+  .Enquiry_Input{
+    height: 3rem;
+    border-radius: 5px;
+  } 
+  header {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3rem;
+    height: 3rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #d3d3d3;
+  }
+
+.Enquiry_Button{
+    background-color: #10e060;
+    border-radius: 10px;
+}
+.Enquiry_Button:hover{
+    background-color: #ff0000;
+}
+  
+  fieldset {
+    border: 0;
+    text-align: center;
+  }
+  
+  .Popup_submit {
+    background: rgb(60, 58, 160);
+    border: 0;
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+    color: white;
+    padding: 0.7rem;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .Popup_submit:hover {
+    background-color: #ff0000;
+  }
+  .Popup_Common {
+    background: transparent;
+    border: 0;
+    border-left: 4px solid;
+    border-color: #ff0000;
+    padding: 10px;
+    color: white;
+    width: 80%;
+  }
+  
+  .phone_class {
+    margin-top: 20px;
+  }
+  .Popup_Common:focus,
+  .Popup_Common:focus,
+  .Popup_Common:focus {
+    outline: 0;
+    background: rgba(235, 30, 54, 0.3);
+    border-radius: 1.2rem;
+    border-color: transparent;
+  }
+  
+  ::placeholder {
+    color: #d3d3d3;
+  }
+  
+  /*Media queries */
+  
+  @media all and (min-width: 481px) and (max-width: 568px) {
+    #container {
+      margin-top: 10%;
+      margin-bottom: 10%;
+    }
+  }
+  @media all and (min-width: 569px) and (max-width: 768px) {
+    #container {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+  }
+  
+  .modal-content {
+    border: #ff0000;
+  }

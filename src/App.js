@@ -108,6 +108,12 @@ import EnquiryForm from "./pages/EnquiryForm";
 import AboutAdminPage from "./pages/AboutAdminPage";
 import ContactAdminPage from "./pages/ContactAdminPage";
 import ProductExplore from "./pages/ProductExplore";
+import EnquiryUpdate from "./pages/EnquiryUpdate";
+import Update from "./pages/Update";
+import UserAdmin from "./pages/UserAdmin";
+import AdminGallery from "./pages/AdminGallery";
+import VendorSupport from "./pages/VendorSupport";
+import VendorCenterShop from "./pages/VendorCenterShop";
 
 // import DistributerPage from "./components/DistributerPage";
 
@@ -126,6 +132,8 @@ function App() {
           <Route exact path="/LoginPage" element={<Login />} />
           <Route exact path="/Register" element={<Register />} />
           <Route exact path="/Master" element={<Master />} />
+          <Route exact path="/UserAdmin" element={<UserAdmin/>} />
+          {/* <Route exact path="/Update" element={<Update/>} /> */}
           <Route
             exact
             path="/UserRegistration"
@@ -140,6 +148,12 @@ function App() {
             element={<ContactAdminPage />}
           />
           <Route exact path="/ProductExplore" element={<ProductExplore />} />
+          <Route exact path="/EnquiryUpdate" element={<EnquiryUpdate/>} />
+          <Route exact path="/AdminGallery" element={<AdminGallery/>} />
+
+          <Route exact path="/VendorSupport" element={<VendorSupport/>} />
+          <Route exact path="/VendorCentorShop" element={<VendorCenterShop/>} />
+
           {/* <Route exact path="/DistributerPage" element={<DistributerPage />} /> */}
           <Route
             exact
@@ -164,50 +178,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <ToggleSidebar/> */
-}
-{
-  /* <Register/> */
-}
-{
-  /* <Login/> */
-}
-{
-  /* <Product/> */
-}
-{
-  /* <Home/> */
-}
-{
-  /* <UserRegistration/> */
-}
-{
-  /* <EnquiryForm/> */
-}
-{
-  /* <Contact/> */
-}
-{
-  /* <About/> */
-}
-{
-  /* <Galary/> */
-}
-{
-  /* <Master/> */
-}
-{
-  /* <CenterShop/> */
-}
-
-{
-  /* //   <div className="App">
-    //   <div className="AppGlass">
-    //     <Sidebar/>
-    //     <MainDash/>
-    //     <RightSide/>
-    //   </div>
-    // </div> */
-}

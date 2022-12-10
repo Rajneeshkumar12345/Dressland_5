@@ -1,22 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ToggleSidebar.css";
-import { Link } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-//import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import CottageIcon from "@mui/icons-material/Cottage";
-import InfoIcon from "@mui/icons-material/Info";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import PersonIcon from "@mui/icons-material/Person";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
-import LogoutIcon from "@mui/icons-material/Logout";
-
-import Caro1 from "../images/Carosol1.jpg";
-import Caro2 from "../images/Carosol2.jpg";
-import Caro3 from "../images/Carosol3.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import Caro1 from "../images/School1.jpg";
+import Caro2 from "../images/School4.jpg";
+import Caro3 from "../images/School5.jpg";
+import Caro4 from "../images/School10.jpeg";
+import Caro5 from "../images/School9.jpg";
 import img from "../images/Logo.png";
-
 import Cloth1 from "../images/Cloth1.jpg";
 import Cloth2 from "../images/Cloth2.jpg";
 import Cloth3 from "../images/Cloth3.jpg";
@@ -25,114 +15,132 @@ import Cloth5 from "../images/Cloth5.jpg";
 import Cloth6 from "../images/Cloth6.jpg";
 import Cloth7 from "../images/Cloth7.webp";
 import Cloth8 from "../images/Cloth8.jpg";
-
 import Logo from "../images/Logo.png";
 import HomeIcon from "@mui/icons-material/Home";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import PhoneIcon from "@mui/icons-material/Phone";
-
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-
 import { SidebarData } from "./SidebarData";
-
 import { IconContext } from "react-icons";
-
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import Enquire from "./Enquire";
 
 const ToggleSidebar = () => {
-  // const [isOpen, setIsopen] = useState(false);
-
-  // const ToggleSidebar = () => {
-  //   isOpen === true ? setIsopen(false) : setIsopen(true);
-  // };
   const [sidebar, setSidebar] = useState(false);
-
   const showSidebar = () => setSidebar(!sidebar);
+  const navigate = useNavigate();
+
+  // useEffect(()  =>{
+  //    if(!localStorage.getItem('token')){
+  // navigate('/LoginPage')
+  //    }
+  // })
   return (
     <>
       <div className="navBar fixed-top">
         <IconContext.Provider value={{ color: "#fff" }}>
           <div className="navbar">
-            <Link to="#" className="menu-bars">
-              <FaIcons.FaBars onClick={showSidebar} />
-            </Link>
-            <Link to="/" className="img_contain ">
-              <img
-                src={img}
-                className="img-fluid "
-                width="60"
-                height="40"
-                alt="img"
-              />
-            </Link>
-
-
-            <section
-              className="d-flex justify-content-between p-2 text-white Navbar_Social"
-              style={{ backgroundColor: "#172470", marginLeft:"45rem" }}
-            >
-              <div className="me-5 ms-5">
-                <a
-                  href="https://www.facebook.com/CodeLoverTech/"
-                  target="_blank"
-                  className="text-white me-4"
-                >
-                  <WhatsAppIcon fontSize="medium" />{" "}
-                  <a href="tel:+" className="text-dark">
-                  </a>
-                </a>
+            <div className="row w-100">
+              <div className="col-sm-12 col-md-8 d-flex">
+                <div className="row w-100">
+                  <div className="col-1">
+                    <Link to="#" className="menu-bars">
+                      <FaIcons.FaBars onClick={showSidebar} />
+                    </Link>
+                  </div>
+                  <div className="col-3">
+                    <Link to="/" className="img_contain">
+                      <img
+                        src={img}
+                        className="img-fluid img-thumbnails"
+                         width="120"
+                         height="90"
+                        alt="img"
+                      />
+                    </Link>
+                  </div>
+                  <div className="col-8">
+                    <div className="h1 text-white text-uppercase SK_Home">
+                      SK Dressland
+                      <h6
+                        className=" Quotation_Treasure"
+                        style={{ color: "#2bed21" }}
+                      >
+                        Treasure Of Fashion With New Trends
+                      </h6>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <a
-                  href="https://www.facebook.com/CodeLoverTech/"
-                  target="_blank"
-                  className="text-white me-4"
+              <div className="col-sm-12 col-md-4 Social_Menu_Icon">
+                <section
+                  className=" d-flex float-right "
+                  style={{ marginTop: "-3rem" }}
                 >
-                  <FacebookOutlinedIcon fontSize="medium" />
-                </a>
-                <a
-                  href="https://twitter.com/infoRajInfotech"
-                  target="_blank"
-                  className="text-white me-4"
-                >
-                  <TwitterIcon fontSize="medium" />
-                </a>
+                  <div>
+                    <a
+                      href="https://www.facebook.com/CodeLoverTech/"
+                      target="_blank"
+                     
+                    >
+                      <WhatsAppIcon fontSize="medium" />{" "}
+                      <a href="tel:+" className="text-dark"></a>
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://www.facebook.com/CodeLoverTech/"
+                      target="_blank"
+                      className=" ms-3"
+                    >
+                      <FacebookOutlinedIcon fontSize="medium" />
+                    </a>
+                    <a
+                      href="https://twitter.com/infoRajInfotech"
+                      target="_blank"
+                      className=" ms-3"
+                    >
+                      <TwitterIcon fontSize="medium" />
+                    </a>
 
-                <a
-                  href="https://www.instagram.com/codelovertechnology/?hl=en"
-                  target="_blank"
-                  className="text-white me-4"
-                >
-                  <InstagramIcon fontSize="medium" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/codelover-technology-810724151/"
-                  target="_blank"
-                  className="text-white me-4"
-                >
-                  <LinkedInIcon fontSize="medium" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/codelover-technology-810724151/"
-                  target="_blank"
-                  className="text-white me-1"
-                >
-                  <YouTubeIcon fontSize="medium" />
-                </a>
+                    <a
+                      href="https://www.instagram.com/codelovertechnology/?hl=en"
+                      target="_blank"
+                      className=" ms-3"
+                    >
+                      <InstagramIcon fontSize="medium" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/codelover-technology-810724151/"
+                      target="_blank"
+                      className=" ms-3"
+                    >
+                      <LinkedInIcon fontSize="medium" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/codelover-technology-810724151/"
+                      target="_blank"
+                      className=" ms-3"
+                    >
+                      <YouTubeIcon fontSize="medium" />
+                    </a>
+                  </div>
+                </section>
               </div>
-            </section>
+            </div>
           </div>
           <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
             <ul className="nav-menu-items" onClick={showSidebar}>
               <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
+                
+                <Link to="#" className="menu-bars Close_Tag">
                   <AiIcons.AiOutlineClose />
                 </Link>
               </li>
@@ -150,26 +158,8 @@ const ToggleSidebar = () => {
           </nav>
         </IconContext.Provider>
       </div>
+
       <div className="container-fluid mt-3">
-        {/* <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-md">
-          <div className="container-fluid">
-            <Link to="/" className="img_contain">
-              <img
-                src={img}
-                className="img-fluid"
-                width="60"
-                height="40"
-                alt="img"
-              />
-            </Link>
-            <div className="form-inline ml-auto">
-              <div className="btn btn-primary" onClick={ToggleSidebar}>
-             
-                <MenuIcon fontSize="medium" />
-              </div>
-            </div>
-          </div>
-        </nav> */}
         <div className="container my-5">
           {/* <a
             href=""
@@ -199,10 +189,6 @@ const ToggleSidebar = () => {
                       className="d-block w-100"
                       alt="carosol_image"
                     />
-                    {/* <div className="carousel-caption">
-                      <h5>Second slide</h5>
-                      <p></p>
-                    </div> */}
                   </div>
                   <div className="carousel-item">
                     <img
@@ -210,11 +196,30 @@ const ToggleSidebar = () => {
                       className="d-block w-100"
                       alt="carosol-image"
                     />
-                    {/* <div className="carousel-caption">
-                      <h5>Third slide</h5>
-                      <p></p>
-                    </div> */}
                   </div>
+                  {/* <div className="carousel-item">
+                    <img
+                      src={Caro4}
+                      className="d-block w-100"
+                      height="500"
+                      alt="carosol_image"
+                    />
+                  </div>
+                  <div className="carousel-item">
+                    <img
+                      src={Caro5}
+                      className="d-block w-100"
+                      height="500"
+                      alt="carosol_image"
+                    />
+                  </div>
+                  <div className="carousel-item">
+                    <img
+                      src={Caro2}
+                      className="d-block w-100"
+                      alt="carosol_image"
+                    />
+                  </div> */}
                 </div>
                 <button
                   className="carousel-control-prev"
@@ -245,102 +250,9 @@ const ToggleSidebar = () => {
           </div>
         </div>
 
-        {/* ************************Sidebar Toggle Start from here  ***********************************/}
-        {/* <div className={`sidebar ${isOpen == true ? "active" : ""}`}>
-          <div className="sd-header">
-            <h4 className="mb-0 Toggle_CompanyName text-white"><span style={{fontSize:"50px", fontWeight:"600", marginLeft:"70px", color:"#0bad09"}}>SK</span> Dressland </h4>
-            <div className="btn btn-primary" onClick={ToggleSidebar}>
-             
-              <CloseIcon fontSize="medium" />
-            </div>
-          </div>
-          <div className="sd-body">
-            <ul>
-              <li>
-                <Link
-                  to="/"
-                  className="sd-link"
-                  style={{ width: "15rem" }}
-                >
-                   Home
-                </Link>
-              </li>
-              <li>
-                <a
-                  className="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                  href="/About"
-                  role="button"
-                >
-                  <InfoIcon /> About Us
-                </a>
-         
-              </li>
-
-              <li>
-                <a
-                  href="/ProductGallery"
-                  className="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                >
-                  {" "}
-                  <ContactPageIcon />
-                  Product
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/ProductExplore"
-                  className="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                >
-                  {" "}
-                  <AccountBoxIcon /> Gallery
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/Contact"
-                  className="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                >
-                  {" "}
-                  <PersonIcon /> Contact us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/MainDash"
-                  className="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                >
-                  {" "}
-                  <AccountBoxIcon /> Admin Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/LoginPage"
-                  className="btn btn-dark btn-lg"
-                  style={{ width: "15rem" }}
-                >
-                  {" "}
-                  <SettingsApplicationsIcon /> Login
-                </a>
-              </li>
-              <li>
-            
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div
-          className={`sidebar-overlay ${isOpen === true ? "active" : ""}`}
-          onClick={ToggleSidebar}
-        ></div> */}
-
         {/****************************** * POPUP WINDOW START FROM HERE  ****************************************/}
-        <button
+        <Enquire/>
+        {/* <button
           data-toggle="modal"
           data-target="#myModal"
           className="trigger_popup border-0"
@@ -351,13 +263,7 @@ const ToggleSidebar = () => {
           <div className="modal-dialog">
             <div
               className="modal-content"
-              // style={{ backgroundColor: "rgba(3, 3, 55, 0.5)" }}
             >
-              {/* <div className="modal-header" >
-                <button type="button" className="close" data-dismiss="modal">
-                  &times;
-                </button>
-              </div> */}
               <div id="container" style={{ marginTop: "3rem" }}>
                 <button
                   type="button"
@@ -400,22 +306,6 @@ const ToggleSidebar = () => {
                     />
                     <br />
                     <br />
-                    {/* <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Password"
-                      required
-                    />
-                    <br />
-                    <br />
-                    <input
-                      type="password"
-                      name="confirm-password"
-                      id="confirm-password"
-                      placeholder="Confirm Password"
-                      required
-                    /> */}
                     <textarea
                       type="text"
                       name="message"
@@ -436,19 +326,9 @@ const ToggleSidebar = () => {
                   </fieldset>
                 </form>
               </div>
-
-              {/* <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-default"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div> */}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* ******************3D ROTATING COMPONENTS START FROM HERE**************** */}

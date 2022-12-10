@@ -121,3 +121,50 @@ button {
 .SU{
     color: #fff;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* LATEST LOGIN PAGE CSS START FROM HERE */
+
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+.Account_text{
+    color:black;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.Register_text{
+    color: crimson;
+    font-size: 17px;
+    font-weight: 600;
+    
+}
+.Login_comon{
+    font-size: 18px;
+    font-weight: 400;
+}
