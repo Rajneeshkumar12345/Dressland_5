@@ -1,16 +1,35 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Button, Checkbox, Form } from "semantic-ui-react";
 import { TextArea } from "semantic-ui-react";
 import Sidebar from "../components/Sidebar";
+import { Link } from "react-router-dom";
 
 function AdminGallery() {
   const [APIData, setAPIData] = useState([]);
-  const [title, setTitle] = useState("")
-  const[subTitle, setSubTitle] = useState("")
-  const[description, setDescription] = useState("")
-  const[imagePath, , setImagePath] = useState("")
-  const[checkbox, setCheckbox] = useState(false)
+  const [title, setTitle] = useState("");
+  const [subTitle, setSubTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [checkbox, setCheckbox] = useState(false);
+
+
+
+const setData = (data) => {
+  console.log(data);
+  let { galaryID, title, subTitle, description, imagePath, checkbox } = data;
+  localStorage.setItem("galaryID", galaryID);
+  localStorage.setItem("title", title);
+  localStorage.setItem("subTitle", subTitle);
+  localStorage.setItem("description", description);
+  localStorage.setItem("imagePath", imagePath);
+  localStorage.setItem("checkbox", checkbox);
+};
+
+
+
   const PostData = () => {
+    debugger;
     axios.post("http://nias.codelovertechnology.com/Gallery",{
     galaryID: 0,
     title,
@@ -19,11 +38,14 @@ function AdminGallery() {
     imagePath,
     remarks: "NA",
     createdBy: "NA",
-    createdDate: "2022-12-08T13:19:59.846Z",
+    createdDate: "2022-12-08",
     modifiedBy: "NA",
-    modifiedDate: "2022-12-08T13:19:59.846Z",
+    modifiedDate: "2022-12-08",
     checkbox,
     } )
+    .catch((err) => {
+      console.log(err);
+    });
   }
   axios
   .get("http://nias.codelovertechnology.com/Gallery", {
@@ -66,6 +88,7 @@ const getData = () => {
       setAPIData(getData.data);
     });
 };
+
 
   return (
     <>
@@ -112,23 +135,20 @@ const getData = () => {
                       <tr key={data.galaryID}>
                         <td>{data.galaryID}</td>
                         <td>{data.title}</td>
-                        <th>{data.subTitle}</th>
-                        <th>{data.description}</th>
-                        <th><img src={"http://nias.codelovertechnology.com/Gallery/upload/"  + data.imagePath} width="40" height="30" /></th>
+                        <td>{data.subTitle}</td>
+                        <td>{data.description}</td>
                         <td>
-                          <a
-                            href="#editEmployeeModal"
-                            className="edit"
-                            data-toggle="modal"
-                          >
-                            <i
-                              className="material-icons"
-                              data-toggle="tooltip"
-                              title="Edit"
+                          <img src={data.imagePath} width={40}  height={60} /> 
+                          </td>
+                        <td>
+                        <Link to="/AdminGalleryUpdate">
+                            <button
+                              onClick={() => setData(data)}
+                              className="btn btn-primary"
                             >
-                              &#xE254;
-                            </i>
-                          </a>
+                              Edit
+                            </button>
+                          </Link>
                           <a
                             href="#deleteEmployeeModal"
                             className="delete"
@@ -173,6 +193,52 @@ const getData = () => {
                 
                 </div>
                 <div className="container">
+                {/* <Form className="create-form">
+                <Form.Field className="">
+                  <label className="text-white ">Title</label>
+                  <input
+                    placeholder="EnterName "
+                    className="col-md-12"
+                  
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </Form.Field>
+                <Form.Field className="">
+                  <label className="text-white ">SubTitle</label>
+                  <input
+                    placeholder="EnterEmail"
+                    className=""
+                    onChange={(e) => setSubTitle(e.target.value)}
+                  />
+                </Form.Field>
+                <Form.Field className="">
+                  <label className="text-white ">Description</label>
+                  <textarea
+                    placeholder="EnterPhone"
+                    className=""
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </Form.Field>
+                <Form.Field className="">
+                  <label className="text-white ">Upload image :-</label>
+                  <input
+                    placeholder="EnterMessage"
+                    type="file"
+                    className=""
+                    onChange={(e)=>  setImagePath("/images/ProductImages/"+e.target.files[0].name)}
+                  />
+                </Form.Field>
+                <Form.Field className="">
+                  <Checkbox
+                    className="text-white"
+                    label="Check me out"
+                    onChange={(e) => setCheckbox(!checkbox)}
+                  />
+                </Form.Field>
+                <Button className="uiry_Button" onClick={PostData} type="submit">
+                  Submit
+                </Button>
+              </Form> */}
                   <div className="form-group">
                     <label>Title</label>
                     <input
@@ -206,14 +272,14 @@ const getData = () => {
                         Upload image :-
                       </label>
                       <input
-                        onChange={(e) => setImagePath(e.target.files[0])}
+                       onChange={(e)=>  setImagePath("/images/ProductImages/"+e.target.files[0].name)}
                         className="form-control form-control"
                         id="formFileLg"
                         type="file"
                       />
                     </div>
                   </div>
-                  <div className="form-group">
+                  <div className="">
                     <input
                       onChange={(e) => setCheckbox(!checkbox)}
                       type="checkbox"
@@ -228,7 +294,7 @@ const getData = () => {
 
                   <div className=" form-group mb-0">
                     <button
-                      className="btn btn-primary float-right "
+                      className="btn btn-primary float-right"
                          onClick={PostData}
                     >
                       Submit
@@ -240,7 +306,7 @@ const getData = () => {
           </div>
         </div>
 
-        <div id="editEmployeeModal" className="modal fade">
+        {/* <div id="editEmployeeModal" className="modal fade">
           <div className="modal-dialog">
             <div className="modal-content">
               <form>
@@ -260,7 +326,7 @@ const getData = () => {
                   <div className="form-group">
                     <label>Title</label>
                     <input
-                      //   onChange={(e) => setMasterTable(e.target.value)}
+
                       type="text"
                       className="form-control"
                       required
@@ -269,7 +335,7 @@ const getData = () => {
                   <div className="form-group">
                     <label>SubTitle</label>
                     <input
-                      //   onChange={(e) => setTableValue(e.target.value)}
+
                       type="text"
                       className="form-control"
                       required
@@ -289,7 +355,7 @@ const getData = () => {
                   </div>
                   <div className="form-group">
                     <input
-                      //   onChange={(e) => setCheckbox(!checkbox)}
+
                       type="checkbox"
                       className="form-check d-inline"
                       id="chb"
@@ -303,7 +369,7 @@ const getData = () => {
                   <div className=" form-group mb-0">
                     <button
                       className="btn btn-primary float-right "
-                      //   onClick={updateAPIData}
+                      
                     >
                       Submit
                     </button>
@@ -312,7 +378,7 @@ const getData = () => {
               </form>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

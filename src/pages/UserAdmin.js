@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import "./UserAdmin.css";
+import { Link } from "react-router-dom";
 
 function UserAdmin() {
   const [APIData, setAPIData] = useState([]);
@@ -14,7 +15,29 @@ function UserAdmin() {
   const [userCenter, setCenter] = useState("");
   const [password, setPassword] = useState("");
   const [remarks, setRemarks] = useState("");
+  const [userRole, setUserRole] = useState('');
   const [checkbox, setCheckbox] = useState(false);
+
+
+
+  const setData = (data) => {
+    console.log(data);
+    let { userID,userName,address, city, state,email_ID, contactNo,userCenter,password,remarks,userRole,checkbox } = data;
+    localStorage.setItem("userID", userID);
+    localStorage.setItem("userName", userName);
+    localStorage.setItem("address", address);
+    localStorage.setItem("city", city);
+    localStorage.setItem("state", state);
+    localStorage.setItem("email_ID", email_ID);
+    localStorage.setItem("contactNo", contactNo);
+    localStorage.setItem("userCenter", userCenter);
+    localStorage.setItem("password", password);
+    localStorage.setItem("userRole", userRole);
+    localStorage.setItem("remarks", remarks);
+    localStorage.setItem("checkbox", checkbox);
+  };
+
+
 
   const HandlePostData = () => {
     axios
@@ -98,7 +121,7 @@ function UserAdmin() {
     <>
       <Sidebar />
       <div className="UserAdmin">
-        <div className="container-xl" style={{ marginTop: "7rem" }}>
+        <div className="container-xxl" style={{ marginTop: "7rem" }}>
           <div className="table-responsive">
             <div className="table-wrapper">
               <div className="table-title">
@@ -134,6 +157,7 @@ function UserAdmin() {
                     <th>Password</th>
                     {/* <th>Confirm Password</th> */}
                     <th>Remarks</th>
+                    <th>Role</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -151,20 +175,11 @@ function UserAdmin() {
                         <td>{data.userCenter}</td>
                         <td>{data.password}</td>
                         <td>{data.remarks}</td>
+                        <td>{data.userRole}</td>
                         <td>
-                          <a
-                            href="#editEmployeeModal"
-                            className="edit"
-                            data-toggle="modal"
-                          >
-                            <i
-                              className="material-icons"
-                              data-toggle="tooltip"
-                              title="Edit"
-                            >
-                              &#xE254;
-                            </i>
-                          </a>
+                      <Link to="/UserRegistrationUpdate">
+                      <button className="btn btn-info" onClick={() => setData(data)}>Edit</button>
+                      </Link>
                           <a
                             href="#deleteEmployeeModal"
                             className="delete"
@@ -193,357 +208,367 @@ function UserAdmin() {
           <div className="modal-dialog">
             <div className="modal-content">
               <form>
-              <div className="modal-header">
+                <div className="modal-header">
                   <h4 className="modal-title col-md-6">Add User</h4>
                   <div className="float-right">
-                  <button
-                    type="button"
-                    className="close col-md-6"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
+                    <button
+                      type="button"
+                      className="close col-md-6"
+                      data-dismiss="modal"
+                      aria-hidden="true"
+                    >
+                      &times;
+                    </button>
                   </div>
-                
                 </div>
-                {/* <div className="modal-body">
-                  <div className="form-group">
-                    <label>User Name</label>
+                <div className="container">
+                  <div className=" form-group">
+                    <label htmlFor="name-f">Name :</label>
                     <input
                       onChange={(e) => setUserName(e.target.value)}
                       type="text"
                       className="form-control"
+                      name="fname"
+                      id="name-f"
+                      placeholder="Enter your first name."
                       required
                     />
                   </div>
-                  <div className="form-group">
-                    <label>User Email</label>
+                  <div className=" form-group">
+                    <label htmlFor="email">Email :</label>
                     <input
                       onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       className="form-control"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email."
                       required
                     />
                   </div>
-                  <div className="form-group">
-                    <label>User Contact</label>
+                  <div className=" form-group">
+                    <label htmlFor="tel">Phone :</label>
                     <input
                       onChange={(e) => setContact(e.target.value)}
-                      type="text"
+                      type="tel"
+                      name="phone"
                       className="form-control"
+                      id="tel"
+                      placeholder="Enter Your Contact Number."
                       required
                     />
                   </div>
-                  <div className="form-group">
-                    <label>Address</label>
-                    <textarea
+
+                  <div className=" form-group">
+                    <label htmlFor="address-1">Address :</label>
+                    <input
                       onChange={(e) => setUserAddress(e.target.value)}
+                      type="address"
                       className="form-control"
+                      name="Locality"
+                      id="address-1"
+                      placeholder="Locality/House/Street no."
                       required
-                    ></textarea>
+                    />
                   </div>
-                  <div className="form-group">
-                    <label>City</label>
+                  <div className=" form-group">
+                    <label htmlFor="address-2">City :</label>
                     <input
                       onChange={(e) => setCity(e.target.value)}
-                      type="text"
+                      type="address"
                       className="form-control"
+                      name="address"
+                      id="address-2"
+                      placeholder="City Name."
                       required
                     />
                   </div>
-                  <div className="form-group">
-                    <label>State</label>
+                  <div className=" form-group">
+                    <label htmlFor="State">State :</label>
                     <input
                       onChange={(e) => setState(e.target.value)}
-                      type="text"
+                      type="address"
                       className="form-control"
+                      name="State"
+                      id="State"
+                      placeholder="Enter your state name."
                       required
                     />
                   </div>
-                  <div className="form-group">
-                    <label>User Center</label>
+                  <div className=" form-group">
+                    <label htmlFor="zip">Postal-Code :</label>
                     <input
                       onChange={(e) => setCenter(e.target.value)}
-                      type="text"
+                      type="zip"
                       className="form-control"
+                      name="Zip"
+                      id="zip"
+                      placeholder="Postal-Code."
                       required
                     />
                   </div>
-                  <div className="form-group">
-                    <label>Password</label>
-                    <input
-                      onChange={(e) => setPassword(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      required
-                    />
+
+                  <div className=" form-group">
+                    <label htmlFor="sex">Gender :</label>
+                    <select
+                      // onChange={(e) => setUserName(e.target.value)}
+                      id="sex"
+                      className="form-control browser-default custom-select"
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="unspesified">Unspecified</option>
+                    </select>
                   </div>
-                  <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Remarks</label>
+
+                  <div className=" form-group">
+                    <label htmlFor="address-1">Remarks :</label>
                     <input
                       onChange={(e) => setRemarks(e.target.value)}
-                      type="text"
+                      type="address"
                       className="form-control"
+                      name="Locality"
+                      id="address-1"
+                      placeholder="Remarks"
                       required
                     />
                   </div>
+                  <div className=" form-group">
+                    <label htmlFor="pass">Password :</label>
+                    <input
+                      onChange={(e) => setPassword(e.target.value)}
+                      type="Password"
+                      name="password"
+                      className="form-control"
+                      id="pass"
+                      placeholder="Enter your password."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="pass2">Confirm Password :</label>
+                    <input
+                      type="Password"
+                      name="cnf-password"
+                      className="form-control"
+                      id="pass2"
+                      placeholder="Re-enter your password."
+                      required
+                    />
+                  </div>
+                  <div className="">
+                    <input
+                      onChange={(e) => setCheckbox(!checkbox)}
+                      type="checkbox"
+                      className="form-check d-inline"
+                      id="chb"
+                      required
+                    />
+                    <label
+                      htmlFor="chb"
+                      className="form-check-label"
+                      style={{ marginTop: "-10px" }}
+                    >
+                      &nbsp; Check me out.
+                    </label>
+                  </div>
+
+                  <div className=" form-group mb-0">
+                    <button
+                      className="btn btn-primary float-right "
+                      onClick={HandlePostData}
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
-                <div className="modal-footer">
-                  <input
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    value="Cancel"
-                  />
-                  <input
-                    onClick={HandlePostData}
-                    type="submit"
-                    className="btn btn-success"
-                    value="Add"
-                  />
-                </div> */}
-                 <div className="container">
-              <div className=" form-group">
-                <label htmlFor="name-f">Name :</label>
-                <input
-                onChange={(e) => setUserName(e.target.value)}
-                  type="text"
-                  className="form-control"
-                  name="fname"
-                  id="name-f"
-                  placeholder="Enter your first name."
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="email">Email :</label>
-                <input
-                onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  id="email"
-                  placeholder="Enter your email."
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="tel">Phone :</label>
-                <input
-                onChange={(e) => setContact(e.target.value)}
-                  type="tel"
-                  name="phone"
-                  className="form-control"
-                  id="tel"
-                  placeholder="Enter Your Contact Number."
-                  required
-                />
-              </div>
-
-              <div className=" form-group">
-                <label htmlFor="address-1">Address :</label>
-                <input
-                onChange={(e) => setUserAddress(e.target.value)}
-                  type="address"
-                  className="form-control"
-                  name="Locality"
-                  id="address-1"
-                  placeholder="Locality/House/Street no."
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="address-2">City :</label>
-                <input
-                onChange={(e) => setCity(e.target.value)}
-                  type="address"
-                  className="form-control"
-                  name="address"
-                  id="address-2"
-                  placeholder="City Name."
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="State">State :</label>
-                <input
-                onChange={(e) => setState(e.target.value)}
-                  type="address"
-                  className="form-control"
-                  name="State"
-                  id="State"
-                  placeholder="Enter your state name."
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="zip">Postal-Code :</label>
-                <input
-                onChange={(e) => setCenter(e.target.value)}
-                  type="zip"
-                  className="form-control"
-                  name="Zip"
-                  id="zip"
-                  placeholder="Postal-Code."
-                  required
-                />
-              </div>
-  
-              <div className=" form-group">
-                <label htmlFor="sex">Gender :</label>
-                <select
-                // onChange={(e) => setUserName(e.target.value)}
-                  id="sex"
-                  className="form-control browser-default custom-select"
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="unspesified">Unspecified</option>
-                </select>
-              </div>
-
-        
-              <div className=" form-group">
-                <label htmlFor="address-1">Remarks :</label>
-                <input
-                onChange={(e) => setRemarks(e.target.value)}
-                  type="address"
-                  className="form-control"
-                  name="Locality"
-                  id="address-1"
-                  placeholder="Remarks"
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="pass">Password :</label>
-                <input
-                onChange={(e) => setPassword(e.target.value)}
-                  type="Password"
-                  name="password"
-                  className="form-control"
-                  id="pass"
-                  placeholder="Enter your password."
-                  required
-                />
-              </div>
-              <div className=" form-group">
-                <label htmlFor="pass2">Confirm Password :</label>
-                <input
-                  type="Password"
-                  name="cnf-password"
-                  className="form-control"
-                  id="pass2"
-                  placeholder="Re-enter your password."
-                  required
-                />
-              </div>
-              <div className="">
-                <input
-                  onChange={(e) => setCheckbox(!checkbox)}
-                  type="checkbox"
-                  className="form-check d-inline"
-                  id="chb"
-                  required
-                />
-                <label
-                  htmlFor="chb"
-                  className="form-check-label"
-                  style={{ marginTop: "-10px" }}
-                >
-                  &nbsp; Check me out.
-                </label>
-              </div>
-
-              <div className=" form-group mb-0">
-                <button
-                  className="btn btn-primary float-right "
-                  onClick={HandlePostData}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
               </form>
             </div>
           </div>
         </div>
 
-        <div id="editEmployeeModal" className="modal fade">
-          <div className="modal-dialog">
+        {/* <div id="editEmployeeModal" className="modal fade">
+        <div className="modal-dialog">
             <div className="modal-content">
               <form>
                 <div className="modal-header">
-                  <h4 className="modal-title">Edit Product</h4>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <div className="form-group">
-                    <label>User Name</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>User Email</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>User Contact</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Address</label>
-                    <textarea className="form-control" required></textarea>
-                  </div>
-                  <div className="form-group">
-                    <label>City</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>State</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>User Center</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Password</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Remarks</label>
-                    <input type="text" className="form-control" required />
+                  <h4 className="modal-title col-md-6">Add User</h4>
+                  <div className="float-right">
+                    <button
+                      type="button"
+                      className="close col-md-6"
+                      data-dismiss="modal"
+                      aria-hidden="true"
+                    >
+                      &times;
+                    </button>
                   </div>
                 </div>
-                <div className="modal-footer">
-                  <input
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    value="Cancel"
-                  />
-                  <input type="submit" className="btn btn-info" value="Save" />
+                <div className="container">
+                  <div className=" form-group">
+                    <label htmlFor="name-f">Name :</label>
+                    <input
+                      onChange={(e) => setUserName(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      name="fname"
+                      id="name-f"
+                      placeholder="Enter your first name."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="email">Email :</label>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="tel">Phone :</label>
+                    <input
+                      onChange={(e) => setContact(e.target.value)}
+                      type="tel"
+                      name="phone"
+                      className="form-control"
+                      id="tel"
+                      placeholder="Enter Your Contact Number."
+                      required
+                    />
+                  </div>
+
+                  <div className=" form-group">
+                    <label htmlFor="address-1">Address :</label>
+                    <input
+                      onChange={(e) => setUserAddress(e.target.value)}
+                      type="address"
+                      className="form-control"
+                      name="Locality"
+                      id="address-1"
+                      placeholder="Locality/House/Street no."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="address-2">City :</label>
+                    <input
+                      onChange={(e) => setCity(e.target.value)}
+                      type="address"
+                      className="form-control"
+                      name="address"
+                      id="address-2"
+                      placeholder="City Name."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="State">State :</label>
+                    <input
+                      onChange={(e) => setState(e.target.value)}
+                      type="address"
+                      className="form-control"
+                      name="State"
+                      id="State"
+                      placeholder="Enter your state name."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="zip">Postal-Code :</label>
+                    <input
+                      onChange={(e) => setCenter(e.target.value)}
+                      type="zip"
+                      className="form-control"
+                      name="Zip"
+                      id="zip"
+                      placeholder="Postal-Code."
+                      required
+                    />
+                  </div>
+
+                  <div className=" form-group">
+                    <label htmlFor="sex">Gender :</label>
+                    <select
+                      // onChange={(e) => setUserName(e.target.value)}
+                      id="sex"
+                      className="form-control browser-default custom-select"
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="unspesified">Unspecified</option>
+                    </select>
+                  </div>
+
+                  <div className=" form-group">
+                    <label htmlFor="address-1">Remarks :</label>
+                    <input
+                      onChange={(e) => setRemarks(e.target.value)}
+                      type="address"
+                      className="form-control"
+                      name="Locality"
+                      id="address-1"
+                      placeholder="Remarks"
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="pass">Password :</label>
+                    <input
+                      onChange={(e) => setPassword(e.target.value)}
+                      type="Password"
+                      name="password"
+                      className="form-control"
+                      id="pass"
+                      placeholder="Enter your password."
+                      required
+                    />
+                  </div>
+                  <div className=" form-group">
+                    <label htmlFor="pass2">Confirm Password :</label>
+                    <input
+                      type="Password"
+                      name="cnf-password"
+                      className="form-control"
+                      id="pass2"
+                      placeholder="Re-enter your password."
+                      required
+                    />
+                  </div>
+                  <div className="">
+                    <input
+                      onChange={(e) => setCheckbox(!checkbox)}
+                      type="checkbox"
+                      className="form-check d-inline"
+                      id="chb"
+                      required
+                    />
+                    <label
+                      htmlFor="chb"
+                      className="form-check-label"
+                      style={{ marginTop: "-10px" }}
+                    >
+                      &nbsp; Check me out.
+                    </label>
+                  </div>
+
+                  <div className=" form-group mb-0">
+                    <button
+                      className="btn btn-primary float-right "
+                      onClick={HandlePostData}
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* <div id="deleteEmployeeModal" className="modal fade">
           <div className="modal-dialog">

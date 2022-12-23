@@ -2,6 +2,10 @@
 .card-wrapper {
     margin-bottom: 30px;
   }
+  .home{
+   height: auto;
+   
+  }
   .card-image .card .card-img-wrapper {
     height: 100%;
   }

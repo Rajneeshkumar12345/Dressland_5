@@ -7,16 +7,6 @@ import { UilSignOutAlt } from "@iconscout/react-unicons";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
 
-// import DashboardIcon from "@mui/icons-material/Dashboard";
-// import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
-// import InventoryIcon from "@mui/icons-material/Inventory";
-// import LoginIcon from "@mui/icons-material/Login";
-// import PhotoIcon from "@mui/icons-material/Photo";
-// import ListIcon from "@mui/icons-material/List";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import ContactMailIcon from "@mui/icons-material/ContactMail";
-// import ContactPageIcon from "@mui/icons-material/ContactPage";
-// import InfoIcon from "@mui/icons-material/Info";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarAdminData } from "./SidebarAdminData";
@@ -24,20 +14,6 @@ import { IconContext } from "react-icons";
 
 import img from "../images/Logo.png";
 const Sidebar = () => {
-  // const [selected, setSelected] = useState(0);
-
-  // const [expanded, setExpaned] = useState(true);
-
-  // const sidebarVariants = {
-  //   true: {
-  //     left: "0",
-  //   },
-  //   false: {
-  //     left: "-60%",
-  //   },
-  // };
-  // console.log(window.innerWidth);
-
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -51,27 +27,22 @@ const Sidebar = () => {
               <Link to="#" className="menu-bars">
                 <FaIcons.FaBars onClick={showSidebar} />
               </Link>
-              {/* <Link to="/" className="img_contain ">
-              <img
-                src={img}
-                className="img-fluid "
-                width="60"
-                height="40"
-                alt="img"
-              />
-            </Link> */}
               <div>
                 <h2 className="ms-5 mt-3 Admin_Panel_Heading">Admin Panel</h2>
               </div>
             </div>
             <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
               <ul className="nav-menu-items" onClick={showSidebar}>
-               
+              <li>
+                  <Link to="/"className="menu-bars" style={{marginLeft:"1rem"}}>
+                    <AiIcons.AiOutlineArrowLeft />
+                  </Link>
+                </li>
                 <li className="navbar-toggle">
                   <Link
                     to="#"
                     className="menu-bars"
-                    style={{ marginLeft: "12rem" }}
+                    style={{ marginLeft: "12rem", marginTop:"-8rem" }}
                   >
                     <AiIcons.AiOutlineClose />
                   </Link>
@@ -86,11 +57,7 @@ const Sidebar = () => {
                     </li>
                   );
                 })}
-                 <li>
-                  <Link to="/"className="menu-bars" style={{marginLeft:"1rem"}}>
-                    <AiIcons.AiOutlineArrowLeft />
-                  </Link>
-                </li>
+          
               </ul>
             </nav>
           </IconContext.Provider>

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
+import VendorSidebar from '../components/VendorSidebar';
 
 
 function VendorCenterShop() {
@@ -18,26 +19,25 @@ function VendorCenterShop() {
   const [remarks, setRemarks] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
-  
-    axios.post("http://nias.codelovertechnology.com/ShopMaster", {
-      shopID: 0,
-      shopName,
-      personName,
-      shopEmail_ID,
-      shopContactNo,
-      personContactNo,
-      personEmailID,
-      shopAddress,
-      city,
-      state,
-      shopBanner,
-      remarks,
-      createdBy: "NA",
-      createdDate: "2022-11-23T12:56:22.535Z",
-      modifiedBy: "NA",
-      modifiedDate: "2022-11-23T12:56:22.536Z",
-      checkbox,
-    });
+    // axios.post("http://nias.codelovertechnology.com/ShopMaster", {
+    //   shopID: 0,
+    //   shopName,
+    //   personName,
+    //   shopEmail_ID,
+    //   shopContactNo,
+    //   personContactNo,
+    //   personEmailID,
+    //   shopAddress,
+    //   city,
+    //   state,
+    //   shopBanner,
+    //   remarks,
+    //   createdBy: "NA",
+    //   createdDate: "2022-11-23T12:56:22.535Z",
+    //   modifiedBy: "NA",
+    //   modifiedDate: "2022-11-23T12:56:22.536Z",
+    //   checkbox,
+    // });
   
 
   axios
@@ -72,6 +72,7 @@ function VendorCenterShop() {
   }, []);
   return (
     <>
+    <VendorSidebar/>
      <div className="getAPIData mt-5">
           <div className="UserAdmin">
             <div className="container-xxl" style={{ marginTop: "7rem" }}>
@@ -81,7 +82,7 @@ function VendorCenterShop() {
                     <div className="row">
                       <div className="col-sm-6">
                         <h2>
-                          Manage <b>Center Shop</b>
+                          Vendor <b>Center Shop</b>
                         </h2>
                       </div>
                     </div>

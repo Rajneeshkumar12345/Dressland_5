@@ -1,13 +1,33 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+//import useAuth from "../hooks/useAuth";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import Log_image from "../images/Log_Image.webp";
+import roles from "./Role";
+import Spinner from "./Spinner";
 
 const LoginPage = () => {
+  //const { setAuth } = useAuth();
+  //const location = useLocation();
+  //const from = location.state?.from?.pathname || "/";
+  // const userRef = useRef();
+
+  const errRef = useRef();
+  const [errMsg, setErrMsg] = useState("");
+  const [loggedInState, setLoggedInState] = useState(false)
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log({ email, password });
+  const[loading, setLoading] = useState("");
+  
+
+  // useEffect(() => {
+  //   setLoggedInState(true);
+  //   setTimeout(() => {
+  //     setLoggedInState(false);
+  //   }, 3000);
+  // }, []);
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -16,66 +36,103 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/LoginPage")
-  //   }
-  // })
 
-  const handleApi = () => {
-    console.log({ email, password });
-    // const credentials = {
-    //   email,
-    //   password,
-    // };
+  const handleApi = (e) => {
+    setLoading("You are logging please wait")
     axios
-      .post("http://nias.codelovertechnology.com/UserMaster/api/UserMaster/Login",{
-        email: email,
-        password: password
-      })
-      .then(result => {
-        console.log(result.data)
-       localStorage.setItem("token", result.data.token);
-         navigate("/MainDash");
-      })
-      .catch(error => {
-        console.log(error)
-      })
-     
+      .post(
+        "http://nias.codelovertechnology.com/UserMaster/api/UserMaster/Login",
+        {
+          email_ID: email,
+          password: password,
+        }
+      )
+      .then((result) => {
+        //   console.log(result.data);
+        //  const Roles = result.data[0].userRole;
+        localStorage.setItem("result", result);
+        localStorage.setItem("currentUserRole",result.data[0].userRole);
+        if (result.data[0].userRole == "ADMIN") {
+          navigate("/MainDash");
+        } else if (result.data[0].userRole == "VENDOR") {
 
+          navigate("/VendorDashboard");
+        } else if (result.data[0].userRole == "CENTOR") {
+          navigate("/CentorDashboard");
+        } else if ((!result.data[0].userRole == "ADMIN") && (!result.data[0].userRole == "VENDOR") && (!result.data[0].userRole == "CENTOR")) {
+          navigate("/");
+        }
+        else {
+          setErrMsg("Please Enter Valid Email Id And Password...!!!");
+          return;
+        }
+      })
+      .catch((error) => {
+        return setErrMsg("Please Enter Valid Email id And Password...!!!");
+        console.log(error);
+      });
+    // try {
+    //   const response = axios.post(
+    //     "http://nias.codelovertechnology.com/UserMaster/api/UserMaster/Login",
+    //     JSON.stringify({ email, password }),
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   console.log(JSON.stringify(response?.data));
+    //   const accessToken = response?.data?.accessToken;
+    //   const roles = response?.data?.roles;
+    //   setAuth({ email, password, roles, accessToken });
+    //   setEmail("");
+    //   setPassword("");
 
+    // } catch (err) {
+    //   if (!err?.response) {
+    //     setErrMsg("No Server Response");
+    //   } else if (err.response?.status === 400) {
+    //     setErrMsg("Missing Username or Password");
+    //   } else if (err.response?.status === 401) {
+    //     setErrMsg("Unauthorized");
+    //   } else {
+    //     setErrMsg("Login Failed");
+    //   }
+    //   errRef.current.focus();
+    // }
 
-      // credentials)
-      // .then((response) => {
-      //   if (response.data.accountType === "admin") {
-      //     navigate("/MainDash");
-      //   } else if (response.data.accountType === "student") {
-      //     navigate("/");
-      //   }
-      // })
-      // .catch((error) => {
-      //   alert(error.response.data.message);
-      // });
-    
-    
-  //   {
-  //     email: email,
-  //     password: password,
-  //   })
-  //   .then((result) => {
-  //     console.log(result.data);
-  //     // alert("success");
-  //     localStorage.setItem("token", result.data.token);
-  //     navigate("/");
-  //   })
-  //   .catch((error) => {
-  //     alert("Plz Enter Valid Email and Password");
-  //     console.log(error);
-  //   });
-   };
+    // credentials)
+    // .then((response) => {
+    //   if (response.data.accountType === "admin") {
+    //     navigate("/MainDash");
+    //   } else if (response.data.accountType === "student") {
+    //     navigate("/");
+    //   }
+    // })
+    // .catch((error) => {
+    //   alert(error.response.data.message);
+    // });
+
+  };
   return (
     <>
+    {/* <div className="Logincontainer">
+  {loggedInState == 'logging in' ? <Spinner/> : ''}
+    </div> */}
       <section className="vh-100">
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
+        <p
+          ref={errRef}
+          className={loading ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {loading}
+        </p>
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
@@ -118,9 +175,12 @@ const LoginPage = () => {
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center">
-                  <a href="#!" className="text-body">
-                    Forgot password?
-                  </a>
+                  <Link to="/" className="text-danger Home_text">
+                  Back to Home
+                  </Link>
+                  {/* <a href="#!" className="text-body">
+                    Back to Home
+                  </a> */}
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">
@@ -134,12 +194,12 @@ const LoginPage = () => {
                   </button>
                   <p className="small  mt-4 pt-1 mb-0 Account_text">
                     Don't have an account?{" "}
-                    <a
-                      href="/UserRegistration"
+                    <Link
+                      to="/UserRegistration"
                       className="Register_text text-danger"
                     >
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </form>

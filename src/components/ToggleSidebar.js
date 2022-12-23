@@ -59,8 +59,8 @@ const ToggleSidebar = () => {
                       <img
                         src={img}
                         className="img-fluid img-thumbnails"
-                         width="120"
-                         height="90"
+                        width="120"
+                        height="90"
                         alt="img"
                       />
                     </Link>
@@ -88,7 +88,6 @@ const ToggleSidebar = () => {
                     <a
                       href="https://www.facebook.com/CodeLoverTech/"
                       target="_blank"
-                     
                     >
                       <WhatsAppIcon fontSize="medium" />{" "}
                       <a href="tel:+" className="text-dark"></a>
@@ -139,7 +138,6 @@ const ToggleSidebar = () => {
           <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
             <ul className="nav-menu-items" onClick={showSidebar}>
               <li className="navbar-toggle">
-                
                 <Link to="#" className="menu-bars Close_Tag">
                   <AiIcons.AiOutlineClose />
                 </Link>
@@ -251,7 +249,7 @@ const ToggleSidebar = () => {
         </div>
 
         {/****************************** * POPUP WINDOW START FROM HERE  ****************************************/}
-        <Enquire/>
+        <Enquire />
         {/* <button
           data-toggle="modal"
           data-target="#myModal"
@@ -368,6 +366,17 @@ const ToggleSidebar = () => {
           </span>
         </div>
       </div>
+{/*********** * Start Apply btn section from here ***********************************************/}
+      <section className="" style={{ backgroundColor: "#2a3661" }}>
+        <div className="Center">
+          <h3 className="text-center text-white">Connect with me for<span style={{color:"#f20ac4"}}>Center Shop</span></h3>
+          <div className="center_btn float-right me-5">
+            <Link to="/UserRegistration">
+              <button className="btn btn-success btn-lg">Apply Now</button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ************** * FOOTER START FROM HERE.*************************** */}
 

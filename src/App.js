@@ -1,93 +1,13 @@
-// import React, { Component } from "react";
-// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
-// import { history } from "./helper/history";
-// import { Role } from "./helper/Role";
-// import { authenticationService } from "./services/authenticationService";
-// import { PrivateRoute } from "./private/PrivateRoute";
-// import { HomePage } from "./components/HomePage";
-// import { AdminPage } from "./components/AdminPage";
-// import LoginPage from "./components/LoginPage";
-
-// // var HomePage = require('./components/HomePage');
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       error: null,
-//       currentUser: null,
-//       isAdmin: false,
-//     };
-//   }
-
-//   componentDidMount() {
-//     authenticationService.currentUser.subscribe((x) =>
-//       this.setState({
-//         currentUser: x,
-//         isAdmin: x && x.role === Role.Admin,
-//       })
-//     );
-//   }
-
-//   logout() {
-//     authenticationService.logout();
-//     history.push("/login");
-//   }
-//   render() {
-//     const { currentUser, isAdmin } = this.state;
-//     return (
-//       <>
-//         <div className="app" history={history}>
-//         <div>
-//           {currentUser && (
-//             <nav className="navbar navbar-expand navbar-dark bg-dark">
-//               <div className="navbar-nav">
-//                 <Link to="/HomePage" className="nav-item nav-link">
-//                   Home
-//                 </Link>
-//                 {isAdmin && (
-//                   <Link to="HomePage/AdminPage" className="nav-item nav-link">
-//                     Admin
-//                   </Link>
-
-//                 ) }
-//                 <a onClick={this.logout} className="nav-item nav-link">
-//                   Logout
-//                 </a>
-//               </div>
-//             </nav>
-//           )}
-//          <Router>
-//          <PrivateRoute exact path="/" component={HomePage} />
-//                   <PrivateRoute
-//                     path="/AdminPage"
-//                     roles={[Role.Admin]}
-//                     component={AdminPage}
-//                   />
-
-//                   <Routes>
-//                     <Route path="/" element={<HomePage/>}></Route>
-//                   <Route path="/LoginPage" element={<LoginPage/>} />
-//                   </Routes>
-//          </Router>
-
-//         </div>
-//       </div>
-
-//       </>
-//     );
-//   }
-// }
-// export default App;
-
 import "./App.css";
+import React, {useState} from 'react'
 import MainDash from "./components/MainDash/MainDash";
 import RightSide from "./components/RigtSide/RightSide";
 import Sidebar from "./components/Sidebar";
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+
+import ROLE from './components/Role';
+import axios from "axios";
 
 // import Home from "./components/Home";
 // import Login from "./components/Login";
@@ -115,48 +35,80 @@ import AdminGallery from "./pages/AdminGallery";
 import VendorSupport from "./pages/VendorSupport";
 import VendorCenterShop from "./pages/VendorCenterShop";
 import Transaction from "./pages/Transaction";
+import RequireAuth from "./components/RequireAuth";
+import { useEffect } from "react";
+import VendorSidebar from "./components/VendorSidebar";
+import VendorDashboard from "./components/VendorDashboard";
+import VendorStock from "./pages/VendorStock";
+import CentorDahboard from "./components/CentorDashboard";
+import CentorSidebar from "./components/CentorSidebar";
+import CentorCenterShop from "./pages/CentorCenterShop";
+import CentorStock from "./pages/CentorStock";
+import CentorSupport from "./pages/CentorSupport";
+import CentorTransaction from "./pages/CentorTransaction";
+import VendorTransaction from "./pages/VendorTransaction";
+import UserRegistrationUpdate from "./pages/UserRegistrationUpdate";
+import Invoice from "./pages/Invoice";
+import ProductUpdate from "./pages/ProductUpdate";
+import PubProdGallery from "./pages/PubProdGallery";
+import PubGallery from "./pages/PubGallery";
+import AdminGalleryUpdate from "./pages/AdminGalleryUpdate";
+import EnquiryUpdate2 from "./pages/EnquiryUpdate2";
+import CenterShopUpdate from "./pages/CenterShopUpdate";
+import MasterUpdate from "./pages/MasterUpdate";
 
 // import DistributerPage from "./components/DistributerPage";
 
+
+
 function App() {
+  // const [APIData, setAPIData] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://nias.codelovertechnology.com/ProductMaster`)
+  //     .then((response) => {
+  //       setAPIData(response.data);
+       
+  //     });
+  // }, []);
+
+  // useEffect (() =>{
+  //   const Role =  localStorage.getItem("result");
+  //   console.log(Role);
+  //   if (Role[0].userRole == 'ADMIN'){
+  //     Navigate('/MainDash');
+  //   }
+  //   console.log(Role[0].userRole);
+  // })
+
   return (
     <main className="App">
       <BrowserRouter>
         <Routes>
+          {/* Public Routes */}
           <Route exact path="/" element={<ToggleSidebar />} />
           <Route exact path="/About" element={<About />} />
-          <Route exact path="/Stock" element={<Stock />} />
-          <Route exact path="/ProductGallery" element={<ProductGallery />} />
-          <Route exact path="/Product" element={<Product />} />
-          <Route exact path="/Galary" element={<Galary />} />
+        
+          <Route path='/PubGallery/:ProductIDReq' element={<PubGallery/>}/>
+          <Route exact path="/ProductExplore" element={<ProductExplore/>} />
           <Route exact path="/Contact" element={<Contact />} />
           <Route exact path="/LoginPage" element={<Login />} />
+
+           {/* This is rout for Vendor and Center  */}
+          <Route path='/Galary/:ProductIDReq' element={<Galary/>}/>
+          <Route exact path="/ProductGallery" element={<ProductGallery/>} />
+          {/* This is rout for Vendor and Center  */}
+
+          <Route exact path="/PubProdGallery" element={<PubProdGallery/>} />
           <Route exact path="/Register" element={<Register />} />
-          <Route exact path="/Master" element={<Master />} />
-          <Route exact path="/UserAdmin" element={<UserAdmin/>} />
-          {/* <Route exact path="/Update" element={<Update/>} /> */}
           <Route
             exact
             path="/UserRegistration"
             element={<UserRegistration />}
           />
-          <Route exact path="/CenterShop" element={<CenterShop />} />
-          <Route exact path="/EnquiryForm" element={<EnquiryForm />} />
-          <Route exact path="/AboutAdminPage" element={<AboutAdminPage />} />
-          <Route
-            exact
-            path="/ContactAdminPage"
-            element={<ContactAdminPage />}
-          />
-          <Route exact path="/ProductExplore" element={<ProductExplore />} />
-          <Route exact path="/EnquiryUpdate" element={<EnquiryUpdate/>} />
-          <Route exact path="/AdminGallery" element={<AdminGallery/>} />
-          <Route exact path="/Transaction" element={<Transaction/>} />
 
-          <Route exact path="/VendorSupport" element={<VendorSupport/>} />
-          <Route exact path="/VendorCentorShop" element={<VendorCenterShop/>} />
-
-          {/* <Route exact path="/DistributerPage" element={<DistributerPage />} /> */}
+          {/* Protect Admin Routes Start here  */}
+          {/* <Route element={<RequireAuth  allowedRoles={[ROLE.ADMIN]}/>}> */}
           <Route
             exact
             path="/MainDash"
@@ -172,8 +124,52 @@ function App() {
               </>
             }
           />
+          <Route exact path="/Product" element={<Product />} />
+          <Route exact path="/ProductUpdate" element={<ProductUpdate/>} />
+          <Route exact path="/Stock" element={<Stock />} />
+          <Route exact path="/UserAdmin" element={<UserAdmin/>} />
+          <Route exact path="/AdminGallery" element={<AdminGallery/>} />
+          <Route exact path="/AdminGalleryUpdate" element={<AdminGalleryUpdate/>} />
+          <Route exact path="/Master" element={<Master />} />
+          <Route exact path="/MasterUpdate" element={<MasterUpdate/>} />
+          <Route exact path="/CenterShop" element={<CenterShop />} />
+          <Route exact path="/CenterShopUpdate" element={<CenterShopUpdate/>} />
+          <Route exact path="/AboutAdminPage" element={<AboutAdminPage />} />
+          <Route
+            exact
+            path="/ContactAdminPage"
+            element={<ContactAdminPage />}
+          />
+          <Route exact path="/EnquiryForm" element={<EnquiryForm />} />
+          <Route exact path="/EnquiryUpdate" element={<EnquiryUpdate/>} />
+          <Route exact path="/EnquiryUpdate2" element={<EnquiryUpdate2/>} />
+          <Route exact path="/Transaction" element={<Transaction/>} />
+          <Route exact path="/UserRegistrationUpdate" element={<UserRegistrationUpdate/>}/>
+          {/* </Route> */}
+         
+
+
+          {/* Protect VENDOR Routes Start here  */}
+          <Route exact path="/VendorDashboard" element={<VendorDashboard/>} />
+          <Route exact path="/VendorSupport" element={<VendorSupport/>} />
+          <Route exact path="/VendorCenterShop" element={<VendorCenterShop/>}/>
+          <Route exact path="/VendorStock" element={<VendorStock/>} />
+          <Route exact path="/VendorSidebar" element={<VendorSidebar/>} />
+          <Route exact path="/VendorTransaction" element={<VendorTransaction/>} />
+
+          
+          {/* Protect Centor Routes Start here  */}
+          <Route exact path="/CentorDashboard" element={<CentorDahboard/>} />
+          <Route exact path="/CentorSupport" element={<CentorSupport/>} />
+          <Route exact path="/CentorCenterShop" element={<CentorCenterShop/>}/>
+          <Route exact path="/CentorStock" element={<CentorStock/>} />
+          <Route exact path="/CentorSidebar" element={<CentorSidebar/>} />
+          <Route exact path="/CentorTransaction" element={<CentorTransaction/>} />
+
+          {/* INVOICE ROUTE */}
+          <Route exact path="/Invoice" element={<Invoice/>} />
+          
         </Routes>
-        {/* <Route exact path="/CenterShop" element={ <CenterShop/> } /> */}
       </BrowserRouter>
     </main>
   );

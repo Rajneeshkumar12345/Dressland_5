@@ -14,6 +14,17 @@ function EnquiryForm() {
   const [enqMessage, setEnquiry] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
+  const setData = (data) => {
+    console.log(data);
+    let { enquiryID, name, email_ID, contactNo, enqMessage, checkbox } = data;
+    localStorage.setItem("enquiryID", enquiryID);
+    localStorage.setItem("name", name);
+    localStorage.setItem("email_ID", email_ID);
+    localStorage.setItem("contactNo", contactNo);
+    localStorage.setItem("enqMessage", enqMessage);
+    localStorage.setItem("checkbox", checkbox);
+  };
+
   const PostData = () => {
     console.log(name);
     console.log(email_ID);
@@ -34,9 +45,6 @@ function EnquiryForm() {
       modifiedDate: "2022-11-25",
       checkbox,
     });
-    // .then((error) =>{
-    //  alert("errr"+error)
-    // })
   };
   useEffect(() => {
     axios
@@ -46,14 +54,12 @@ function EnquiryForm() {
       });
   }, []);
 
-  
-
   const onDelete = (id) => {
     axios
       .delete(`http://nias.codelovertechnology.com/EnquiryMaster/${id}`)
       .then(() => {
         getData();
-        alert("Your data has beeen deleted");
+        alert("Your data has been deleted");
       });
   };
   const getData = () => {
@@ -64,7 +70,6 @@ function EnquiryForm() {
       });
   };
 
- 
   return (
     <>
       <Sidebar />
@@ -78,8 +83,8 @@ function EnquiryForm() {
                     <h2>
                       Manage <b>Enquiry</b>
                     </h2>
-                    </div>
-                    <div className="col-sm-6 col-md-6">
+                  </div>
+                  <div className="col-sm-6 col-md-6">
                     <a
                       href="#addEmployeeModal"
                       className="btn btn-success"
@@ -88,7 +93,6 @@ function EnquiryForm() {
                       <i className="material-icons">&#xE147;</i>{" "}
                       <span>Add New Enquiry</span>
                     </a>
-                
                   </div>
                 </div>
               </div>
@@ -114,19 +118,14 @@ function EnquiryForm() {
                         <td>{data.enqMessage}</td>
 
                         <td>
-                          <a
-                            href="#addEmployeeModal"
-                            className="edit"
-                            data-toggle="modal"
-                          >
-                            <i
-                              className="material-icons"
-                              data-toggle="tooltip"
-                              title="Edit"
+                        <Link to="/EnquiryUpdate2">
+                            <button
+                              onClick={() => setData(data)}
+                              className="btn btn-success"
                             >
-                              &#xE254;
-                            </i>
-                          </a>
+                              Edit
+                            </button>
+                          </Link>
 
                           <a
                             href="#deleteEmployeeModal"
@@ -143,7 +142,12 @@ function EnquiryForm() {
                             </i>
                           </a>
                           <Link to="/EnquiryUpdate">
-                            <button className="btn btn-primary">Reply</button>
+                            <button
+                              onClick={() => setData(data)}
+                              className="btn btn-primary"
+                            >
+                              Reply
+                            </button>
                           </Link>
                         </td>
                       </tr>
@@ -151,75 +155,33 @@ function EnquiryForm() {
                   })}
                 </tbody>
               </table>
-              {/* Pgination start from here */}
-
-              {/* <div className="clearfix">
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a href="#">Previous</a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item ">
-                    <a href="#" className="page-link">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      4
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      5
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a href="#" className="page-link">
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
             </div>
           </div>
-  
 
-              {/* ADD ENQUIRY POPUP START FROM HERE */}
+          {/* ADD ENQUIRY POPUP START FROM HERE */}
           <div id="addEmployeeModal" className="modal fade">
             <div className="modal-dialog">
               <div className="modal-content">
                 <form>
-                <div className="modal-header">
-                  <h4 className="modal-title col-md-6">Add Enquiry</h4>
-                  <div className="float-right">
-                  <button
-                    type="button"
-                    className="close col-md-6"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
+                  <div className="modal-header">
+                    <h4 className="modal-title col-md-6">Add Enquiry</h4>
+                    <div className="float-right">
+                      <button
+                        type="button"
+                        className="close col-md-6"
+                        data-dismiss="modal"
+                        aria-hidden="true"
+                      >
+                        &times;
+                      </button>
+                    </div>
                   </div>
-                
-                </div>
-                 
-                  <div className="modal-body">
+
+                  <div className="container">
                     <div className="form-group">
                       <label>Customer Name</label>
                       <input
                         type="text"
-                        
                         onChange={(e) => setName(e.target.value)}
                         className="form-control"
                         required
@@ -251,33 +213,36 @@ function EnquiryForm() {
                         required
                       ></textarea>
                     </div>
-                  </div>
-                  <div className="modal-footer">
-                    <input
-                      type="button"
-                      className="btn btn-default"
-                      data-dismiss="modal"
-                      value="Cancel"
-                    />
-                    <input
+                    <div className="form-group">
+                      <input
+                        type="checkbox"
+                        className="form-check-input ms-1"
+                        id="exampleCheck1"
+                        checked={checkbox}
+                        onChange={() => setCheckbox(!checkbox)}
+                      />
+                      <label
+                        className="form-check-label ms-4"
+                        for="exampleCheck1"
+                        style={{ marginTop: "-10px" }}
+                      >
+                        Check me out
+                      </label>
+                    </div>
+                
+                  <div className="form-group">
+                  <button
+                      className="btn btn-primary float-right"
                       onClick={PostData}
-                      type="submit"
-                      className="btn btn-info"
-                      value="Save"
-                    />
+                    >
+                      Submit
+                    </button>
+                  </div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-
-
-
-
-
-
-
-
 
           {/* <div id="addEmployeeModal" className="modal fade">
             <div className="modal-dialog">

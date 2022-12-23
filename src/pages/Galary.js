@@ -1,17 +1,119 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Galary.css";
 import Logo from "../images/Logo.png";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Badge } from "@mui/material";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Toggle from "../components/Toggle";
+import { useParams } from "react-router-dom";
+import { data } from "jquery";
+import VendorSidebar from "../components/VendorSidebar";
+import CentorSidebar from "../components/CentorSidebar";
 
 function Galary() {
+  const [ProductDetailsData, setAPIData] = useState([]);
+  const [increse, setIncrease] = useState(0);
+  const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [date,setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+  const ProductIDReq = useParams();
+
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+ 
+
+  useEffect(() => {
+    total();
+  }, [cart]);
+
+  const total = (ProductDetailsData) => {
+    let totalVal = 0;
+    cart.forEach((ProductDetails, index) => {
+      // <div key={index}>
+      totalVal += ProductDetails.mrp;
+      setCartTotal(totalVal);
+    });
+  };
+
+  const addToCart = (ProductDetailsData) => {
+    setIncrease(Number(increse) + 1);
+    // const MRP = ProductDetailsData.mrp;
+    console.log("MRP : " + ProductDetailsData.mrp);
+    setCart([...cart, ProductDetailsData]);
+    console.log(...cart);
+  };
+
+  const removeFromCart = (ProductDetailsData) => {
+    if (increse > 0) {
+      setIncrease(Number(increse) - 1);
+    }
+    let hardCopy = [...cart];
+    hardCopy = hardCopy.filter(
+      (ProductDetailsData) =>
+        ProductDetailsData.productID !== ProductDetailsData.productID
+    );
+    setCart(hardCopy);
+  };
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://nias.codelovertechnology.com/ProductMaster/${ProductIDReq.ProductIDReq}`
+      )
+      .then((response) => {
+        setAPIData(response.data);
+        // localStorage.setItem("storageData", response.data);
+      });
+  }, []);
+
+  var CurrentUserRole=localStorage.getItem("currentUserRole"); 
+
   return (
     <>
-      <div className="section-fluid-main">
+      {/* <Toggle /> */}
+      {CurrentUserRole == 'VENDOR' ? <VendorSidebar/>: <CentorSidebar/>}
+      <div
+        className="section-fluid-main"
+        style={{ backgroundColor: "#7e98bd" }}
+      >
         <div className="section">
+          <div className="Galaery_API_Image">
+            <img
+              src={ProductDetailsData.productImg1}
+              height="200"
+              width="100"
+            />
+          </div>
           <div className="info-wrap mob-margin">
-            <p className="title-up">Modern Fabric</p>
-            <h2 className="Cotton_heading">Cotton Fabric</h2>
+            <p className="title-up">
+              {ProductDetailsData.productCode +
+                " - " +
+                ProductDetailsData.productName}
+            </p>
+            <div className="float-right">
+              <Badge color="secondary" badgeContent={increse}  onClick={handleShow}>
+                <AddShoppingCartIcon
+                  fontSize="large"
+                  data-toggle="modal"
+                   data-target="#exampleModal"
+                />
+              </Badge>
+            </div>
+
+            <h2 className="Cotton_heading">
+              {ProductDetailsData.productCode +
+                " - " +
+                ProductDetailsData.productName}
+            </h2>
             <h4 className="Galery_price">
-              Rs. 174 <span>Rs. 237</span>
+              <tr>
+                <td>Rs. {ProductDetailsData.mrp}</td>
+              </tr>
             </h4>
             <div className="section-fluid">
               <input
@@ -30,10 +132,7 @@ function Galary() {
               />
               <label for="desc-2">Details</label>
               <div className="section-fluid desc-sec accor-1">
-                <p>
-                  This is very good fabric and also it is very cheap price,
-                  comfort, lifelong etc.
-                </p>
+                <p>{ProductDetailsData.productDescription}</p>
               </div>
               <div className="section-fluid desc-sec accor-2">
                 <div className="section-inline">
@@ -51,95 +150,156 @@ function Galary() {
                     <span>45</span>cm<br></br>Height
                   </p>
                 </div>
-                {/* <div className="section-inline">
-                  <p>
-                    <span>10</span>kg<br></br>Weight
-                  </p>
-                </div> */}
               </div>
             </div>
-            <h5>Choose upholstery:</h5>
           </div>
-          <div className="clearfix"></div>
-          <input
-            className="color-btn for-color-1"
-            type="radio"
-            id="color-1"
-            name="color-btn"
-            checked
-          />
-          <label className="first-color" for="color-1"></label>
-          <input
-            className="color-btn for-color-2"
-            type="radio"
-            id="color-2"
-            name="color-btn"
-          />
-          <label className="color-2" for="color-2"></label>
-          <input
-            className="color-btn for-color-3"
-            type="radio"
-            id="color-3"
-            name="color-btn"
-          />
-          <label className="color-3" for="color-3"></label>
-          <input
-            className="color-btn for-color-4"
-            type="radio"
-            id="color-4"
-            name="color-btn"
-          />
-          <label className="color-4" for="color-4"></label>
-          <input
-            className="color-btn for-color-5"
-            type="radio"
-            id="color-5"
-            name="color-btn"
-          />
-          <label className="color-5" for="color-5"></label>
-          <input
-            className="color-btn for-color-6"
-            type="radio"
-            id="color-6"
-            name="color-btn"
-          />
-          <label className="color-6" for="color-6"></label>
+
           <div className="clearfix"></div>
           <div className="info-wrap">
-            <a href="#" className="_btn">
-              <i className="uil uil-shopping-cart icon"></i> Add To Cart
-            </a>
-            <div className="Card_quantity">
-            <label for="item-1-quantity" className="labal-Stock text-white">
-              Quantity:
-            </label>
-            <input
-              type="text"
-              className="AddCert_number"
-              name="item-1-quantity"
-              id="item-1-quantity"
-              value="1"
-            />
+            <div className="Card_quantity row">
+              <button
+                className=" btn-success btn-sm col-md-5 mt-4"
+                onClick={() => addToCart(ProductDetailsData)}
+              >
+                Add Cart
+                <AddCircleOutlineIcon />
+              </button>
+              <button
+                className=" btn-success tn-sm col-md-5 mt-4"
+                onClick={(ProductDetailsData) =>
+                  removeFromCart(ProductDetailsData)
+                }
+              >
+                Remove Cart
+                <RemoveCircleOutlineIcon />
+              </button>
             </div>
-      
           </div>
 
-          <div className="img-wrap chair-1"></div>
-          <div className="img-wrap chair-2"></div>
-          <div className="img-wrap chair-3"></div>
-          <div className="img-wrap chair-4"></div>
-          <div className="img-wrap chair-5"></div>
-          <div className="img-wrap chair-6"></div>
-          <div className="back-color"></div>
-          <div className="back-color chair-2"></div>
-          <div className="back-color chair-3"></div>
-          <div className="back-color chair-4"></div>
-          <div className="back-color chair-5"></div>
-          <div className="back-color chair-6"></div>
+          {/* <div className="cart ms-2">
+          <h4>Price:-</h4>
+              <div>{listItems}</div>
+               <div>{cartItems}</div>
+              <div className="total">Total Price:{cartTotal}</div>
+          </div> */}
+        </div>
+      </div>
 
-          <a href="/" className="logo" target="_blank">
-            <img src={Logo} alt="company_Logo_here" />
-          </a>
+      {/* Modal Start from here */}
+      <div
+      show={show} onHide={handleClose}
+        class="modal fade"
+         id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="header row">
+              <h2
+                class="modal-title col-md-6 text-center"
+                id="exampleModalLabel"
+              >
+                Cart
+              </h2>
+              <button
+                type="button"
+                class="close col-md-6"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <br></br>
+            <hr></hr>
+            <div class="modal-body">
+              {/* <h4>Total Price:-</h4>
+              <div className="total">Total:{cartTotal}</div> */}
+              <div className="Invoice container">
+                <div className="Invoice_Header">
+                  <header className="text-white text-center mt-5">
+                    Invoice
+                  </header>
+                </div>
+                <div className="Company_Info mt-5">
+                  <h2 className="text-dark">SK Dressand</h2>
+                  <p className="text-dark">
+                    Azamgarh,<br></br>UP,
+                  </p>
+                  <p className="text-dark">9689567452</p>
+                </div>
+                <div className="Invoice_Body float-right">
+                  <table className="table-responsive table table-striped table-bordered">
+                    <tr>
+                      <th>#Invoice</th>
+                      <td>.....</td>
+                    </tr>
+
+                    <tr>
+                      <th>#Date</th>
+                      <td>{date.toLocaleDateString()}</td>
+                    </tr>
+
+                    <tr>
+                      <th>#Amount Due</th>
+                      <td>Rs. {cartTotal}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div className="Invoice_Table">
+                  <table className="table-responsive table table-striped table-bordered">
+                    <tr
+                      className="row tr-dark"
+                      style={{ backgroundColor: "#c7fff6" }}
+                    >
+                      <th className="col-md-2">Sr. No.</th>
+                      <th className="col-md-4">Description</th>
+                      <th className="col-md-2">Rate</th>
+                      <th className="col-md-2">Quantity</th>
+                      <th className="col-md-2">Price</th>
+                    </tr>
+
+                    <tr className="row">
+                      <td className="col-md-2">1</td>
+                      <td className="col-md-4">{ProductDetailsData.productDescription}</td>
+                      <td className="col-md-2">{ProductDetailsData.mrp}</td>
+                      <td className="col-md-2">{increse}</td>
+                      <td className="col-md-2">{cartTotal}</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div className="Payment float-right">
+                  <table className="table-responsive table table-striped table-bordered">
+                    <tr>
+                      <th>#CGST</th>
+                      <td>.....</td>
+                    </tr>
+
+                    <tr>
+                      <th>#SGST</th>
+                      <td>.....</td>
+                    </tr>
+
+                    <tr>
+                      <th>#Total</th>
+                      <td>Rs.{cartTotal}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <Link to="/LoginPage">
+                <button type="button" class="btn btn-primary btn-lg">
+                  Pay Now
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </>

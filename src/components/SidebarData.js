@@ -5,31 +5,31 @@ import * as IoIcons from 'react-icons/io';
 
 export const SidebarData = [
   {
-    title: 'Home',
+    title: 'HOME',
     path: '/',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
   },
   {
-    title: 'About us',
+    title: 'ABOUT US',
     path: '/About',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
   {
-    title: 'Products',
-    path: '/ProductGallery',
+    title: 'PRODUCTS',
+    path: '/PubProdGallery',
     icon: <FaIcons.FaCartPlus />,
     cName: 'nav-text'
   },
   {
-    title: 'Gallery',
+    title: 'GALLERY',
     path: '/ProductExplore',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
   {
-    title: 'Contact',
+    title: 'CONTACT',
     path: '/Contact',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
@@ -41,7 +41,7 @@ export const SidebarData = [
   //   cName: 'nav-text'
   // },
   {
-    title: 'Login',
+    title: 'LOG IN',
     path: '/LoginPage',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'

@@ -32,9 +32,7 @@
   
   .product {
     float: left;
-    /* width: 23%; */
     border-radius: 2%;
-    /* margin: 1%; */
   }
   
   .product:hover {

@@ -1,9 +1,11 @@
 import React from "react";
+import VendorSidebar from "../components/VendorSidebar";
 
 function VendorSupport() {
   return (
     <>
-      <div className="Support" style={{backgroundColor:"#c9c997", height:"39.1rem"}}>
+    <VendorSidebar/>
+      <div className="Support" style={{backgroundColor:"#c9c997", height:"39.1rem", marginTop:"5rem"}}>
         <form>
           <div className="container ">
             <div className="form-group">
@@ -36,6 +38,9 @@ function VendorSupport() {
                   rows="3"
                 ></textarea>
               </div>
+            </div>
+            <div className="form-group float-right">
+           <button className="btn-lg btn-info form-control">Submit</button>
             </div>
           </div>
         </form>

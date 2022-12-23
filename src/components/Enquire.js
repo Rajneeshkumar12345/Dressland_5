@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import "./Enquire.css";
+import { useNavigate } from "react-router-dom";
 
 function Enquire() {
   const [name, setName] = useState("");
@@ -9,12 +10,12 @@ function Enquire() {
   const [contactNo, setPhone] = useState("");
   const [enqMessage, setMsg] = useState("");
   const [checkbox, setCheckbox] = useState(false);
+  const errRef = useRef();
+  const [msg, setmsg] = useState("")
+  const navigate = useNavigate();
 
   const PostData = () => {
-    console.log(name);
-    console.log(email_ID);
-    console.log(contactNo);
-    console.log(enqMessage);
+    setmsg("Enquiry has been submitted")
     axios.post("http://nias.codelovertechnology.com/EnquiryMaster", {
       enquiryID: 0,
       name,
@@ -29,8 +30,13 @@ function Enquire() {
       modifiedBy: "NA",
       modifiedDate: "2022-11-25",
       checkbox,
-    })
-    return alert("Success")
+    }) 
+    // .then(() =>{
+    //   setTimeout(() => {
+    //     navigate('/')
+    //   }, 5000)
+    // })
+  // return alert("Enquiry has been Submitted")
   
   };
   return (
@@ -45,6 +51,13 @@ function Enquire() {
       <div className="modal fade" id="myModal" role="dialog">
         <div className="modal-dialog">
           <div className="modal-content">
+          <p
+          ref={errRef}
+          className={msg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {msg}
+        </p>
             <div id="container" style={{ marginTop: "0rem" }}>
               <button
                 type="button"

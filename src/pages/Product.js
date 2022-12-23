@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { TextArea } from "semantic-ui-react";
 import Sidebar from "../components/Sidebar";
+import ImageUploading from "react-images-uploading";
 import "./Product.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Product() {
   const [APIData, setAPIData] = useState([]);
@@ -17,8 +19,41 @@ function Product() {
   const [productImg1, setProductImg] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
-  const PostData = () => {
-    console.log(PostData)
+  //     function handleFile(e) {
+  //     console.log(e.target.files);
+  //     setProductImg("/images/ProductImages/"+e.target.files[0].name);
+  // }
+
+  const setData = (data) => {
+    console.log(data);
+    let {
+      productID,
+      productCode,
+      productName,
+      productSubTitle,
+      productCategory,
+      productType,
+      productDescription,
+      mrp,
+      offerCode,
+      productImg1,
+      checkbox,
+    } = data;
+    localStorage.setItem("productID", productID);
+    localStorage.setItem("productCode", productCode);
+    localStorage.setItem("productName", productName);
+    localStorage.setItem("productSubTitle", productSubTitle);
+    localStorage.setItem("productCategory", productCategory);
+    localStorage.setItem("productType", productType);
+    localStorage.setItem("productDescription", productDescription);
+    localStorage.setItem("mrp", mrp);
+    localStorage.setItem("offerCode", offerCode);
+    localStorage.setItem("productImg1", productImg1);
+    localStorage.setItem("checkbox", checkbox);
+  };
+
+  const PostData = (e) => {
+    console.log(PostData);
     axios
       .post("http://nias.codelovertechnology.com/ProductMaster", {
         productID: 0,
@@ -96,8 +131,30 @@ function Product() {
   return (
     <>
       <Sidebar />
+      {/* <div className="image" style={{marginTop:"15rem"}}>
+      <ImageUploading
+        onChange={handleFile} 
+      >
+        {({ imageList, onImageUpload }) => (
+          // write your building UI
+          <div className="imageuploader">
+            <div className="mainBtns">
+            <button className="btn btn-primary mr-1" onClick={onImageUpload}>Upload Image</button>
+            
+            </div>
+            {imageList.map((image) => (
+              <div className="imagecontainer" key={image.key}>
+                <img src={image.dataURL} />
+                
+              </div>
+            ))}
+          </div>
+        )}
+      </ImageUploading>
+      </div> */}
+
       <div className="Product" style={{ marginTop: "8rem" }}>
-        <div className="container-xl">
+        <div className="container-xxl">
           <div className="table-responsive">
             <div className="table-wrapper">
               <div className="table-title">
@@ -131,7 +188,7 @@ function Product() {
                     <th>Product Description</th>
                     <th>Product MRP</th>
                     <th>Offer Code</th>
-                    <th>Product Image1</th>
+                    <th>Product Image1 Path</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -149,17 +206,20 @@ function Product() {
                         <td>{data.mrp}</td>
                         <td>{data.offerCode}</td>
                         <td>
-                          <img
-                            src={
-                              "http://nias.codelovertechnology.com/ProductMaster" +
-                              data.productImg1
-                            }
-                            width="40"
-                            height="30"
-                          />
+                          {/* {addFiles} */}
+                          <img src={data.productImg1} width={40} height={60} />
+                          {".." + data.productImg1}
                         </td>
                         <td>
-                          <a
+                          <Link to="/ProductUpdate">
+                            <button
+                              className="btn btn-info"
+                              onClick={() => setData(data)}
+                            >
+                              Edit
+                            </button>
+                          </Link>
+                          {/* <a
                             href="#editEmployeeModal"
                             className="edit"
                             data-toggle="modal"
@@ -171,7 +231,7 @@ function Product() {
                             >
                               &#xE254;
                             </i>
-                          </a>
+                          </a> */}
                           <a
                             href="#deleteEmployeeModal"
                             className="delete"
@@ -197,168 +257,129 @@ function Product() {
         </div>
 
         <div id="addEmployeeModal" className="modal fade">
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <form>
                 <div className="modal-header">
                   <h4 className="modal-title col-md-6">Add Product</h4>
                   <div className="float-right">
-                  <button
-                    type="button"
-                    className="close col-md-6"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
+                    <button
+                      type="button"
+                      className="close col-md-6"
+                      data-dismiss="modal"
+                      aria-hidden="true"
+                    >
+                      &times;
+                    </button>
                   </div>
-                
                 </div>
                 <div className="container">
-                  <div className="row">
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault01">Product Code :-</label>
-                      <input
-                        onChange={(e) => setProductCode(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefault01"
-                        placeholder="Enter Product Code"
-                        required
-                      />
-                    </div>
-                    <div className="form-group  col-md-12 mb-3">
-                      <label for="validationDefault02">Product Name :-</label>
-                      <input
-                        onChange={(e) => setProductName(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefault02"
-                        placeholder="Enter Product Name"
-                        required
-                      />
-                    </div>
-                    <div className=" form-group col-md-12 mb-3">
-                      <label for="validationDefaultUsername">
-                        Product SubTitle :-
-                      </label>
-                      <input
-                        onChange={(e) => setProductSubTitle(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefaultUsername"
-                        placeholder="Enter Product SubTitle"
-                        aria-describedby="inputGroupPrepend2"
-                        required
-                      />
-                    </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault01">Product Code :-</label>
+                    <input
+                      onChange={(e) => setProductCode(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault01"
+                      placeholder="Enter Product Code"
+                      required
+                    />
                   </div>
-                  <div className="row">
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault03">
-                        Product Category :-
-                      </label>
-                      <input
-                        onChange={(e) => setProductCategory(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefault03"
-                        placeholder="Enter Product Category"
-                        required
-                      />
-                    </div>
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault04">Product Type :-</label>
-                      <input
-                        onChange={(e) => setProductType(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefault04"
-                        placeholder="Enter Product Type"
-                        required
-                      />
-                    </div>
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault05">
-                        Product Description :-
-                      </label>
-                      <TextArea
-                        onChange={(e) => setProductDescription(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefault05"
-                        placeholder="Enter Product Description"
-                        required
-                      />
-                    </div>
+                  <div className="form-group  col-md-12 mb-3">
+                    <label for="validationDefault02">Product Name :-</label>
+                    <input
+                      onChange={(e) => setProductName(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault02"
+                      placeholder="Enter Product Name"
+                      required
+                    />
                   </div>
-                  <div className="row">
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault03">Product MRP :-</label>
-                      <input
-                        onChange={(e) => setMRP(e.target.value)}
-                        type="number"
-                        className="form-control"
-                        id="validationDefault03"
-                        placeholder="Enter MRP"
-                        required
-                      />
-                    </div>
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault04">Offer Code :-</label>
-                      <input
-                        onChange={(e) => setOfferCode(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefault04"
-                        placeholder="Enter Offer Code"
-                        required
-                      />
-                    </div>
-                    <div className="form-group col-md-12 mb-3">
-                      <label for="validationDefault05">Product Image1 :-</label>
-                      <input
-                        onChange={(e) => setProductImg(e.target.files[0])}
-                        className="form-control form-control"
-                        id="formFileLg"
-                        type="file"
-                        required
-                      />
-                      {/* <select
-                      onChange={(e) => setState(e.target.value)}
-                      className="form-select  form-select-sm"
-                      style={{ height: "40px" }}
-                    >
-                      <option >Choose State</option>
-                      <option >Andhra Pradesh</option>
-                      <option >Arunachal Pradesh</option>
-                      <option >Assam</option>
-                      <option >Bihar</option>
-                      <option >Chhattisgarh</option>
-                      <option >Gujarat</option>
-                      <option >Haryana</option>
-                      <option >Himachal Pradesh</option>
-                      <option >Jharkhand</option>
-                      <option >Karnataka</option>
-                      <option >Kerala</option>
-                      <option >Madhya Pradesh</option>
-                      <option >Maharashtra</option>
-                      <option >Manipur</option>
-                      <option >Meghalaya</option>
-                      <option >Mizoram</option>
-                      <option >Nagaland</option>
-                      <option >Odisha</option>
-                      <option value="Punjab">Punjab</option>
-                      <option >Rajasthan</option>
-                      <option >Sikkim</option>
-                      <option >Tamil Nadu</option>
-                      <option >Telangana</option>
-                      <option >Tripura</option>
-                      <option >Uttar Pradesh</option>
-                      <option >Uttarakhand</option>
-                      <option >West Bengal</option>
-                    </select> */}
-                    </div>
+                  <div className=" form-group col-md-12 mb-3">
+                    <label for="validationDefaultUsername">
+                      Product SubTitle :-
+                    </label>
+                    <input
+                      onChange={(e) => setProductSubTitle(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefaultUsername"
+                      placeholder="Enter Product SubTitle"
+                      aria-describedby="inputGroupPrepend2"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault03">Product Category :-</label>
+                    <input
+                      onChange={(e) => setProductCategory(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault03"
+                      placeholder="Enter Product Category"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault04">Product Type :-</label>
+                    <input
+                      onChange={(e) => setProductType(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter Product Type"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault05">
+                      Product Description :-
+                    </label>
+                    <TextArea
+                      onChange={(e) => setProductDescription(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault05"
+                      placeholder="Enter Product Description"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault03">Product MRP :-</label>
+                    <input
+                      onChange={(e) => setMRP(e.target.value)}
+                      type="number"
+                      className="form-control"
+                      id="validationDefault03"
+                      placeholder="Enter MRP"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault04">Offer Code :-</label>
+                    <input
+                      onChange={(e) => setOfferCode(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefault04"
+                      placeholder="Enter Offer Code"
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12 mb-3">
+                    <label for="validationDefault05">Product Image1 :-</label>
+                    <input
+                      onChange={(e) =>
+                        setProductImg(
+                          "/images/ProductImages/" + e.target.files[0].name
+                        )
+                      }
+                      className="form-control"
+                      id="formFileLg"
+                      type="file"
+                      required
+                    />
                   </div>
 
                   <div className="form-group">
@@ -383,7 +404,7 @@ function Product() {
                       type="submit"
                       onClick={PostData}
                     >
-                      Submit form
+                      Submit
                     </button>
                   </div>
                 </div>
@@ -391,73 +412,6 @@ function Product() {
             </div>
           </div>
         </div>
-
-        {/* <div id="editEmployeeModal" className="modal fade">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <form>
-                <div className="modal-header">
-                  <h4 className="modal-title">Edit Product</h4>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <div className="form-group">
-                    <label>Product Code</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Name</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product SubTitle</label>
-                    <textarea className="form-control" required></textarea>
-                  </div>
-                  <div className="form-group">
-                    <label>Product Category</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Category</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Category</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Category</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Code</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Image1</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <input
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    value="Cancel"
-                  />
-                  <input type="submit" className="btn btn-info" value="Save" />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div> */}
 
         {/* <div id="deleteEmployeeModal" className="modal fade">
           <div className="modal-dialog">

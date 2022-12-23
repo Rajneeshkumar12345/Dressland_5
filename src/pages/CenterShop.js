@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import "./CenterShop.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function CenterShop() {
   const [APIData, setAPIData] = useState([]);
@@ -17,6 +18,24 @@ function CenterShop() {
   const [shopBanner, setShopBanner] = useState("");
   const [remarks, setRemarks] = useState("");
   const [checkbox, setCheckbox] = useState(true);
+
+  const setData = (data) => {
+    console.log(data);
+    let {shopID,shopName, personName, shopEmail_ID, shopContactNo, personContactNo, personEmailID,  shopAddress , city, state, shopBanner, remarks, checkbox} = data
+    localStorage.setItem("shopID", shopID);
+    localStorage.setItem("shopName", shopName);
+    localStorage.setItem("personName", personName);
+    localStorage.setItem("shopEmail_ID", shopEmail_ID);
+    localStorage.setItem("shopContactNo", shopContactNo);
+    localStorage.setItem("personContactNo", personContactNo);
+    localStorage.setItem("personEmailID", personEmailID);
+    localStorage.setItem("shopAddress", shopAddress);
+    localStorage.setItem("city", city);
+    localStorage.setItem("state", state);
+    localStorage.setItem("shopBanner", shopBanner);
+    localStorage.setItem("remarks", remarks);
+    localStorage.setItem("checkbox", checkbox);
+  };
 
   const PostData = () => {
     axios.post("http://nias.codelovertechnology.com/ShopMaster", {
@@ -70,7 +89,6 @@ function CenterShop() {
         setAPIData(response.data);
       });
   }, []);
-
 
   const onDelete = (id) => {
     axios
@@ -136,16 +154,15 @@ function CenterShop() {
                     <label for="validationDefaultUsername">
                       Person Email ID :-
                     </label>
-                      <input
-                        onChange={(e) => setPersonEmailID(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefaultUsername"
-                        placeholder="Enter Email"
-                        aria-describedby="inputGroupPrepend2"
-                        required
-                      />
-                  
+                    <input
+                      onChange={(e) => setPersonEmailID(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      id="validationDefaultUsername"
+                      placeholder="Enter Email"
+                      aria-describedby="inputGroupPrepend2"
+                      required
+                    />
                   </div>
                 </div>
                 <div className="row">
@@ -280,26 +297,26 @@ function CenterShop() {
                 </div>
 
                 <div className="form-group">
-                    <input
-                      onChange={(e) => setCheckbox(!checkbox)}
-                      className="form-check-input mt-3 ms-1"
-                      type="checkbox"
-                      value=""
-                      id="invalidCheck2"
-                      required
-                    />
-                    <label className="form-check-label ms-4" for="invalidCheck2">
-                      Check me out
-                    </label>
+                  <input
+                    onChange={(e) => setCheckbox(!checkbox)}
+                    className="form-check-input mt-3 ms-1"
+                    type="checkbox"
+                    value=""
+                    id="invalidCheck2"
+                    required
+                  />
+                  <label className="form-check-label ms-4" for="invalidCheck2">
+                    Check me out
+                  </label>
                 </div>
                 <div className="form-group">
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  onClick={PostData}
-                >
-                  Submit form
-                </button>
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    onClick={PostData}
+                  >
+                    Submit form
+                  </button>
                 </div>
               </div>
             </form>
@@ -365,26 +382,21 @@ function CenterShop() {
                             {/* <td><img src={"http://nias.codelovertechnology.com/ShopMaster" + data.shopBanner} width="40" height="30" /></td> */}
                             <td>{data.remarks}</td>
                             <td>
-                              <a
-                                href="#editEmployeeModal"
-                                className="edit"
-                                data-toggle="modal"
-                              >
-                                <i
-                                  className="material-icons"
-                                  data-toggle="tooltip"
-                                  title="Edit"
+                              <Link to="/CenterShopUpdate">
+                                <button
+                                  className="btn btn-success"
+                                  onClick={() => setData(data)}
                                 >
-                                  &#xE254;
-                                </i>
-                              </a>
+                                  Edit
+                                </button>
+                              </Link>
                               <a
                                 href="#deleteEmployeeModal"
                                 className="delete"
                                 data-toggle="modal"
                               >
                                 <i
-                                   onClick={() => onDelete(data.shopID)}
+                                  onClick={() => onDelete(data.shopID)}
                                   className="material-icons"
                                   data-toggle="tooltip"
                                   title="Delete"
@@ -403,135 +415,141 @@ function CenterShop() {
             </div>
 
             <div id="addEmployeeModal" className="modal fade">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <form>
-              <div className="modal-header">
-                  <h4 className="modal-title col-md-8">Add Center Shop</h4>
-                  <div className="float-right">
-                  <button
-                    type="button"
-                    className="close col-md-4"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
-                  </div>
-                
-                </div>
-  
-                <div className="container">
-                <div className="row">
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault01">Person Full Name :-</label>
-                    <input
-                      onChange={(e) => setPersonName(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault01"
-                      placeholder="Enter Name"
-                      required
-                    />
-                  </div>
-                  <div className="form-group  col-md-12 mb-3">
-                    <label for="validationDefault02">
-                      Person Contact No :-
-                    </label>
-                    <input
-                      onChange={(e) => setPersonContactNo(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault02"
-                      placeholder="Enter Phone"
-                      required
-                    />
-                  </div>
-                  <div className=" form-group col-md-12 mb-3">
-                    <label for="validationDefaultUsername">
-                      Person Email ID :-
-                    </label>
-                      <input
-                        onChange={(e) => setPersonEmailID(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="validationDefaultUsername"
-                        placeholder="Enter Email"
-                        aria-describedby="inputGroupPrepend2"
-                        required
-                      />
-                  
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault03">Shop Name :-</label>
-                    <input
-                      onChange={(e) => setShopName(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault03"
-                      placeholder="Enter Shop Name"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault04">Shop Contact No :-</label>
-                    <input
-                      onChange={(e) => setShopContactNo(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault04"
-                      placeholder="Enter Shop Contact"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault05">Shop Email ID :-</label>
-                    <input
-                      onChange={(e) => setEmail_ID(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault05"
-                      placeholder="Enter Shop Email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault03">Shop Address :-</label>
-                    <input
-                      onChange={(e) => setShopAddress(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault03"
-                      placeholder="Enter Shop Address"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault04">City :-</label>
-                    <input
-                      onChange={(e) => setCity(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault04"
-                      placeholder="Enter City"
-                      required
-                    />
-                  </div>
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault05">State :-</label>
-                    <input
-                      onChange={(e) => setState(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault04"
-                      placeholder="Enter State"
-                      required
-                    />
-                    {/* <select
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <form>
+                    <div className="modal-header">
+                      <h4 className="modal-title col-md-8">Add Center Shop</h4>
+                      <div className="float-right">
+                        <button
+                          type="button"
+                          className="close col-md-4"
+                          data-dismiss="modal"
+                          aria-hidden="true"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="container">
+                      <div className="row">
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault01">
+                            Person Full Name :-
+                          </label>
+                          <input
+                            onChange={(e) => setPersonName(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault01"
+                            placeholder="Enter Name"
+                            required
+                          />
+                        </div>
+                        <div className="form-group  col-md-12 mb-3">
+                          <label for="validationDefault02">
+                            Person Contact No :-
+                          </label>
+                          <input
+                            onChange={(e) => setPersonContactNo(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault02"
+                            placeholder="Enter Phone"
+                            required
+                          />
+                        </div>
+                        <div className=" form-group col-md-12 mb-3">
+                          <label for="validationDefaultUsername">
+                            Person Email ID :-
+                          </label>
+                          <input
+                            onChange={(e) => setPersonEmailID(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefaultUsername"
+                            placeholder="Enter Email"
+                            aria-describedby="inputGroupPrepend2"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault03">Shop Name :-</label>
+                          <input
+                            onChange={(e) => setShopName(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault03"
+                            placeholder="Enter Shop Name"
+                            required
+                          />
+                        </div>
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault04">
+                            Shop Contact No :-
+                          </label>
+                          <input
+                            onChange={(e) => setShopContactNo(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault04"
+                            placeholder="Enter Shop Contact"
+                            required
+                          />
+                        </div>
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault05">
+                            Shop Email ID :-
+                          </label>
+                          <input
+                            onChange={(e) => setEmail_ID(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault05"
+                            placeholder="Enter Shop Email"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault03">
+                            Shop Address :-
+                          </label>
+                          <input
+                            onChange={(e) => setShopAddress(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault03"
+                            placeholder="Enter Shop Address"
+                            required
+                          />
+                        </div>
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault04">City :-</label>
+                          <input
+                            onChange={(e) => setCity(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault04"
+                            placeholder="Enter City"
+                            required
+                          />
+                        </div>
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault05">State :-</label>
+                          <input
+                            onChange={(e) => setState(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault04"
+                            placeholder="Enter State"
+                            required
+                          />
+                          {/* <select
                       onChange={(e) => setState(e.target.value)}
                       className="form-select  form-select-sm"
                       style={{ height: "40px" }}
@@ -565,63 +583,66 @@ function CenterShop() {
                       <option >Uttarakhand</option>
                       <option >West Bengal</option>
                     </select> */}
-                  </div>
-                </div>
+                        </div>
+                      </div>
 
-                <div className="row">
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="formFileLg" className="form-label">
-                      Shop Banner :-
-                    </label>
-                    <input
-                      onChange={(e) => setShopBanner(e.target.value)}
-                      className="form-control form-control"
-                      id="formFileLg"
-                      type="file"
-                    />
-                  </div>
-                  <div className="form-group col-md-12 mb-3">
-                    <label for="validationDefault04">Remarks :-</label>
-                    <input
-                      onChange={(e) => setRemarks(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      id="validationDefault04"
-                      placeholder="Enter Remarks"
-                      required
-                    />
-                  </div>
-                </div>
+                      <div className="row">
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="formFileLg" className="form-label">
+                            Shop Banner :-
+                          </label>
+                          <input
+                            onChange={(e) => setShopBanner(e.target.value)}
+                            className="form-control form-control"
+                            id="formFileLg"
+                            type="file"
+                          />
+                        </div>
+                        <div className="form-group col-md-12 mb-3">
+                          <label for="validationDefault04">Remarks :-</label>
+                          <input
+                            onChange={(e) => setRemarks(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="validationDefault04"
+                            placeholder="Enter Remarks"
+                            required
+                          />
+                        </div>
+                      </div>
 
-                <div className="form-group">
-                    <input
-                      onChange={(e) => setCheckbox(!checkbox)}
-                      className="form-check-input mt-3 ms-1"
-                      type="checkbox"
-                      value=""
-                      id="invalidCheck2"
-                      required
-                    />
-                    <label className="form-check-label text-dark ms-4" for="invalidCheck2">
-                      Check me out
-                    </label>
-                </div>
-                <div className="form-group">
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  onClick={PostData}
-                >
-                  Submit form
-                </button>
+                      <div className="form-group">
+                        <input
+                          onChange={(e) => setCheckbox(!checkbox)}
+                          className="form-check-input mt-3 ms-1"
+                          type="checkbox"
+                          value=""
+                          id="invalidCheck2"
+                          required
+                        />
+                        <label
+                          className="form-check-label text-dark ms-4"
+                          for="invalidCheck2"
+                        >
+                          Check me out
+                        </label>
+                      </div>
+                      <div className="form-group">
+                        <button
+                          className="btn btn-primary"
+                          type="submit"
+                          onClick={PostData}
+                        >
+                          Submit form
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-              </form>
             </div>
-          </div>
-        </div>
 
-        {/* <div id="editEmployeeModal" className="modal fade">
+            {/* <div id="editEmployeeModal" className="modal fade">
           <div className="modal-dialog">
             <div className="modal-content">
               <form>

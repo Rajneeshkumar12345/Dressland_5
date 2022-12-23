@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import "./Master.css";
 import Read from "./Read";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Master() {
   const [APIData, setAPIData] = useState([]);
@@ -11,6 +12,16 @@ function Master() {
   const [sequence, setSequence] = useState("");
   const [checkbox, setCheckbox] = useState(false);
   const [masterTable, setMasterTable] = useState("");
+
+  const setData = (data) => {
+    console.log(data);
+    let { masterID, tableValue, sequence, masterTable, checkbox } = data;
+    localStorage.setItem("masterID", masterID);
+    localStorage.setItem("tableValue", tableValue);
+    localStorage.setItem("sequence", sequence);
+    localStorage.setItem("masterTable", masterTable);
+    localStorage.setItem("checkbox", checkbox);
+  };
 
   const PostData = () => {
     axios.post("http://nias.codelovertechnology.com/MastersAPI", {
@@ -51,27 +62,6 @@ function Master() {
         setAPIData(response.data);
       });
   }, []);
-
-
-  useEffect(() => {
-    setID(localStorage.getItem('ID'))
-    setMasterTable(localStorage.getItem('MasterTable'));
-    setTableValue(localStorage.getItem('TablValue'));
-    setSequence(localStorage.getItem('Sequence'));
-    setCheckbox(localStorage.getItem('Checkbox Value'));
-}, []);
-
-const updateAPIData = () => {
-  axios.put(`http://nias.codelovertechnology.com/MastersAPI/${id}`, {
-      masterTable,
-      tableValue,
-      sequence,
-      checkbox
-  })
-  // .then(() => {
-  //     history.push('/read')
-  // })
-}
 
   const onDelete = (id) => {
     axios
@@ -136,19 +126,14 @@ const updateAPIData = () => {
                         <td>{data.tableValue}</td>
                         <td>{data.sequence}</td>
                         <td>
-                          <a
-                            href="#editEmployeeModal"
-                            className="edit"
-                            data-toggle="modal"
-                          >
-                            <i
-                              className="material-icons"
-                              data-toggle="tooltip"
-                              title="Edit"
+                          <Link to="/MasterUpdate">
+                            <button
+                              className="btn btn-success"
+                              onClick={() => setData(data)}
                             >
-                              &#xE254;
-                            </i>
-                          </a>
+                              Edit
+                            </button>
+                          </Link>
                           <a
                             href="#deleteEmployeeModal"
                             className="delete"
@@ -215,19 +200,18 @@ const updateAPIData = () => {
           <div className="modal-dialog">
             <div className="modal-content">
               <form>
-              <div className="modal-header">
+                <div className="modal-header">
                   <h4 className="modal-title col-md-6">Add Product</h4>
                   <div className="float-right">
-                  <button
-                    type="button"
-                    className="close col-md-6"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
+                    <button
+                      type="button"
+                      className="close col-md-6"
+                      data-dismiss="modal"
+                      aria-hidden="true"
+                    >
+                      &times;
+                    </button>
                   </div>
-                
                 </div>
                 <div className="container">
                   <div className="form-group">
@@ -272,7 +256,7 @@ const updateAPIData = () => {
 
                   <div className=" form-group mb-5">
                     <button
-                      className="btn btn-primary float-right "
+                      className="btn btn-primary float-right"
                       onClick={PostData}
                     >
                       Submit
@@ -283,101 +267,6 @@ const updateAPIData = () => {
             </div>
           </div>
         </div>
-
-        <div id="editEmployeeModal" className="modal fade">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <form>
-                <div className="modal-header">
-                  <h4 className="modal-title">Edit Product</h4>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
-                </div>
-                {/* <div className="modal-body">
-                  <div className="form-group">
-                    <label>Master Table</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Table Value</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Sequence</label>
-                    <input type="value" className="form-control" required />
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <input
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    value="Cancel"
-                  />
-                  <input type="submit" className="btn btn-info" value="Save" />
-                </div> */}
-                <div className="container">
-                  <div className="form-group">
-                    <label>Master Table</label>
-                    <input
-                      onChange={(e) => setMasterTable(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Table Value</label>
-                    <input
-                      onChange={(e) => setTableValue(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Sequence</label>
-                    <input
-                      onChange={(e) => setSequence(e.target.value)}
-                      type="value"
-                      className="form-control"
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      onChange={(e) => setCheckbox(!checkbox)}
-                      type="checkbox"
-                      className="form-check d-inline"
-                      id="chb"
-                      required
-                    />
-                    <label htmlFor="chb" className="form-check-label">
-                      &nbsp; Check me out.
-                    </label>
-                  </div>
-
-                  <div className=" form-group mb-0">
-                    <button
-                      className="btn btn-primary float-right "
-                      onClick={updateAPIData}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-
       </div>
     </>
   );
