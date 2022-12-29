@@ -1,38 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./ProductGallery.css";
-import Toggle from "../components/Toggle";
 import axios from "axios";
-import LoginPage from "../components/LoginPage";
 import VendorSidebar from "../components/VendorSidebar";
 import CentorSidebar from "../components/CentorSidebar";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Badge } from "@mui/material";
 
-function ProductGallery() {
+
+function Items() {
   const [APIData, setAPIData] = useState([]);
-  const [UserData, setUserData] = useState([]);
+  let [num, setNum]= useState(0);
+  let incNum =(id)=>{
+    let updatedCart = APIData.map((curElm) => {
+  if(curElm.id === curElm.productID) {
+    setNum(Number(num)+1);
+    }
+    })
   
+  };
+  let decNum = () => {
+     if(num>0)
+     {
+      setNum(num - 1);
+     }
+  }
+ let handleChange = (e)=>{
+   setNum(e.target.value);
+  }
+
   useEffect(() => {
     axios
       .get(`http://nias.codelovertechnology.com/ProductMaster`)
       .then((response) => {
         setAPIData(response.data);
-        setUserData(localStorage.getItem("result"));
       });
-    }, []);
-    
-    var CurrentUserRole=localStorage.getItem("currentUserRole"); 
+  }, []);
 
-    return (
-    <> 
-   {CurrentUserRole == 'VENDOR' ? <VendorSidebar/> : <CentorSidebar/>}
+  var CurrentUserRole = localStorage.getItem("currentUserRole");
+
+  return (
+    <>
+      {CurrentUserRole == "VENDOR" ? <VendorSidebar /> : <CentorSidebar />}
+      <div className="float-right mt-3 me-4">
+        <Badge
+          color="secondary"
+        >
+          <AddShoppingCartIcon
+            fontSize="large"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          />
+        </Badge>
+      </div>
       <div className="home" style={{ backgroundColor: "#3e5e78" }}>
-        {/* 10 Card Container start from here */}
         <h1 className="text-center gallery_heading text-white py-2">
           Our Product Gallery{" "}
         </h1>
         <div className="container">
           <div className="row">
-            {/* Card Number 1 */}
             {APIData.map((data) => {
               return (
                 <div
@@ -53,43 +81,34 @@ function ProductGallery() {
                       </h5>
                       <p className="card-text">{data.productDescription}</p>
                       <br></br>
+                      <div className="Add_Cart">
+                        <button className="btn btn-success">Add to Cart</button>
+                        <input
+                          type="number"
+                          className="col-md-3 mt-3"
+                          value={num} onChange={handleChange}
+                        ></input>
+                        <AddCircleOutlineIcon
+                          className="ms-2"
+                          onClick={() => incNum(data.productID)}
+                        />
+                        <RemoveCircleOutlineIcon
+                          className="ms-2"
+                          onClick={decNum}
+                        />
+                      </div>
                       <Link
                         to={"/Galary/" + data.productID}
-                        className="btn btn-dark"
+                        className="btn btn-dark mt-3"
                       >
                         View Details {">>"}
                       </Link>
-                      {/* <Link to={"/ProductGallery/" + item.id}><img src={ item.images[0]} alt="listing" /></Link> */}
                     </div>
                   </div>
                 </div>
               );
-            })}
-            ;{/* Card Number 9 */}
-            {/* <div className="card-wrapper card-image-title-description col-lg-4 col-md-6 col-xs-12">
-              <div className="card">
-                <div className="card-img-wrapper">
-                  <img
-                    className="card-img-top"
-                    src={Carosol3}
-                    alt="not found"
-                  />
-                </div>
-                <div className="card-body">
-                  <h5 className="card-title">Fabric Cloths</h5>
-                  <p className="card-text">
-                    Fabric is cloth or other material produced by weaving
-                    together cotton, nylon, wool, silk, or other threads....
-                  </p>
-                
-                      <br></br>
-                  <br></br>
-                  <Link to="/Galary" className="btn btn-dark">
-                  View Details {'>>'}
-                  </Link>
-                </div>
-              </div>
-            </div> */}
+            })};
+           
           </div>
         </div>
       </div>
@@ -97,4 +116,4 @@ function ProductGallery() {
   );
 }
 
-export default ProductGallery;
+export default Items;

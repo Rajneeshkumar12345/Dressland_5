@@ -1,62 +1,14 @@
 import React, {useState, useEffect} from "react";
 import "./Stock.css";
 import axios from 'axios'
-import VendorDahboard from "../components/VendorDashboard";
-import VendorSidebar from "../components/VendorSidebar";
 import CentorSidebar from "../components/CentorSidebar";
 
 function CentorStock() {
   const [APIData, setAPIData] = useState([]);
-  const [id, setID] = useState(null);
-  const [userID, setUserID] = useState("");
-  const [productID, setProductID] = useState("");
-  const [stock, setStock] = useState("");
-  const [unit, setUnit] = useState("");
-  const [minimumStock, setMinimumStock] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
 
-
-
-
-//   const PostData = () => {
-//     axios.post("http://nias.codelovertechnology.com/MasterStock", {
-//       stock_ID: 0,
-//       userID,
-//       productID,
-//       stock,
-//       unit,
-//       minimumStock,
-//       remarks: "NA",
-//       createdBy: "Admin",
-//       createdDate: "2022-12-08T13:20:50.924Z",
-//       modifiedBy: "NA",
-//       modifiedDate: "2022-12-08T13:20:50.924Z",  
-//       checkbox,
-//     });
- 
-//   };
-
-  axios
-    .get("http://nias.codelovertechnology.com/MasterStock", {
-      stock_ID: 0,
-      userID,
-      productID,
-      stock,
-      unit,
-      minimumStock,
-      remarks: "NA",
-      createdBy: "Admin",
-      createdDate: "2022-12-08T13:20:50.924Z",
-      modifiedBy: "NA",
-      modifiedDate: "2022-12-08T13:20:50.924Z",  
-      checkbox,
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/MasterStock`)
+      .get(`${process.env.REACT_APP_API}MasterStock`)
       .then((response) => {
         setAPIData(response.data);
       });

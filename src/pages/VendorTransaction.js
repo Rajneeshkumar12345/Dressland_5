@@ -1,49 +1,17 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
-import CentorSidebar from '../components/CentorSidebar';
-import Sidebar from '../components/Sidebar';
 import VendorSidebar from '../components/VendorSidebar';
 
 function  VendorTransaction() {
   const [APIData, setAPIData] = useState([]);
-  const [productName, setProductName] = useState("");
-  const [unit, setUnit] = useState("");
-  const [referenceNo, setReferenceNo] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
 
-
- 
-
-  axios
-    .get("http://nias.codelovertechnology.com/Trancation", {
-        trancationID: 0,
-        userID: 0,
-        productID: 0,
-        productName,
-        quantity: 0,
-        unit,
-        price: 0,
-        referenceNo,
-        remarks: "NA",
-        createdBy: "NA",
-        createdDate: "2022-12-08T13:22:36.631Z",
-        modifiedBy: "NA",
-        modifiedDate: "2022-12-08T13:22:36.632Z",
-        checkbox,
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/Trancation`)
+      .get(`${process.env.REACT_APP_API}Trancation`)
       .then((response) => {
         setAPIData(response.data);
       });
   }, []);
-
-
-
 
   return (
     <>

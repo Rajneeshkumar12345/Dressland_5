@@ -40,7 +40,7 @@ function CenterShopUpdate() {
   const updateAPIData = () => {
     console.log(updateAPIData)
     axios
-      .put(`http://nias.codelovertechnology.com/ShopMaster/${shopID}`, {
+      .put(`${process.env.REACT_APP_API}ShopMaster/${shopID}`, {
         shopID,
         shopName,
         personName,

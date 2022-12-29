@@ -24,9 +24,8 @@ function AdminGalleryUpdate() {
   }, []);
 
   const updateAPIData = () => {
-    console.log(updateAPIData)
     axios
-      .put(`http://nias.codelovertechnology.com/Gallery/${galaryID}`, {
+      .put(`${process.env.REACT_APP_API}Gallery/${galaryID}`, {
         galaryID,
         title,
         subTitle,

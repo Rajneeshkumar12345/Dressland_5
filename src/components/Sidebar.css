@@ -5,6 +5,16 @@
   padding-top: 4rem;
   transition: all 300ms ease;
 }
+
+
+
+.Admin_Navbar{
+  background-color: #113d80;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
 /* logo */
 .bars {
   display: none;
@@ -246,14 +256,14 @@
   width: 100%;
 }
 
-.navbar-toggle {
+/* .navbar-toggle {
   background-color: #113d80;
   width: 100%;
   height: 50px;
   display: flex;
   justify-content: start;
   align-items: center;
-}
+} */
 
 span {
   margin-left: 16px;

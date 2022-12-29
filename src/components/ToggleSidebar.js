@@ -369,8 +369,8 @@ const ToggleSidebar = () => {
 {/*********** * Start Apply btn section from here ***********************************************/}
       <section className="" style={{ backgroundColor: "#2a3661" }}>
         <div className="Center">
-          <h3 className="text-center text-white">Connect with me for<span style={{color:"#f20ac4"}}>Center Shop</span></h3>
-          <div className="center_btn float-right me-5">
+          <h3 className="text-center text-white">-: Connect with us for<span style={{color:"#f20ac4"}}>Center Shop </span>:-</h3>
+          <div className="center_btn">
             <Link to="/UserRegistration">
               <button className="btn btn-success btn-lg">Apply Now</button>
             </Link>

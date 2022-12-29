@@ -5,7 +5,6 @@ import axios from 'axios'
 
 function Master() {
   const [APIData, setAPIData] = useState([]);
-  const [id, setID] = useState(null);
   const [userID, setUserID] = useState("");
   const [productID, setProductID] = useState("");
   const [stock, setStock] = useState("");
@@ -13,11 +12,8 @@ function Master() {
   const [minimumStock, setMinimumStock] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
-
-
-
   const PostData = () => {
-    axios.post("http://nias.codelovertechnology.com/MasterStock", {
+    axios.post(`${process.env.REACT_APP_API}MasterStock`, {
       stock_ID: 0,
       userID,
       productID,
@@ -37,7 +33,7 @@ function Master() {
   };
 
   axios
-    .get("http://nias.codelovertechnology.com/MasterStock", {
+    .get(`${process.env.REACT_APP_API}MasterStock`, {
       stock_ID: 0,
       userID,
       productID,
@@ -56,7 +52,7 @@ function Master() {
     });
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/MasterStock`)
+      .get(`${process.env.REACT_APP_API}MasterStock`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -64,7 +60,7 @@ function Master() {
 
   const onDelete = (id) => {
     axios
-      .delete(`http://nias.codelovertechnology.com/MasterStock/${id}`)
+      .delete(`${process.env.REACT_APP_API}MasterStock/${id}`)
       .then(() => {
         getData();
         alert("Your data has beeen deleted");
@@ -72,7 +68,7 @@ function Master() {
   };
   const getData = () => {
     axios
-      .get(`http://nias.codelovertechnology.com/MasterStock`)
+      .get(`${process.env.REACT_APP_API}MasterStock`)
       .then((getData) => {
         setAPIData(getData.data);
       });

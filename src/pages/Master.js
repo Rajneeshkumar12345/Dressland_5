@@ -24,7 +24,7 @@ function Master() {
   };
 
   const PostData = () => {
-    axios.post("http://nias.codelovertechnology.com/MastersAPI", {
+    axios.post(`${process.env.REACT_APP_API}MastersAPI`, {
       masterID: 0,
       masterTable,
       tableValue,
@@ -41,7 +41,7 @@ function Master() {
   };
 
   axios
-    .get("http://nias.codelovertechnology.com/MastersAPI", {
+    .get(`${process.env.REACT_APP_API}MastersAPI`, {
       masterID: 0,
       masterTable,
       tableValue,
@@ -57,7 +57,7 @@ function Master() {
     });
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/MastersAPI`)
+      .get(`${process.env.REACT_APP_API}MastersAPI`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -65,7 +65,7 @@ function Master() {
 
   const onDelete = (id) => {
     axios
-      .delete(`http://nias.codelovertechnology.com/MastersAPI/${id}`)
+      .delete(`${process.env.REACT_APP_API}MastersAPI/${id}`)
       .then(() => {
         getData();
         alert("Your data has beeen deleted");
@@ -73,7 +73,7 @@ function Master() {
   };
   const getData = () => {
     axios
-      .get(`http://nias.codelovertechnology.com/MastersAPI`)
+      .get(`${process.env.REACT_APP_API}MastersAPI`)
       .then((getData) => {
         setAPIData(getData.data);
       });

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TextArea } from "semantic-ui-react";
 import Sidebar from "../components/Sidebar";
-import ImageUploading from "react-images-uploading";
 import "./Product.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -19,11 +18,7 @@ function Product() {
   const [productImg1, setProductImg] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
-  //     function handleFile(e) {
-  //     console.log(e.target.files);
-  //     setProductImg("/images/ProductImages/"+e.target.files[0].name);
-  // }
-
+  
   const setData = (data) => {
     console.log(data);
     let {
@@ -55,7 +50,7 @@ function Product() {
   const PostData = (e) => {
     console.log(PostData);
     axios
-      .post("http://nias.codelovertechnology.com/ProductMaster", {
+      .post(`${process.env.REACT_APP_API}ProductMaster`, {
         productID: 0,
         productCode,
         productName,
@@ -80,7 +75,7 @@ function Product() {
       });
   };
   axios
-    .get("http://nias.codelovertechnology.com/ProductMaster", {
+    .get(`${process.env.REACT_APP_API}ProductMaster`, {
       productID: 0,
       productCode,
       productName,
@@ -105,7 +100,7 @@ function Product() {
     });
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/ProductMaster`)
+      .get(`${process.env.REACT_APP_API}ProductMaster`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -114,7 +109,7 @@ function Product() {
   //  DELETE TASK PERFORM HERE
   const onDelete = (id) => {
     axios
-      .delete(`http://nias.codelovertechnology.com/ProductMaster/${id}`)
+      .delete(`${process.env.REACT_APP_API}ProductMaster/${id}`)
       .then(() => {
         getData();
         alert("Your data has been deleted");
@@ -122,7 +117,7 @@ function Product() {
   };
   const getData = () => {
     axios
-      .get(`http://nias.codelovertechnology.com/ProductMaster`)
+      .get(`${process.env.REACT_APP_API}ProductMaster`)
       .then((getData) => {
         setAPIData(getData.data);
       });
@@ -131,28 +126,6 @@ function Product() {
   return (
     <>
       <Sidebar />
-      {/* <div className="image" style={{marginTop:"15rem"}}>
-      <ImageUploading
-        onChange={handleFile} 
-      >
-        {({ imageList, onImageUpload }) => (
-          // write your building UI
-          <div className="imageuploader">
-            <div className="mainBtns">
-            <button className="btn btn-primary mr-1" onClick={onImageUpload}>Upload Image</button>
-            
-            </div>
-            {imageList.map((image) => (
-              <div className="imagecontainer" key={image.key}>
-                <img src={image.dataURL} />
-                
-              </div>
-            ))}
-          </div>
-        )}
-      </ImageUploading>
-      </div> */}
-
       <div className="Product" style={{ marginTop: "8rem" }}>
         <div className="container-xxl">
           <div className="table-responsive">
@@ -188,7 +161,7 @@ function Product() {
                     <th>Product Description</th>
                     <th>Product MRP</th>
                     <th>Offer Code</th>
-                    <th>Product Image1 Path</th>
+                    <th>Product Image1</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -219,19 +192,6 @@ function Product() {
                               Edit
                             </button>
                           </Link>
-                          {/* <a
-                            href="#editEmployeeModal"
-                            className="edit"
-                            data-toggle="modal"
-                          >
-                            <i
-                              className="material-icons"
-                              data-toggle="tooltip"
-                              title="Edit"
-                            >
-                              &#xE254;
-                            </i>
-                          </a> */}
                           <a
                             href="#deleteEmployeeModal"
                             className="delete"
@@ -257,7 +217,7 @@ function Product() {
         </div>
 
         <div id="addEmployeeModal" className="modal fade">
-          <div className="modal-dialog modal-lg">
+          <div className="modal-dialog">
             <div className="modal-content">
               <form>
                 <div className="modal-header">
@@ -278,7 +238,7 @@ function Product() {
                     <label for="validationDefault01">Product Code :-</label>
                     <input
                       onChange={(e) => setProductCode(e.target.value)}
-                      type="text"
+                      type="number"
                       className="form-control"
                       id="validationDefault01"
                       placeholder="Enter Product Code"
@@ -369,6 +329,8 @@ function Product() {
                   </div>
                   <div className="form-group col-md-12 mb-3">
                     <label for="validationDefault05">Product Image1 :-</label>
+                    {/* <input type="file" onChange={handleImage}/>
+                    <img src={imagePath} alt="imagepath" /> */}
                     <input
                       onChange={(e) =>
                         setProductImg(

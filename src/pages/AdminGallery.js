@@ -30,7 +30,7 @@ const setData = (data) => {
 
   const PostData = () => {
     debugger;
-    axios.post("http://nias.codelovertechnology.com/Gallery",{
+    axios.post(`${process.env.REACT_APP_API}Gallery`,{
     galaryID: 0,
     title,
     subTitle,
@@ -48,7 +48,7 @@ const setData = (data) => {
     });
   }
   axios
-  .get("http://nias.codelovertechnology.com/Gallery", {
+  .get(`${process.env.REACT_APP_API}Gallery`, {
     galaryID: 0,
     title,
     subTitle,
@@ -66,7 +66,7 @@ const setData = (data) => {
   });
 useEffect(() => {
   axios
-    .get(`http://nias.codelovertechnology.com/Gallery`)
+    .get(`${process.env.REACT_APP_API}Gallery`)
     .then((response) => {
       setAPIData(response.data);
     });
@@ -75,7 +75,7 @@ useEffect(() => {
 
 const onDelete = (id) => {
   axios
-    .delete(`http://nias.codelovertechnology.com/Gallery/${id}`)
+    .delete(`${process.env.REACT_APP_API}Gallery/${id}`)
     .then(() => {
       getData();
       alert("Your data has beeen deleted");
@@ -83,7 +83,7 @@ const onDelete = (id) => {
 };
 const getData = () => {
   axios
-    .get(`http://nias.codelovertechnology.com/Gallery`)
+    .get(`${process.env.REACT_APP_API}Gallery`)
     .then((getData) => {
       setAPIData(getData.data);
     });

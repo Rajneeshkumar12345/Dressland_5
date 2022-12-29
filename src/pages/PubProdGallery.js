@@ -3,20 +3,17 @@ import { Link } from "react-router-dom";
 import "./ProductGallery.css";
 import Toggle from "../components/Toggle";
 import axios from "axios";
-import LoginPage from "../components/LoginPage";
-import VendorSidebar from "../components/VendorSidebar";
-import CentorSidebar from "../components/CentorSidebar";
 
 function PubProdGallery() {
   const [APIData, setAPIData] = useState([]);
-  const [UserData, setUserData] = useState([]);
+  // const [UserData, setUserData] = useState([]);
   
   useEffect(() => {
     axios
       .get(`http://nias.codelovertechnology.com/ProductMaster`)
       .then((response) => {
         setAPIData(response.data);
-        setUserData(localStorage.getItem("result"));
+        // setUserData(localStorage.getItem("result"));
       });
     }, []);
     

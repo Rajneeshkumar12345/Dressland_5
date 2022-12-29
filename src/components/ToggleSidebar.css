@@ -514,3 +514,12 @@ fieldset {
 .footer_content {
   text-align: justify;
 }
+
+
+/* Apply now btn css start from here */
+.center_btn{
+  width:10rem;
+  margin:auto;
+  text-align: center;
+  margin-top: 3rem;
+}

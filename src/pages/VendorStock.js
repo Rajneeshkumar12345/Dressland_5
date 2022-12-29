@@ -1,76 +1,23 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Stock.css";
-import axios from 'axios'
-import VendorDahboard from "../components/VendorDashboard";
+import axios from "axios";
 import VendorSidebar from "../components/VendorSidebar";
 
 function VendorStock() {
   const [APIData, setAPIData] = useState([]);
-  const [id, setID] = useState(null);
-  const [userID, setUserID] = useState("");
-  const [productID, setProductID] = useState("");
-  const [stock, setStock] = useState("");
-  const [unit, setUnit] = useState("");
-  const [minimumStock, setMinimumStock] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
 
-
-
-
-  const PostData = () => {
-    axios.post("http://nias.codelovertechnology.com/MasterStock", {
-      stock_ID: 0,
-      userID,
-      productID,
-      stock,
-      unit,
-      minimumStock,
-      remarks: "NA",
-      createdBy: "Admin",
-      createdDate: "2022-12-08T13:20:50.924Z",
-      modifiedBy: "NA",
-      modifiedDate: "2022-12-08T13:20:50.924Z",  
-      checkbox,
-    });
-    // .then((error) =>{
-    //  alert(error)
-    // })
-  };
-
-  axios
-    .get("http://nias.codelovertechnology.com/MasterStock", {
-      stock_ID: 0,
-      userID,
-      productID,
-      stock,
-      unit,
-      minimumStock,
-      remarks: "NA",
-      createdBy: "Admin",
-      createdDate: "2022-12-08T13:20:50.924Z",
-      modifiedBy: "NA",
-      modifiedDate: "2022-12-08T13:20:50.924Z",  
-      checkbox,
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   useEffect(() => {
-    axios
-      .get(`http://nias.codelovertechnology.com/MasterStock`)
-      .then((response) => {
-        setAPIData(response.data);
-      });
+    axios.get(`${process.env.REACT_APP_API}MasterStock`).then((response) => {
+      setAPIData(response.data);
+    });
   }, []);
 
-
   return (
-   <>
-  
-   <div className="VendorStock" >
-   <VendorSidebar/>
-   <div className="container-xl " >
-          <div className="table-responsive" style={{marginTop:"7rem"}}>
+    <>
+      <div className="VendorStock">
+        <VendorSidebar />
+        <div className="container-xl ">
+          <div className="table-responsive" style={{ marginTop: "7rem" }}>
             <div className="table-wrapper">
               <div className="table-title">
                 <div className="row">
@@ -90,7 +37,6 @@ function VendorStock() {
                     <th>Stock</th>
                     <th>Unit</th>
                     <th>Minimum Stock</th>
-                   
                   </tr>
                 </thead>
 
@@ -104,19 +50,17 @@ function VendorStock() {
                         <td>{data.stock}</td>
                         <td>{data.unit}</td>
                         <td>{data.minimumStock}</td>
-                       
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-         
             </div>
           </div>
         </div>
-   </div>
-   </>
-  )
+      </div>
+    </>
+  );
 }
 
-export default VendorStock
+export default VendorStock;

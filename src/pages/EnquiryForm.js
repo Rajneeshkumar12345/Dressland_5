@@ -30,7 +30,7 @@ function EnquiryForm() {
     console.log(email_ID);
     console.log(contactNo);
     console.log(enqMessage);
-    axios.post("http://nias.codelovertechnology.com/EnquiryMaster", {
+    axios.post(`${process.env.REACT_APP_API}EnquiryMaster`, {
       enquiryID: 0,
       name,
       contactNo,
@@ -48,7 +48,7 @@ function EnquiryForm() {
   };
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/EnquiryMaster`)
+      .get(`${process.env.REACT_APP_API}EnquiryMaster`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -56,7 +56,7 @@ function EnquiryForm() {
 
   const onDelete = (id) => {
     axios
-      .delete(`http://nias.codelovertechnology.com/EnquiryMaster/${id}`)
+      .delete(`${process.env.REACT_APP_API}EnquiryMaster/${id}`)
       .then(() => {
         getData();
         alert("Your data has been deleted");
@@ -64,7 +64,7 @@ function EnquiryForm() {
   };
   const getData = () => {
     axios
-      .get(`http://nias.codelovertechnology.com/EnquiryMaster`)
+      .get(`${process.env.REACT_APP_API}EnquiryMaster`)
       .then((getData) => {
         setAPIData(getData.data);
       });
@@ -244,56 +244,6 @@ function EnquiryForm() {
             </div>
           </div>
 
-          {/* <div id="addEmployeeModal" className="modal fade">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <form>
-                  <div className="modal-header">
-                    <h4 className="modal-title">Edit Customer</h4>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-hidden="true"
-                    >
-                      &times;
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <div className="form-group">
-                      <label>Product Name</label>
-                      <input type="text" className="form-control" required />
-                    </div>
-                    <div className="form-group">
-                      <label>About</label>
-                      <input type="email" className="form-control" required />
-                    </div>
-                    <div className="form-group">
-                      <label>Quality</label>
-                      <textarea className="form-control" required></textarea>
-                    </div>
-                    <div className="form-group">
-                      <label>Brand</label>
-                      <input type="text" className="form-control" required />
-                    </div>
-                  </div>
-                  <div className="modal-footer">
-                    <input
-                      type="button"
-                      className="btn btn-default"
-                      data-dismiss="modal"
-                      value="Cancel"
-                    />
-                    <input
-                      type="submit"
-                      className="btn btn-success"
-                      value="Add"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div> */}
 
           {/* <div id="deleteEmployeeModal" className="modal fade">
             <div className="modal-dialog">

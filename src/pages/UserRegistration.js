@@ -23,7 +23,7 @@ function UserRegistration() {
 
   const UserRegistered = () => {
     axios
-      .post("http://nias.codelovertechnology.com/UserMaster", {
+      .post(`${process.env.REACT_APP_API}UserMaster`, {
         userID: 0,
         userType: "NA",
         userName,
@@ -48,10 +48,6 @@ function UserRegistration() {
           navigate("/");
         }, 5000);
       });
-    //return alert("Success")
-    // .catch((err) => {
-    //   console.log(err);
-    // });
   };
 
   return (

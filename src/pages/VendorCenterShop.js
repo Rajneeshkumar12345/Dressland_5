@@ -4,65 +4,7 @@ import VendorSidebar from '../components/VendorSidebar';
 
 
 function VendorCenterShop() {
-
   const [APIData, setAPIData] = useState([]);
-  const [shopName, setShopName] = useState("");
-  const [personName, setPersonName] = useState("");
-  const [shopEmail_ID, setEmail_ID] = useState("");
-  const [shopContactNo, setShopContactNo] = useState("");
-  const [personContactNo, setPersonContactNo] = useState("");
-  const [personEmailID, setPersonEmailID] = useState("");
-  const [shopAddress, setShopAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [shopBanner, setShopBanner] = useState("");
-  const [remarks, setRemarks] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
-
-    // axios.post("http://nias.codelovertechnology.com/ShopMaster", {
-    //   shopID: 0,
-    //   shopName,
-    //   personName,
-    //   shopEmail_ID,
-    //   shopContactNo,
-    //   personContactNo,
-    //   personEmailID,
-    //   shopAddress,
-    //   city,
-    //   state,
-    //   shopBanner,
-    //   remarks,
-    //   createdBy: "NA",
-    //   createdDate: "2022-11-23T12:56:22.535Z",
-    //   modifiedBy: "NA",
-    //   modifiedDate: "2022-11-23T12:56:22.536Z",
-    //   checkbox,
-    // });
-  
-
-  axios
-    .get("http://nias.codelovertechnology.com/ShopMaster", {
-      shopID: 0,
-      shopName,
-      personName,
-      shopEmail_ID,
-      shopContactNo,
-      personContactNo,
-      personEmailID,
-      shopAddress,
-      city,
-      state,
-      shopBanner,
-      remarks,
-      createdBy: "NA",
-      createdDate: "2022-11-23T12:56:22.535Z",
-      modifiedBy: "NA",
-      modifiedDate: "2022-11-23T12:56:22.536Z",
-      checkbox,
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   useEffect(() => {
     axios
       .get(`http://nias.codelovertechnology.com/ShopMaster`)

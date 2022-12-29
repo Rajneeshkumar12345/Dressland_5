@@ -10,7 +10,8 @@
     --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
     --activeItem: #f799a354;
   }
-  
+
+
   .app {
     /* padding: 0.5rem 3.5rem; */
     color: var(--black);
@@ -27,6 +28,12 @@
     font-family: 'Inter', sans-serif;
   }
   
+
+.Vendor_Support{
+     font-size: large;
+     font-weight: 500;
+}
+
   .AppGlass {
     display: grid;
     height: 97%;

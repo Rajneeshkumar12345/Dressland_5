@@ -16,7 +16,7 @@ function Enquire() {
 
   const PostData = () => {
     setmsg("Enquiry has been submitted")
-    axios.post("http://nias.codelovertechnology.com/EnquiryMaster", {
+    axios.post(`${process.env.REACT_APP_API}EnquiryMaster`, {
       enquiryID: 0,
       name,
       contactNo,

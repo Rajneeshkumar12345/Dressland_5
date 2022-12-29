@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function UserRegistrationUpdate() {
-  const [APIData, setAPIData] = useState([]);
   const [setroleDropdownData, setRoleDropdownData] = useState([]);
   let navigate = useNavigate();
   const [userID, setID] = useState(null);
@@ -21,18 +19,11 @@ function UserRegistrationUpdate() {
   const [userRole, setUserRole] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get(`http://nias.codelovertechnology.com/UserMaster`)
-      .then((response) => {
-        setAPIData(response.data);
-      });
-  }, []);
-
+  
   useEffect(() => {
     var ResultForDropdown;
     axios
-      .get(`http://nias.codelovertechnology.com/MastersAPI`)
+      .get(`${process.env.REACT_APP_API}MastersAPI`)
       .then((response) => {
         ResultForDropdown=response.data;
           var RoleList=ResultForDropdown.filter(e =>e.masterTable == "Role");
@@ -50,7 +41,7 @@ function UserRegistrationUpdate() {
     setContact(localStorage.getItem("contactNo"));
     setCenter(localStorage.getItem("userCenter"));
     setPassword(localStorage.getItem("password"));
-    setUserRole(localStorage.getItem("userRole"));
+  //  setUserRole(localStorage.getItem("userRole"));
     setRemarks(localStorage.getItem("remarks"));
     setCheckbox(localStorage.getItem("checkbox"));
   }, []);
@@ -59,7 +50,7 @@ function UserRegistrationUpdate() {
 
   const updateAPIData = () => {
     axios
-      .put(`http://nias.codelovertechnology.com/UserMaster/${userID}`, {
+      .put(`${process.env.REACT_APP_API}UserMaster/${userID}`, {
         userID,
         userType:'NA',
         userName,
@@ -178,6 +169,7 @@ function UserRegistrationUpdate() {
               class="form-select Enquiry_Input col-md-6 float-right"
               aria-label="Default select example"
             >
+            <option selected>Please Select Role</option>
               {setroleDropdownData.map(({ tableValue}) => (
                 <option key={tableValue} value={tableValue}>
                   {tableValue}

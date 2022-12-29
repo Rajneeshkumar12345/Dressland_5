@@ -38,11 +38,11 @@ const Sidebar = () => {
                     <AiIcons.AiOutlineArrowLeft />
                   </Link>
                 </li>
-                <li className="navbar-toggle">
+                <li className=" Admin_Navbar">
                   <Link
                     to="#"
                     className="menu-bars"
-                    style={{ marginLeft: "12rem", marginTop:"-8rem" }}
+                    style={{ marginLeft: "12rem", marginTop:"-3rem" }}
                   >
                     <AiIcons.AiOutlineClose />
                   </Link>

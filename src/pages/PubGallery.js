@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Galary.css";
-import Logo from "../images/Logo.png";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -9,9 +8,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Toggle from "../components/Toggle";
 import { useParams } from "react-router-dom";
-import { data } from "jquery";
-import VendorSidebar from "../components/VendorSidebar";
-import CentorSidebar from "../components/CentorSidebar";
 
 function PubGallery() {
   const [ProductDetailsData, setAPIData] = useState([]);
@@ -63,7 +59,7 @@ function PubGallery() {
   useEffect(() => {
     axios
       .get(
-        `http://nias.codelovertechnology.com/ProductMaster/${ProductIDReq.ProductIDReq}`
+        `${process.env.REACT_APP_API}ProductMaster/${ProductIDReq.ProductIDReq}`
       )
       .then((response) => {
         setAPIData(response.data);

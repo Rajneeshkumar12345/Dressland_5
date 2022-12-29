@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function ProductUpdate() {
     let navigate = useNavigate();
-    const [APIData, setAPIData] = useState([]);
     const [productID, setID] = useState(null);
     const [productCode, setProductCode] = useState("");
     const [productName, setProductName] = useState("");
@@ -19,26 +17,7 @@ function ProductUpdate() {
     const [productImg1, setProductImg] = useState("");
     const [checkbox, setCheckbox] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get(`http://nias.codelovertechnology.com/ProductMaster`)
-      .then((response) => {
-        setAPIData(response.data);
-      });
-  }, []);
-
-//   useEffect(() => {
-//     var ResultForDropdown;
-//     axios
-//       .get(`http://nias.codelovertechnology.com/ProductMaster`)
-//       .then((response) => {
-//         ResultForDropdown=response.data;
-//           var RoleList=ResultForDropdown.filter(e =>e.masterTable=="Role").map();
-//           setRoleDropdownData(RoleList);
-//         console.log(response.data);
-//       });
-//   }, []);
-
+  
   useEffect(() => {
     setID(localStorage.getItem("productID"));
     setProductCode(localStorage.getItem("productCode"));
@@ -57,7 +36,7 @@ function ProductUpdate() {
 
   const updateAPIData = () => {
     axios
-      .put(`http://nias.codelovertechnology.com/ProductMaster/${productID}`, {
+      .put(`${process.env.REACT_APP_API}ProductMaster/${productID}`, {
         productID,
         productCode,
         productName,
@@ -170,21 +149,6 @@ function ProductUpdate() {
               onChange={(e) => setProductImg(e.target.value)}
             />
           </Form.Field>
-          {/* <Form.Field className="mt-5">
-            <label className="text-dark col-md-6">Approval :-</label>
-            <select
-              id="ddlRoleList"
-              onChange={(e) => setUserRole(e.target.value)}              
-              class="form-select Enquiry_Input col-md-6 float-right"
-              aria-label="Default select example"
-            >
-              {setroleDropdownData.map(({ tableValue}) => (
-                <option key={tableValue} value={tableValue}>
-                  {tableValue}
-                </option>
-              ))}
-            </select>
-          </Form.Field> */}
           <Form.Field className="mt-5 ms-2">
             <Checkbox
               className="text-dark ms-2"

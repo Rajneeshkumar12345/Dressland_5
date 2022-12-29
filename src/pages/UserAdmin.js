@@ -15,7 +15,6 @@ function UserAdmin() {
   const [userCenter, setCenter] = useState("");
   const [password, setPassword] = useState("");
   const [remarks, setRemarks] = useState("");
-  const [userRole, setUserRole] = useState('');
   const [checkbox, setCheckbox] = useState(false);
 
 
@@ -41,7 +40,7 @@ function UserAdmin() {
 
   const HandlePostData = () => {
     axios
-      .post("http://nias.codelovertechnology.com/UserMaster", {
+      .post(`${process.env.REACT_APP_API}UserMaster`, {
         userID: 0,
         userType: "NA",
         userName,
@@ -67,7 +66,7 @@ function UserAdmin() {
 
   // Get data from API Start Here Get Method
   axios
-    .get("http://nias.codelovertechnology.com/UserMaster", {
+    .get(`${process.env.REACT_APP_API}UserMaster`, {
       userID: 0,
       userType: "NA",
       userName,
@@ -92,7 +91,7 @@ function UserAdmin() {
 
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/UserMaster`)
+      .get(`${process.env.REACT_APP_API}UserMaster`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -102,7 +101,7 @@ function UserAdmin() {
   // Delete Start from here
   const onDelete = (id) => {
     axios
-      .delete(`http://nias.codelovertechnology.com/UserMaster/${id}`)
+      .delete(`${process.env.REACT_APP_API}UserMaster/${id}`)
       .then(() => {
         getData();
         alert("Your data has beeen deleted");
@@ -110,7 +109,7 @@ function UserAdmin() {
   };
   const getData = () => {
     axios
-      .get(`http://nias.codelovertechnology.com/UserMaster`)
+      .get(`${process.env.REACT_APP_API}UserMaster`)
       .then((getData) => {
         setAPIData(getData.data);
       });
@@ -155,7 +154,6 @@ function UserAdmin() {
                     <th>State</th>
                     <th>UserCenter</th>
                     <th>Password</th>
-                    {/* <th>Confirm Password</th> */}
                     <th>Remarks</th>
                     <th>Role</th>
                     <th>Actions</th>
@@ -213,7 +211,7 @@ function UserAdmin() {
                   <div className="float-right">
                     <button
                       type="button"
-                      className="close col-md-6"
+                      className="close col-md-6 product_btn"
                       data-dismiss="modal"
                       aria-hidden="true"
                     >

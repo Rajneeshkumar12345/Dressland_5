@@ -3,8 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import Log_image from "../images/Log_Image.webp";
-import roles from "./Role";
-import Spinner from "./Spinner";
 
 const LoginPage = () => {
   //const { setAuth } = useAuth();
@@ -14,7 +12,7 @@ const LoginPage = () => {
 
   const errRef = useRef();
   const [errMsg, setErrMsg] = useState("");
-  const [loggedInState, setLoggedInState] = useState(false)
+  const [loggedInState, setLoggedInState] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,26 +36,34 @@ const LoginPage = () => {
 
 
   const handleApi = (e) => {
-    setLoading("You are logging please wait")
+    setLoading("You are logging please wait...")
+        let hardcodedCred = {
+          email: `${process.env.REACT_APP_USER_ID}`,
+          password: `${process.env.REACT_APP_PASSWORD}`
+      }
+      if ((email == hardcodedCred.email) && (password == hardcodedCred.password)) {
+          navigate('/MainDash');
+      }
+      
     axios
       .post(
-        "http://nias.codelovertechnology.com/UserMaster/api/UserMaster/Login",
+        `${process.env.REACT_APP_API}UserMaster/api/UserMaster/Login`,
         {
           email_ID: email,
           password: password,
         }
       )
       .then((result) => {
-        //   console.log(result.data);
-        //  const Roles = result.data[0].userRole;
+         //  console.log(result.data);
         localStorage.setItem("result", result);
+        // const Roles = result.data[0].userRole;
+        localStorage.setItem("userId",result.data[0].userID);
         localStorage.setItem("currentUserRole",result.data[0].userRole);
         if (result.data[0].userRole == "ADMIN") {
           navigate("/MainDash");
-        } else if (result.data[0].userRole == "VENDOR") {
-
+        } else if (result.data[0].userRole == "VENDOR"){
           navigate("/VendorDashboard");
-        } else if (result.data[0].userRole == "CENTOR") {
+        } else if (result.data[0].userRole == "CENTOR"){
           navigate("/CentorDashboard");
         } else if ((!result.data[0].userRole == "ADMIN") && (!result.data[0].userRole == "VENDOR") && (!result.data[0].userRole == "CENTOR")) {
           navigate("/");
@@ -67,9 +73,8 @@ const LoginPage = () => {
           return;
         }
       })
-      .catch((error) => {
+      .catch(() => {
         return setErrMsg("Please Enter Valid Email id And Password...!!!");
-        console.log(error);
       });
     // try {
     //   const response = axios.post(
@@ -145,7 +150,7 @@ const LoginPage = () => {
                     className="form-label Login_comon"
                     for="validationDefaultEmailaddress"
                   >
-                    Email Address
+                    Email Address(User Id)
                   </label>
                   <input
                     type="email"
@@ -153,7 +158,7 @@ const LoginPage = () => {
                     onChange={handleEmail}
                     id="validationDefaulEmailaddress"
                     className="form-control form-control-lg"
-                    placeholder="Enter a valid email address"
+                    placeholder="Enter a email address"
                   />
                 </div>
 

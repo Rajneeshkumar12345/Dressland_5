@@ -25,7 +25,7 @@ function EnquiryUpdate2() {
   const updateAPIData = () => {
     console.log(updateAPIData)
     axios
-      .put(`http://nias.codelovertechnology.com/EnquiryMaster/${enquiryID}`, {
+      .put(`${process.env.REACT_APP_API}EnquiryMaster/${enquiryID}`, {
         enquiryID,
         name,
         contactNo,

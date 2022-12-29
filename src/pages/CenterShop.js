@@ -38,7 +38,7 @@ function CenterShop() {
   };
 
   const PostData = () => {
-    axios.post("http://nias.codelovertechnology.com/ShopMaster", {
+    axios.post(`${process.env.REACT_APP_API}ShopMaster`, {
       shopID: 0,
       shopName,
       personName,
@@ -60,7 +60,7 @@ function CenterShop() {
   };
 
   axios
-    .get("http://nias.codelovertechnology.com/ShopMaster", {
+    .get(`${process.env.REACT_APP_API}ShopMaster`, {
       shopID: 0,
       shopName,
       personName,
@@ -84,7 +84,7 @@ function CenterShop() {
     });
   useEffect(() => {
     axios
-      .get(`http://nias.codelovertechnology.com/ShopMaster`)
+      .get(`${process.env.REACT_APP_API}ShopMaster`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -92,7 +92,7 @@ function CenterShop() {
 
   const onDelete = (id) => {
     axios
-      .delete(`http://nias.codelovertechnology.com/ShopMaster/${id}`)
+      .delete(`${process.env.REACT_APP_API}ShopMaster/${id}`)
       .then(() => {
         getData();
         alert("Your data has been deleted");
@@ -100,7 +100,7 @@ function CenterShop() {
   };
   const getData = () => {
     axios
-      .get(`http://nias.codelovertechnology.com/ShopMaster`)
+      .get(`${process.env.REACT_APP_API}ShopMaster`)
       .then((getData) => {
         setAPIData(getData.data);
       });
@@ -414,16 +414,18 @@ function CenterShop() {
               </div>
             </div>
 
+
             <div id="addEmployeeModal" className="modal fade">
               <div className="modal-dialog">
                 <div className="modal-content">
+              
                   <form>
                     <div className="modal-header">
-                      <h4 className="modal-title col-md-8">Add Center Shop</h4>
-                      <div className="float-right">
+                      <h4 className="modal-title">Add Center Shop</h4>
+                      <div className="">
                         <button
                           type="button"
-                          className="close col-md-4"
+                          className="close"
                           data-dismiss="modal"
                           aria-hidden="true"
                         >
@@ -641,77 +643,6 @@ function CenterShop() {
                 </div>
               </div>
             </div>
-
-            {/* <div id="editEmployeeModal" className="modal fade">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <form>
-                <div className="modal-header">
-                  <h4 className="modal-title">Edit Product</h4>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    &times;
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <div className="form-group">
-                    <label>User Name</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>User Email</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>User Contact</label>
-                    <input type="email" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Address</label>
-                    <textarea className="form-control" required></textarea>
-                  </div>
-                  <div className="form-group">
-                    <label>City</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>State</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>User Center</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Password</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                  <div className="form-group">
-                    <label>Remarks</label>
-                    <input type="text" className="form-control" required />
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <input
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    value="Cancel"
-                  />
-                  <input type="submit" className="btn btn-info" value="Save" />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div> */}
           </div>
         </div>
       </div>

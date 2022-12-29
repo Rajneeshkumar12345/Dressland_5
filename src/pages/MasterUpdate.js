@@ -23,7 +23,7 @@ function MasterUpdate() {
   const updateAPIData = () => {
     console.log(updateAPIData)
     axios
-      .put(`http://nias.codelovertechnology.com/MastersAPI/${masterID}`, {
+      .put(`${process.env.REACT_APP_API}MastersAPI/${masterID}`, {
       masterID,
       masterTable,
       tableValue,

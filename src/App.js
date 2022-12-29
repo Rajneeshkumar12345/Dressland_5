@@ -25,18 +25,16 @@ import Master from "./pages/Master";
 import Stock from "./pages/Stock";
 import ProductGallery from "./pages/ProductGallery";
 import EnquiryForm from "./pages/EnquiryForm";
-import AboutAdminPage from "./pages/AboutAdminPage";
 import ContactAdminPage from "./pages/ContactAdminPage";
 import ProductExplore from "./pages/ProductExplore";
 import EnquiryUpdate from "./pages/EnquiryUpdate";
-import Update from "./pages/Update";
+
 import UserAdmin from "./pages/UserAdmin";
 import AdminGallery from "./pages/AdminGallery";
 import VendorSupport from "./pages/VendorSupport";
 import VendorCenterShop from "./pages/VendorCenterShop";
 import Transaction from "./pages/Transaction";
-import RequireAuth from "./components/RequireAuth";
-import { useEffect } from "react";
+
 import VendorSidebar from "./components/VendorSidebar";
 import VendorDashboard from "./components/VendorDashboard";
 import VendorStock from "./pages/VendorStock";
@@ -56,30 +54,19 @@ import AdminGalleryUpdate from "./pages/AdminGalleryUpdate";
 import EnquiryUpdate2 from "./pages/EnquiryUpdate2";
 import CenterShopUpdate from "./pages/CenterShopUpdate";
 import MasterUpdate from "./pages/MasterUpdate";
+import TransactionUpdate from "./pages/TransactionUpdate";
+import ContactAdminUpdate from "./pages/ContactAdminUpdate";
+import SupportAdmin from "./pages/SupportAdmin";
+import SupportAdminUpdate from "./pages/SupportAdminUpdate";
+import AdminAbout from "./pages/AdminAbout";
+import AdminAboutUpdate from "./pages/AdminAboutUpdate";
+
 
 // import DistributerPage from "./components/DistributerPage";
 
 
 
 function App() {
-  // const [APIData, setAPIData] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://nias.codelovertechnology.com/ProductMaster`)
-  //     .then((response) => {
-  //       setAPIData(response.data);
-       
-  //     });
-  // }, []);
-
-  // useEffect (() =>{
-  //   const Role =  localStorage.getItem("result");
-  //   console.log(Role);
-  //   if (Role[0].userRole == 'ADMIN'){
-  //     Navigate('/MainDash');
-  //   }
-  //   console.log(Role[0].userRole);
-  // })
 
   return (
     <main className="App">
@@ -93,6 +80,7 @@ function App() {
           <Route exact path="/ProductExplore" element={<ProductExplore/>} />
           <Route exact path="/Contact" element={<Contact />} />
           <Route exact path="/LoginPage" element={<Login />} />
+       
 
            {/* This is rout for Vendor and Center  */}
           <Route path='/Galary/:ProductIDReq' element={<Galary/>}/>
@@ -128,19 +116,24 @@ function App() {
           <Route exact path="/ProductUpdate" element={<ProductUpdate/>} />
           <Route exact path="/Stock" element={<Stock />} />
           <Route exact path="/UserAdmin" element={<UserAdmin/>} />
+          <Route exact path="/ContactAdminUpdate" element={<ContactAdminUpdate/>} />
           <Route exact path="/AdminGallery" element={<AdminGallery/>} />
           <Route exact path="/AdminGalleryUpdate" element={<AdminGalleryUpdate/>} />
           <Route exact path="/Master" element={<Master />} />
           <Route exact path="/MasterUpdate" element={<MasterUpdate/>} />
           <Route exact path="/CenterShop" element={<CenterShop />} />
           <Route exact path="/CenterShopUpdate" element={<CenterShopUpdate/>} />
-          <Route exact path="/AboutAdminPage" element={<AboutAdminPage />} />
+          <Route exact path="/AdminAbout" element={<AdminAbout/>} />
+          <Route exact path="/AdminAboutUpdate" element={<AdminAboutUpdate/>} />
+          <Route exact path="/TransactionUpdate" element={<TransactionUpdate/>}/>
           <Route
             exact
             path="/ContactAdminPage"
             element={<ContactAdminPage />}
           />
           <Route exact path="/EnquiryForm" element={<EnquiryForm />} />
+          <Route exact path="/SupportAdmin" element={<SupportAdmin/>} />
+          <Route exact path="/SupportAdminUpdate" element={<SupportAdminUpdate/>} />
           <Route exact path="/EnquiryUpdate" element={<EnquiryUpdate/>} />
           <Route exact path="/EnquiryUpdate2" element={<EnquiryUpdate2/>} />
           <Route exact path="/Transaction" element={<Transaction/>} />

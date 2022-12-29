@@ -51,7 +51,7 @@ export const SidebarAdminData = [
   ,
   {
     title: 'ABOUT US',
-    path: '/AboutAdminPage',
+    path: '/AdminAbout',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text-admin'
   }
@@ -66,6 +66,12 @@ export const SidebarAdminData = [
   {
     title: 'ENQUIRY',
     path: '/EnquiryForm',
+    icon: <AiIcons.AiOutlineMessage />,
+    cName: 'nav-text-admin'
+  },
+  {
+    title: 'SUPPORT',
+    path: '/SupportAdmin',
     icon: <AiIcons.AiOutlineMessage />,
     cName: 'nav-text-admin'
   },
