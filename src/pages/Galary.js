@@ -9,9 +9,16 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import VendorSidebar from "../components/VendorSidebar";
 import CentorSidebar from "../components/CentorSidebar";
+import { useReactToPrint } from "react-to-print";
+
 
 function Galary() {
   const ProductIDReq = useParams();
+  const [razor, setazor] = useState("")
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
   const navigate = useNavigate();
   const errRef = useRef();
   const [errMsg, setErrMsg] = useState("");
@@ -28,7 +35,7 @@ function Galary() {
   // };
   // const handleShow = () => {
   //   setShow(true);
-  // };
+  // };           
   useEffect(() => {
     total();
   }, [cart]);
@@ -50,15 +57,8 @@ function Galary() {
     if (increse > 0) {
       setIncrease(Number(increse) - 1);
     }
-    // let hardCopy = [...cart];
-    // let hardCopy1 = hardCopy.filter(
-    //   (e) =>
-    //   e.index === index
-    // );
-    // setCart(hardCopy1);
-    // console.log("hardCopy : "+hardCopy1)
-  }
-
+   }
+ 
   useEffect(() => {
     axios
       .get(
@@ -71,81 +71,116 @@ function Galary() {
   }, []);
   var CurrentUserRole = localStorage.getItem("currentUserRole");
 
-  //  Payment Gateway start from here
-  const initializeRazorpay = () => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
 
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
 
-      document.body.appendChild(script);
-    });
-  };
-  const makePayment = async (cartTotal) => {
-    const res = await initializeRazorpay();
 
-    if (!res) {
-      alert("Razorpay Failed to load");
-      return;
+
+
+  function onOpenHandler () {
+    alert('Payments Modal is Opened');
+  }
+
+  function onCloseHandler () {
+    alert('Payments Modal is Closed');
+  }
+
+  function onPaymentSuccessHandler (response) {
+    alert('Payment Success');
+    console.log('Payment Success Response', response);
+  }
+
+  function onPaymentFailureHandler (response) {
+    alert('Payment Failure');
+    console.log('Payment Failure Response', response);
+  }
+
+  Instamojo.configure({
+    handlers: {
+      onOpen: onOpenHandler,
+      onClose: onCloseHandler,
+      onSuccess: onPaymentSuccessHandler,
+      onFailure: onPaymentFailureHandler
     }
-    var options = {
-      key: process.env.REACT_APP_RAZORPAY_KEY,
-      name: "SK Dressland",
-      currency: "INR",
-      amount: cartTotal * 100,
-      description: "Thankyou",
-      image: "/SK_dressland.png",
-      handler: async function (response) {
-        // const data = {
-        //   razorpay_payment_id : response.razorpay_payment_id
-        // }
-        const data = response.razorpay_payment_id;
-        const Price = cartTotal;
-        const Quantity = increse;
-        const Rate = ProductDetailsData.mrp;
-        const ProductName = ProductDetailsData.productName;
-        const ProductCode = ProductDetailsData.productCode;
-        const UserID = localStorage.getItem("userId");
-        axios
-          .post(`${process.env.REACT_APP_API}Trancation`, {
-            trancationID: 0,
-            userID: UserID,
-            productID: ProductCode,
-            productName: "" + ProductName + "",
-            quantity: Quantity,
-            unit: "" + Rate + "",
-            price: Price,
-            referenceNo: data,
-            remarks: "Success",
-            createdBy: "Admin",
-            createdDate: "2022-12-08",
-            modifiedBy: "Admin",
-            modifiedDate: "2022-12-08",
-            checkbox,
-          })
-          .then(() => {
-            setErrMsg("Payment has been Success");
-            setTimeout(() => {
-              navigate("/ProductGallery");
-            }, 3000);
-          });
-      },
-      prefill: {
-        name: "SK Dressland",
-        email: "info@gmail.com",
-        contact: "9689457841",
-      },
-    };
+  });
+  
+  function onButtonClick() {
+    Instamojo.open('https://js.instamojo.com/v1/checkout.js');
+  }
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  };
+
+
+  //  Payment Gateway start from here
+  // const initializeRazorpay = () => {
+  //   return new Promise((resolve) => {
+  //     const script = document.createElement("script");
+  //     script.src = "https://js.instamojo.com/v1/checkout.js";
+
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+  //     script.onerror = () => {
+  //       resolve(false);
+  //     };
+
+  //     document.body.appendChild(script);
+  //   });
+  // };
+  // const makePayment = async (cartTotal) => {
+  //   const res = await initializeRazorpay();
+
+  //   if (!res) {
+  //     alert("Razorpay Failed to load");
+  //     return;
+  //   }
+  //   var options = {
+  //     key: process.env.REACT_APP_RAZORPAY_KEY,
+  //     name: "SK Dressland",
+  //     currency: "INR",
+  //     amount: cartTotal * 100,
+  //     description: "Thankyou",
+  //     image: "/SK_dressland.png",
+  //     handler: async function (response) {
+  //       const data = response.razorpay_payment_id;
+  //       const Price = cartTotal;
+  //       const Quantity = increse;
+  //       const Rate = ProductDetailsData.mrp;
+  //       const ProductName = ProductDetailsData.productName;
+  //       const ProductCode = ProductDetailsData.productCode;
+  //       const UserID = localStorage.getItem("userId");
+  //       axios
+  //         .post(`${process.env.REACT_APP_API}Trancation`, {
+  //           trancationID: 0,
+  //           userID: UserID,
+  //           productID: ProductCode,
+  //           productName: "" + ProductName + "",
+  //           quantity: Quantity,
+  //           unit: "" + Rate + "",
+  //           price: Price,
+  //           referenceNo: data,
+  //           remarks: "Success",
+  //           createdBy: "Admin",
+  //           createdDate: "2022-12-08",
+  //           modifiedBy: "Admin",
+  //           modifiedDate: "2022-12-08",
+  //           checkbox,
+  //         })
+  //         .then(() => {
+  //           setErrMsg("Payment has been Success");
+  //           setazor(response.razorpay_payment_id)
+  //           setTimeout(() => {
+  //           }, 3000);
+  //         });
+  //     },
+  //     prefill: {
+  //       name: "SK Dressland",
+  //       email: "info@gmail.com",
+  //       contact: "9689457841",
+  //     },
+  //   };
+
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // };
 
   return (
     <>
@@ -210,7 +245,7 @@ function Galary() {
               </button>
               <button
                 className=" btn-success btn- col-md-4"
-                onClick={() => removeFromCart()}
+                onClick={() => removeFromCart(ProductDetailsData.productID)}
               >
                 Remove Cart
                 <RemoveCircleOutlineIcon />
@@ -219,7 +254,10 @@ function Galary() {
           </div>
         </div>
       </div>
-      {/* Modal Start from here */}
+
+
+      
+      {/********************************Modal************************/}
       <div
         class="modal fade"
         id="exampleModal"
@@ -229,8 +267,8 @@ function Galary() {
         aria-hidden="true"
       >
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="header row">
+          <div   class="modal-content">
+          <div  class="header row">
               <h2 class="modal-title col-md-6" id="exampleModalLabel">
                 Cart
               </h2>
@@ -245,6 +283,7 @@ function Galary() {
             </div>
             <br></br>
             <hr></hr>
+            <div ref={componentRef}>
             <div class="modal-body">
               <div className="Invoice container">
                 <div className="Invoice_Header">
@@ -262,8 +301,8 @@ function Galary() {
                 <div className="Invoice_Body float-right">
                   <table className="table-responsive table table-striped table-bordered">
                     <tr>
-                      <th>#Invoice</th>
-                      <td>.....</td>
+                      <th>#Payment ID</th>
+                      <td>{razor}</td>
                     </tr>
 
                     <tr>
@@ -272,7 +311,7 @@ function Galary() {
                     </tr>
 
                     <tr>
-                      <th>#Amount Due</th>
+                      <th>#Amount</th>
                       <td>Rs. {cartTotal}</td>
                     </tr>
                   </table>
@@ -322,6 +361,9 @@ function Galary() {
                 </div>
               </div>
             </div>
+
+            </div>
+            <div class="modal-footer">
             <p
               ref={errRef}
               className={errMsg ? "errmsg" : "offscreen"}
@@ -329,19 +371,16 @@ function Galary() {
             >
               {errMsg}
             </p>
-            <div class="modal-footer">
-              {/* <Link to="/Pdf">
-                <button type="button" class="btn btn-primary btn-lg">
-                  Download PDF
-                </button>
-              </Link> */}
               <button
                 type="button"
                 class="btn btn-primary btn-lg"
-                onClick={() => makePayment(cartTotal)}
+                onClick={() => onButtonClick(cartTotal)}
               >
                 Pay Now
               </button>
+              <div>
+              <button onClick={handlePrint} className="btn btn-success float-right">Print Invoice</button> 
+              </div>
             </div>
           </div>
         </div>

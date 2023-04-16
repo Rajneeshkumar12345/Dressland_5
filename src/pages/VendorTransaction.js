@@ -1,9 +1,16 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import VendorSidebar from '../components/VendorSidebar';
+// import { useReactToPrint } from "react-to-print";
+
 
 function  VendorTransaction() {
   const [APIData, setAPIData] = useState([]);
+
+  // const componentRef = useRef();
+  // const handlePrint = useReactToPrint({
+  //   content: () => componentRef.current,
+  // });
 
   useEffect(() => {
     axios
@@ -27,10 +34,9 @@ function  VendorTransaction() {
                       Vendor <b>Transaction</b>
                     </h2>
                   </div>
-  
                 </div>
               </div>
-              <table className="table table-striped table-hover">
+              <table  className="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Transaction ID</th>
@@ -41,7 +47,6 @@ function  VendorTransaction() {
                     <th>Unit</th>
                     <th>Price</th>
                     <th>Reference No</th>
-                  
                   </tr>
                 </thead>
                 <tbody>
@@ -56,7 +61,7 @@ function  VendorTransaction() {
                         <td>{data.unit}</td>
                         <td>{data.price}</td>
                         <td>{data.referenceNo}</td>
-                       
+                        {/* <button onClick={handlePrint} className="btn btn-primary">  Print </button>  */}
                       </tr>
                     );
                   })}
@@ -65,9 +70,7 @@ function  VendorTransaction() {
             </div>
           </div>
         </div>
-
-    
-        </div>
+      </div>
     </>
   )
 }

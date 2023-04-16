@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Galary.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -11,6 +11,9 @@ import { useParams } from "react-router-dom";
 
 function PubGallery() {
   const [ProductDetailsData, setAPIData] = useState([]);
+
+  const errRef = useRef();
+  const [errMsg, setErrMsg] = useState("");
   const [increse, setIncrease] = useState(0);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
@@ -19,9 +22,6 @@ function PubGallery() {
   const ProductIDReq = useParams();
 
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
- 
 
   useEffect(() => {
     total();
@@ -73,118 +73,78 @@ function PubGallery() {
       <Toggle />
      
       <div
-        className="section-fluid-main"
-        style={{ backgroundColor: "#7e98bd" }}
+        className="GalleryApi"
+        style={{ backgroundColor: "#7e98bd", height: "100vh" }}
       >
-        <div className="section">
-          <div className="Galaery_API_Image">
+        <div className="float-right mt-3 me-5">
+          <Badge color="secondary" badgeContent={increse}>
+            <AddShoppingCartIcon
+              fontSize="large"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            />
+          </Badge>
+        </div>
+        <div className="row" style={{ marginTop: "5rem" }}>
+          <div className="PhotoAPI col-md-6 mt-5">
             <img
               src={ProductDetailsData.productImg1}
-              height="200"
-              width="100"
+              className="img-fluid ProductImage"
             />
           </div>
-          <div className="info-wrap mob-margin">
-            <p className="title-up">
-              {ProductDetailsData.productCode +
-                " - " +
-                ProductDetailsData.productName}
-            </p>
-            <div className="float-right">
-              <Badge color="secondary" badgeContent={increse}  onClick={handleShow}>
-                <AddShoppingCartIcon
-                  fontSize="large"
-                  data-toggle="modal"
-                   data-target="#exampleModal"
-                />
-              </Badge>
+          <div className="ContentAPI col-md-6">
+            <div className="row text-center mt-5">
+              <p className="title-up">
+                {ProductDetailsData.productCode +
+                  " - " +
+                  ProductDetailsData.productName}
+              </p>
             </div>
-
-            <h2 className="Cotton_heading">
-              {ProductDetailsData.productCode +
-                " - " +
-                ProductDetailsData.productName}
-            </h2>
-            <h4 className="Galery_price">
-              <tr>
-                <td>Rs. {ProductDetailsData.mrp}</td>
-              </tr>
-            </h4>
-            <div className="section-fluid">
-              <input
-                className="desc-btn"
-                type="radio"
-                id="desc-1"
-                name="desc-btn"
-                checked
-              />
-              <label for="desc-1">Description</label>
-              <input
-                className="desc-btn"
-                type="radio"
-                id="desc-2"
-                name="desc-btn"
-              />
-              <label for="desc-2">Details</label>
-              <div className="section-fluid desc-sec accor-1">
+            <div className="row  text-center mt-3">
+              <h2 className="Cotton_heading">
+                {ProductDetailsData.productCode +
+                  " - " +
+                  ProductDetailsData.productName}
+              </h2>
+            </div>
+            <div className="row text-center">
+              <h4 className="Galery_price">
+                <tr>
+                  <td>Rs. {ProductDetailsData.mrp}</td>
+                </tr>
+              </h4>
+            </div>
+            <div className="row">
+              <div className="col-md-6 text-white">
+                <label for="">Description :-</label>
+              </div>
+              <div className="col-md-6">
                 <p>{ProductDetailsData.productDescription}</p>
               </div>
-              <div className="section-fluid desc-sec accor-2">
-                <div className="section-inline">
-                  <p>
-                    <span>35</span>cm<br></br>Lenght
-                  </p>
-                </div>
-                <div className="section-inline">
-                  <p>
-                    <span>25</span>cm<br></br>Width
-                  </p>
-                </div>
-                <div className="section-inline">
-                  <p>
-                    <span>45</span>cm<br></br>Height
-                  </p>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div className="clearfix"></div>
-          <div className="info-wrap">
-            <div className="Card_quantity row">
+            <div className="row" style={{ marginTop: "5rem" }}>
               <button
-                className=" btn-success btn-sm col-md-5 mt-4"
+                className=" btn-success btn col-md-4"
                 onClick={() => addToCart(ProductDetailsData)}
               >
                 Add Cart
                 <AddCircleOutlineIcon />
               </button>
               <button
-                className=" btn-success tn-sm col-md-5 mt-4"
-                onClick={(ProductDetailsData) =>
-                  removeFromCart(ProductDetailsData)
-                }
+                className=" btn-success btn- col-md-4"
+                onClick={() => removeFromCart()}
               >
                 Remove Cart
                 <RemoveCircleOutlineIcon />
               </button>
             </div>
           </div>
-
-          {/* <div className="cart ms-2">
-          <h4>Price:-</h4>
-              <div>{listItems}</div>
-               <div>{cartItems}</div>
-              <div className="total">Total Price:{cartTotal}</div>
-          </div> */}
         </div>
       </div>
-
       {/* Modal Start from here */}
       <div
-      show={show} onHide={handleClose}
         class="modal fade"
-         id="exampleModal"
+        id="exampleModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -193,10 +153,7 @@ function PubGallery() {
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="header row">
-              <h2
-                class="modal-title col-md-6 text-center"
-                id="exampleModalLabel"
-              >
+              <h2 class="modal-title col-md-6" id="exampleModalLabel">
                 Cart
               </h2>
               <button
@@ -211,8 +168,6 @@ function PubGallery() {
             <br></br>
             <hr></hr>
             <div class="modal-body">
-              {/* <h4>Total Price:-</h4>
-              <div className="total">Total:{cartTotal}</div> */}
               <div className="Invoice container">
                 <div className="Invoice_Header">
                   <header className="text-white text-center mt-5">
@@ -220,7 +175,7 @@ function PubGallery() {
                   </header>
                 </div>
                 <div className="Company_Info mt-5">
-                  <h2 className="text-dark">SK Dressand</h2>
+                  <h2 className="text-dark">SK Dressland</h2>
                   <p className="text-dark">
                     Azamgarh,<br></br>UP,
                   </p>
@@ -259,7 +214,9 @@ function PubGallery() {
 
                     <tr className="row">
                       <td className="col-md-2">1</td>
-                      <td className="col-md-4">{ProductDetailsData.productDescription}</td>
+                      <td className="col-md-4">
+                        {ProductDetailsData.productDescription}
+                      </td>
                       <td className="col-md-2">{ProductDetailsData.mrp}</td>
                       <td className="col-md-2">{increse}</td>
                       <td className="col-md-2">{cartTotal}</td>
@@ -287,10 +244,17 @@ function PubGallery() {
                 </div>
               </div>
             </div>
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
             <div class="modal-footer">
               <Link to="/LoginPage">
                 <button type="button" class="btn btn-primary btn-lg">
-                  Pay Now
+                Pay Now
                 </button>
               </Link>
             </div>

@@ -1,12 +1,12 @@
 import React from 'react'
 import "./ProductExplore.css"
 
-// import Cloth1 from "../images/Cloth1.jpg";
-// import Cloth2 from "../images/Cloth2.jpg";
+// import Cloth1 from "../images/Cloth1.webp";
+// import Cloth2 from "../images/Cloth2.webp";
 // import Cloth3 from "../images/Cloth3.jpg";
-import Cloth4 from "../images/Cloth4.jpg";
-import Cloth5 from "../images/Cloth5.jpg";
-import Cloth6 from "../images/Cloth6.jpg";
+import Cloth4 from "../images/Cloth4.webp";
+import Cloth5 from "../images/Cloth5.webp";
+import Cloth6 from "../images/Cloth6.webp";
 import Toggle from '../components/Toggle';
 
 function ProductExplore() {

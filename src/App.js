@@ -61,6 +61,8 @@ import SupportAdminUpdate from "./pages/SupportAdminUpdate";
 import AdminAbout from "./pages/AdminAbout";
 import AdminAboutUpdate from "./pages/AdminAboutUpdate";
 
+// import PublicGallery from "./pages/PublicGallery";
+
 
 // import DistributerPage from "./components/DistributerPage";
 
@@ -73,6 +75,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Public Routes */}
+          {/* <Route exact path="/PublicGallery" element={<PublicGallery/>}/> */}
           <Route exact path="/" element={<ToggleSidebar />} />
           <Route exact path="/About" element={<About />} />
         

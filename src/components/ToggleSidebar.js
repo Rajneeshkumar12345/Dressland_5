@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./ToggleSidebar.css";
 import { Link, useNavigate } from "react-router-dom";
-import Caro1 from "../images/School1.jpg";
-import Caro2 from "../images/School4.jpg";
-import Caro3 from "../images/School5.jpg";
-import Caro4 from "../images/School10.jpeg";
-import Caro5 from "../images/School9.jpg";
+import Caro1 from "../images/Cloth9.webp";
+import Caro2 from "../images/Cloth10.jpg";
+import Caro3 from "../images/Cloth11.jpg";
 import img from "../images/Logo.png";
-import Cloth1 from "../images/Cloth1.jpg";
-import Cloth2 from "../images/Cloth2.jpg";
+import Cloth1 from "../images/Cloth1.webp";
+import Cloth2 from "../images/Cloth2.webp";
 import Cloth3 from "../images/Cloth3.jpg";
-import Cloth4 from "../images/Cloth4.jpg";
-import Cloth5 from "../images/Cloth5.jpg";
-import Cloth6 from "../images/Cloth6.jpg";
+import Cloth4 from "../images/Cloth4.webp";
+import Cloth5 from "../images/Cloth5.webp";
+import Cloth6 from "../images/Cloth6.webp";
 import Cloth7 from "../images/Cloth7.webp";
 import Cloth8 from "../images/Cloth8.jpg";
 import Logo from "../images/Logo.png";
@@ -159,13 +157,6 @@ const ToggleSidebar = () => {
 
       <div className="container-fluid mt-3">
         <div className="container my-5">
-          {/* <a
-            href=""
-            className="site-nav__link site-nav__link--underline site-nav__link--has-dropdown"
-          >
-            Wholesale
-          </a> */}
-
           <div className="ombre-externe">
             <div className="ombre-interne">
               <div
@@ -195,29 +186,6 @@ const ToggleSidebar = () => {
                       alt="carosol-image"
                     />
                   </div>
-                  {/* <div className="carousel-item">
-                    <img
-                      src={Caro4}
-                      className="d-block w-100"
-                      height="500"
-                      alt="carosol_image"
-                    />
-                  </div>
-                  <div className="carousel-item">
-                    <img
-                      src={Caro5}
-                      className="d-block w-100"
-                      height="500"
-                      alt="carosol_image"
-                    />
-                  </div>
-                  <div className="carousel-item">
-                    <img
-                      src={Caro2}
-                      className="d-block w-100"
-                      alt="carosol_image"
-                    />
-                  </div> */}
                 </div>
                 <button
                   className="carousel-control-prev"
@@ -250,83 +218,6 @@ const ToggleSidebar = () => {
 
         {/****************************** * POPUP WINDOW START FROM HERE  ****************************************/}
         <Enquire />
-        {/* <button
-          data-toggle="modal"
-          data-target="#myModal"
-          className="trigger_popup border-0"
-        >
-          <span>Enquire Now</span>
-        </button>
-        <div className="modal fade" id="myModal" role="dialog">
-          <div className="modal-dialog">
-            <div
-              className="modal-content"
-            >
-              <div id="container" style={{ marginTop: "3rem" }}>
-                <button
-                  type="button"
-                  className="close text-right me-3"
-                  data-dismiss="modal"
-                >
-                  &times;
-                </button>
-                <header>Enquire Now </header>
-
-                <form method="post">
-                  <fieldset>
-                    <br />
-                    <input
-                      type="text"
-                      name="Entername"
-                      id="username"
-                      className="Popup_Common"
-                      placeholder="EnterName"
-                      required
-                      autoFocus
-                    />
-                    <br />
-                    <br />
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      className="Popup_Common"
-                      placeholder="E-mail"
-                      required
-                    />
-                    <input
-                      type="phone"
-                      name="phone"
-                      id="phone"
-                      className="Popup_Common phone_class"
-                      placeholder="Phone"
-                      required
-                    />
-                    <br />
-                    <br />
-                    <textarea
-                      type="text"
-                      name="message"
-                      id="message"
-                      placeholder="EnterMessage"
-                      className="Popup_Common"
-                    ></textarea>
-
-                    <br />
-                    <label for="submit"></label>
-                    <input
-                      type="submit"
-                      name="submit"
-                      id="submit"
-                      value="REGISTER"
-                      className="Popup_submit"
-                    />
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
 
       {/* ******************3D ROTATING COMPONENTS START FROM HERE**************** */}
@@ -366,10 +257,13 @@ const ToggleSidebar = () => {
           </span>
         </div>
       </div>
-{/*********** * Start Apply btn section from here ***********************************************/}
+      {/*********** * Start Apply btn section from here ***********************************************/}
       <section className="" style={{ backgroundColor: "#2a3661" }}>
         <div className="Center">
-          <h3 className="text-center text-white">-: Connect with us for<span style={{color:"#f20ac4"}}>Center Shop </span>:-</h3>
+          <h3 className="text-center text-white">
+            -: Connect with us for
+            <span style={{ color: "#f20ac4" }}>Center Shop </span>:-
+          </h3>
           <div className="center_btn">
             <Link to="/UserRegistration">
               <button className="btn btn-success btn-lg">Apply Now</button>
@@ -507,11 +401,11 @@ const ToggleSidebar = () => {
                     </p>
                     <p>
                       <i className=" mr-3"></i>
-                      <DraftsIcon /> Enter Email
+                      <DraftsIcon /> info@skdressland.com
                     </p>
                     <p>
                       <i className=" mr-3"></i>
-                      <PhoneIcon /> Enter Phone
+                      <PhoneIcon /> +91 723 693 3313
                     </p>
                     {/* <p>
                       <i className="fas fa-print mr-3"></i>Please Write Company

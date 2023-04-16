@@ -13,34 +13,10 @@ import {
   import { keyboard } from "@testing-library/user-event/dist/keyboard";
   
   // Recent Card Imports
-  import img1 from "../images/Cloth1.jpg";
+  import img1 from "../images/Cloth1.webp";
   import img2 from "../images/Cloth3.jpg";
-  import img3 from "../images/Cloth4.jpg";
-  
-  // Sidebar Data
-  // export const SidebarData = [
-  //   {
-  //     icon: UilEstate,
-  //     heading: "Dashboard",
-  //   },
-  //   {
-  //     icon: UilClipboardAlt,
-  //     heading: "Orders",
-  //   },
-  //   {
-  //     icon: UilUsersAlt,
-  //     heading: "Customers",
-  //   },
-  //   {
-  //     icon: UilPackage,
-  //     heading: 'Products'
-  //   },
-  //   {
-  //     icon: UilChart,
-  //     heading: 'Analytics'
-  //   },
-  // ];
-  
+  import img3 from "../images/Cloth4.webp";
+   
   // Analytics Cards Data
   export const cardsData = [
     {
